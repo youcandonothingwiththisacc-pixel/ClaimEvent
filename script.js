@@ -1,7 +1,7 @@
 function continuePage() {
-    const user = document.getElementById("username").value.trim();
+    const user = document.getElementById("username").value;
 
-    if (!user) {
+    if (user === "") {
         alert("Please enter your username.");
         return;
     }
