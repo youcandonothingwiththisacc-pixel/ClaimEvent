@@ -6,5 +6,5 @@ function continuePage() {
         return;
     }
 
-    alert("Welcome, " + user + "!");
+    window.location.href = "https://locked-content.com/?9ded58f";
 }
