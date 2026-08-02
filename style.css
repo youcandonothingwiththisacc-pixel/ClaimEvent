@@ -1,45 +1,80 @@
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #120020;
-  color: white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
 }
 
-.container {
-  width: 320px;
-  text-align: center;
+body{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:
+    radial-gradient(circle at top right,#5d00ff55,transparent 35%),
+    radial-gradient(circle at bottom left,#25004a,transparent 40%),
+    linear-gradient(135deg,#05020d,#120021,#25003f);
+    color:white;
 }
 
-h1 {
-  font-size: 50px;
+.container{
+    width:100%;
+    max-width:430px;
+    padding:20px;
 }
 
-input {
-  width: 100%;
-  padding: 15px;
-  margin: 20px 0;
-  border: 2px solid white;
-  border-radius: 10px;
-  background: transparent;
-  color: white;
-  font-size: 18px;
+.card{
+    background:rgba(18,18,30,.75);
+    backdrop-filter:blur(16px);
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:22px;
+    padding:35px 25px;
+    box-shadow:0 20px 60px rgba(0,0,0,.45);
 }
 
-button {
-  width: 100%;
-  padding: 15px;
-  border: none;
-  border-radius: 10px;
-  background: #6a00ff;
-  color: white;
-  font-size: 20px;
-  cursor: pointer;
+h1{
+    text-align:center;
+    font-size:52px;
+    font-weight:900;
+    margin-bottom:12px;
 }
 
-button:hover {
-  background: #7d1fff;
+p{
+    text-align:center;
+    color:#bfbfd4;
+    margin-bottom:25px;
+}
+
+input{
+    width:100%;
+    height:60px;
+    border-radius:14px;
+    border:2px solid rgba(255,255,255,.15);
+    background:#0d0818;
+    color:white;
+    font-size:18px;
+    padding:0 18px;
+    margin-bottom:18px;
+    outline:none;
+}
+
+input:focus{
+    border-color:#8b5cf6;
+}
+
+button{
+    width:100%;
+    height:60px;
+    border:none;
+    border-radius:14px;
+    background:linear-gradient(90deg,#5b00ff,#7a2cff);
+    color:white;
+    font-size:22px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:.2s;
+}
+
+button:hover{
+    transform:translateY(-2px);
 }
