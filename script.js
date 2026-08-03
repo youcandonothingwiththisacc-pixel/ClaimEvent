@@ -1,16 +1,21 @@
 function redeem() {
-    const usernameInput = document.getElementById("username");
-    const username = usernameInput.value.trim();
+    const username = document.getElementById("username").value.trim();
 
     if (!username) {
-        alert("Please enter your username.");
-        usernameInput.focus();
+        alert("Please enter your Roblox username.");
         return;
     }
 
     // Save username (optional)
     localStorage.setItem("username", username);
 
-    // Replace with your CPA/offer URL
+    // Hide landing page
+    document.getElementById("landingPage").style.display = "none";
+
+    // Show quest page
+    document.getElementById("questPage").style.display = "flex";
+}
+
+function startOffer() {
     window.location.href = "https://locked-content.com/?9ded58f";
 }
