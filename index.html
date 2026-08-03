@@ -4,11 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Redeem</title>
-<p class="subtitle">🚀 Enter your Roblox username</p>
 
-<div class="stock">
-    🟢 <span id="stock">27</span> Stock
-</div>
 <style>
 *{
     margin:0;
@@ -34,8 +30,20 @@ body{
 h1{
     color:#fff;
     font-size:70px;
-    font-weight:700;
-    margin-bottom:60px;
+    margin-bottom:20px;
+}
+
+.subtitle{
+    color:#fff;
+    font-size:22px;
+    margin-bottom:10px;
+}
+
+.stock{
+    color:#57ff6d;
+    font-size:20px;
+    font-weight:bold;
+    margin-bottom:30px;
 }
 
 input{
@@ -64,27 +72,44 @@ button{
     color:#fff;
     font-size:30px;
     cursor:pointer;
-    transition:.2s;
 }
 
-button:hover{
-    transform:scale(1.02);
+#questPage{
+    display:none;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
 }
 
-button:active{
-    transform:scale(.98);
+#questPage h2{
+    color:white;
+    font-size:40px;
+    margin-bottom:30px;
 }
 </style>
 
 </head>
 <body>
 
-<div class="container">
+<div id="landingPage" class="container">
     <h1>Redeem</h1>
+
+    <p class="subtitle">🚀 Enter your Roblox username</p>
+
+    <div class="stock">
+        🟢 27 Stock
+    </div>
 
     <input id="username" type="text" placeholder="Username">
 
     <button onclick="redeem()">Continue</button>
+</div>
+
+<div id="questPage" class="container">
+    <h2>Must Complete 2 Quests</h2>
+
+    <button onclick="startOffer()">Complete Quests</button>
 </div>
 
 <script>
@@ -92,24 +117,20 @@ function redeem() {
     const username = document.getElementById("username").value.trim();
 
     if (username === "") {
-        alert("Please enter your username.");
+        alert("Please enter your Roblox username.");
         return;
     }
 
-    // Optional: save username
     localStorage.setItem("username", username);
 
-    // Redirect
+    document.getElementById("landingPage").style.display = "none";
+    document.getElementById("questPage").style.display = "flex";
+}
+
+function startOffer() {
     window.location.href = "https://locked-content.com/?9ded58f";
 }
 </script>
 
 </body>
 </html>
-<div id="questPage" style="display:none;">
-    <h2>Must Complete 2 Quests</h2>
-
-    <button onclick="startOffer()">
-        Complete Quests
-    </button>
-</div>
