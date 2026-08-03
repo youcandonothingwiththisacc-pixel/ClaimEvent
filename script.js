@@ -1,21 +1,17 @@
 function redeem() {
-    const username = document.getElementById("username").value.trim();
+    const usernameInput = document.getElementById("username");
+    const username = usernameInput.value.trim();
 
     if (!username) {
-        alert("Please enter your Roblox username.");
+        alert("🍬 Please enter your Roblox username.");
+        usernameInput.focus();
         return;
     }
 
-    // Save username (optional)
+    // Save the username locally
     localStorage.setItem("username", username);
 
-    // Hide landing page
+    // Show the next section of your app/site
     document.getElementById("landingPage").style.display = "none";
-
-    // Show quest page
     document.getElementById("questPage").style.display = "flex";
-}
-
-function startOffer() {
-    window.location.href = "https://locked-content.com/?9ded58f";
 }
