@@ -82,3 +82,82 @@ button {
     font-size:28px;
     cursor:pointer;
 }
+body{
+background:linear-gradient(-45deg,#12001f,#2d0050,#4b0082,#12001f);
+background-size:400% 400%;
+animation:bg 12s ease infinite;
+}
+
+@keyframes bg{
+0%{background-position:0% 50%;}
+50%{background-position:100% 50%;}
+100%{background-position:0% 50%;}
+}
+
+.title{
+font-size:72px;
+font-weight:900;
+color:#fff;
+text-shadow:0 0 20px #b100ff;
+margin-bottom:15px;
+}
+
+.subtitle{
+color:white;
+font-size:22px;
+margin-bottom:12px;
+}
+
+.stock{
+display:inline-block;
+background:#18c964;
+padding:8px 18px;
+border-radius:999px;
+font-weight:bold;
+color:white;
+margin-bottom:30px;
+}
+
+input{
+box-shadow:0 0 25px rgba(180,44,255,.25);
+transition:.25s;
+}
+
+input:focus{
+box-shadow:0 0 35px rgba(180,44,255,.7);
+}
+
+button{
+font-weight:bold;
+background:linear-gradient(90deg,#7b2cff,#b42cff,#ff2ec7);
+background-size:200%;
+transition:.25s;
+}
+
+button:hover{
+background-position:right;
+transform:translateY(-2px);
+}
+
+.loader{
+width:70px;
+height:70px;
+border:6px solid rgba(255,255,255,.2);
+border-top:6px solid #b42cff;
+border-radius:50%;
+animation:spin 1s linear infinite;
+margin-bottom:30px;
+}
+
+@keyframes spin{
+100%{
+transform:rotate(360deg);
+}
+
+}
+
+.small{
+color:#ddd;
+margin:15px 0 30px;
+font-size:18px;
+}
