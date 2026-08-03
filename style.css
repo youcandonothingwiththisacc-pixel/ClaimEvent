@@ -43,3 +43,42 @@ button {
     font-size: 28px;
     cursor: pointer;
 }
+.subtitle{
+    color:#fff;
+    font-size:24px;
+    margin-top:-15px;
+    margin-bottom:12px;
+}
+
+.stock{
+    color:#57ff6d;
+    font-size:22px;
+    font-weight:bold;
+    margin-bottom:35px;
+}
+
+#questPage{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    text-align:center;
+}
+
+#questPage h2{
+    color:white;
+    font-size:42px;
+    margin-bottom:40px;
+}
+
+#questPage button{
+    width:320px;
+    height:70px;
+    border:none;
+    border-radius:18px;
+    background:linear-gradient(90deg,#7d2cff,#b42cff,#7d2cff);
+    color:white;
+    font-size:28px;
+    cursor:pointer;
+}
