@@ -15,14 +15,29 @@ body {
   padding: 1.5rem;
 }
 
+/* ===== WHITE CARD WITH CYAN GLOW ===== */
 .card {
   max-width: 480px;
   width: 100%;
-  background: #141a29;
+  background: #ffffff;
   border-radius: 42px;
   padding: 2rem 1.8rem 2.5rem;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.04);
-  border: 1px solid #2a3348;
+  box-shadow: 
+    0 0 30px rgba(0, 255, 255, 0.15),
+    0 0 60px rgba(0, 255, 255, 0.08),
+    0 0 100px rgba(0, 255, 255, 0.04),
+    0 20px 40px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(0, 255, 255, 0.25);
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  box-shadow: 
+    0 0 40px rgba(0, 255, 255, 0.25),
+    0 0 80px rgba(0, 255, 255, 0.12),
+    0 0 120px rgba(0, 255, 255, 0.06),
+    0 25px 50px rgba(0, 0, 0, 0.35);
+  border-color: rgba(0, 255, 255, 0.4);
 }
 
 /* ----- step visibility ----- */
@@ -39,7 +54,7 @@ body {
 }
 
 .user-section .label {
-  color: #a8b5d9;
+  color: #2d3748;
   font-size: 0.9rem;
   font-weight: 500;
   letter-spacing: 0.3px;
@@ -53,26 +68,26 @@ body {
 }
 
 .username-input {
-  background: #1e263b;
+  background: #f0f4f8;
   border-radius: 60px;
   padding: 0.9rem 1.5rem;
-  border: 1px solid #2d364f;
-  color: #d3defa;
+  border: 2px solid #e2e8f0;
+  color: #1a202c;
   font-size: 0.95rem;
   outline: none;
-  transition: 0.15s;
+  transition: 0.3s ease;
   width: 100%;
 }
 
 .username-input::placeholder {
-  color: #6b7da5;
-  opacity: 0.7;
+  color: #a0aec0;
+  opacity: 0.8;
 }
 
 .username-input:focus {
-  border-color: #6a84c7;
-  background: #263050;
-  box-shadow: 0 0 12px rgba(80, 120, 255, 0.1);
+  border-color: #00d4ff;
+  background: #ffffff;
+  box-shadow: 0 0 20px rgba(0, 212, 255, 0.15), inset 0 0 20px rgba(0, 212, 255, 0.03);
 }
 
 .platform-selector {
@@ -80,31 +95,32 @@ body {
 }
 
 .platform-select {
-  background: #1e263b;
+  background: #f0f4f8;
   border-radius: 60px;
   padding: 0.9rem 1.5rem;
-  border: 1px solid #2d364f;
-  color: #d3defa;
+  border: 2px solid #e2e8f0;
+  color: #1a202c;
   font-size: 0.95rem;
   outline: none;
-  transition: 0.15s;
+  transition: 0.3s ease;
   width: 100%;
   cursor: pointer;
   appearance: none;
   -webkit-appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%236b7da5' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%234a5568' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right 1.2rem center;
 }
 
 .platform-select:focus {
-  border-color: #6a84c7;
-  background-color: #263050;
+  border-color: #00d4ff;
+  background-color: #ffffff;
+  box-shadow: 0 0 20px rgba(0, 212, 255, 0.15);
 }
 
 .platform-select option {
-  background: #1e263b;
-  color: #d3defa;
+  background: #ffffff;
+  color: #1a202c;
 }
 
 /* ----- proceed button ----- */
@@ -118,11 +134,11 @@ body {
   font-weight: 600;
   font-size: 1rem;
   letter-spacing: 0.5px;
-  background: linear-gradient(145deg, #3f5290, #2d3d68);
-  box-shadow: 0 4px 0 #1b253f, 0 6px 14px rgba(0, 0, 0, 0.4);
-  transition: 0.08s linear;
+  background: linear-gradient(145deg, #00b8d4, #00838f);
+  box-shadow: 0 4px 0 #006064, 0 6px 20px rgba(0, 200, 255, 0.3);
+  transition: 0.15s ease;
   cursor: pointer;
-  border: 1px solid #5a70a8;
+  border: 1px solid rgba(0, 255, 255, 0.3);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -130,25 +146,31 @@ body {
 }
 
 .proceed-btn i {
-  color: #c2d0ff;
+  color: rgba(255, 255, 255, 0.8);
 }
 
 .proceed-btn:active {
   transform: translateY(3px);
-  box-shadow: 0 1px 0 #1b253f;
+  box-shadow: 0 1px 0 #006064;
 }
 
 .proceed-btn:hover {
-  background: linear-gradient(145deg, #4a5f9a, #33457a);
+  background: linear-gradient(145deg, #00cce6, #0097a7);
+  box-shadow: 0 4px 0 #006064, 0 8px 30px rgba(0, 200, 255, 0.4);
 }
 
 /* ----- amount selector ----- */
 .amount-section {
-  background: #101624;
+  background: #f7fafc;
   border-radius: 36px;
   padding: 1.5rem 1.2rem 1.2rem;
   margin-bottom: 2rem;
-  border: 1px solid #29324b;
+  border: 2px solid #e2e8f0;
+  transition: 0.3s ease;
+}
+
+.amount-section:hover {
+  border-color: #00d4ff;
 }
 
 .amount-header {
@@ -156,7 +178,7 @@ body {
   flex-direction: column;
   align-items: flex-start;
   gap: 0.5rem;
-  color: #b7c4e8;
+  color: #2d3748;
   font-size: 0.85rem;
   font-weight: 500;
   letter-spacing: 0.3px;
@@ -164,20 +186,20 @@ body {
 }
 
 .amount-header .selected-badge {
-  background: #2e3a5a;
+  background: #e6f7ff;
   padding: 0.3rem 1.2rem;
   border-radius: 40px;
-  color: #fff;
+  color: #006064;
   font-weight: 600;
   font-size: 0.8rem;
-  border: 1px solid #4b5a83;
+  border: 1px solid #00d4ff;
   display: flex;
   align-items: center;
   gap: 0.5rem;
 }
 
 .amount-header .selected-badge i {
-  color: #f9c74f;
+  color: #00b8d4;
   font-size: 0.7rem;
 }
 
@@ -188,15 +210,15 @@ body {
 }
 
 .amount-btn {
-  background: #1c253d;
-  border: 1px solid #2f3957;
+  background: #ffffff;
+  border: 2px solid #e2e8f0;
   border-radius: 60px;
   padding: 0.9rem 0.2rem;
   text-align: center;
-  color: #bcc8ee;
+  color: #2d3748;
   font-weight: 500;
   font-size: 0.9rem;
-  transition: 0.15s;
+  transition: 0.3s ease;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -205,34 +227,34 @@ body {
 }
 
 .amount-btn.active {
-  background: #2f3d64;
-  border-color: #6a84c7;
-  color: white;
-  box-shadow: 0 0 12px rgba(80, 120, 255, 0.2);
+  background: #e6f7ff;
+  border-color: #00d4ff;
+  color: #006064;
+  box-shadow: 0 0 20px rgba(0, 212, 255, 0.15);
 }
 
 .amount-btn:not(.active):hover {
-  background: #232d49;
-  border-color: #40507a;
+  background: #f7fafc;
+  border-color: #b0d4e8;
 }
 
 /* ----- verification card ----- */
 .verify-card {
-  background: #12192b;
+  background: #f7fafc;
   border-radius: 40px;
   padding: 1.5rem;
-  border: 1px solid #2c3857;
-  box-shadow: inset 0 0 0 1px #1f2842;
+  border: 2px solid #e2e8f0;
+  box-shadow: inset 0 0 0 1px #e2e8f0;
   text-align: center;
 }
 
 .live-preview-badge {
   display: inline-block;
-  background: #1a233d;
+  background: #e6f7ff;
   padding: 0.4rem 1.2rem;
   border-radius: 40px;
-  border: 1px solid #35446b;
-  color: #b9c8f2;
+  border: 1px solid #00d4ff;
+  color: #006064;
   font-size: 0.7rem;
   font-weight: 600;
   letter-spacing: 0.5px;
@@ -240,7 +262,7 @@ body {
 }
 
 .verify-title {
-  color: #d0dcff;
+  color: #1a202c;
   font-size: 1.3rem;
   font-weight: 600;
   display: flex;
@@ -251,48 +273,48 @@ body {
 }
 
 .verify-title i {
-  color: #f9c74f;
+  color: #00b8d4;
   font-size: 1.1rem;
 }
 
 .verify-sub {
-  color: #8f9fc9;
+  color: #2d3748;
   font-size: 0.9rem;
   margin-bottom: 1.2rem;
   padding: 0.6rem 1rem;
   line-height: 1.6;
   text-align: left;
-  background: #1a233b;
+  background: #ffffff;
   border-radius: 12px;
-  border-left: 3px solid #44568b;
+  border-left: 3px solid #00d4ff;
 }
 
 .verify-sub strong {
-  color: #e6edff;
+  color: #1a202c;
   font-weight: 600;
 }
 
 .verify-sub .highlight-username {
-  color: #f9c74f;
+  color: #00b8d4;
   font-weight: 600;
 }
 
 /* ----- Robux Badge ----- */
 .robux-badge {
-  background: #1a253f;
+  background: #ffffff;
   border-radius: 60px;
   display: inline-flex;
   align-items: center;
   padding: 0.2rem 1.6rem 0.2rem 1.2rem;
   gap: 0.8rem;
-  border: 1px solid #4f6396;
+  border: 2px solid #00d4ff;
   margin: 0.5rem 0 1.2rem;
 }
 
 .robux-badge .big-amount {
   font-size: 2.2rem;
   font-weight: 700;
-  color: white;
+  color: #1a202c;
   letter-spacing: 1px;
 }
 
@@ -332,30 +354,31 @@ body {
 /* ----- Verify Now Button ----- */
 .verify-now-btn {
   width: 100%;
-  background: #f9c74f;
+  background: linear-gradient(145deg, #00b8d4, #00838f);
   border: none;
   border-radius: 80px;
   padding: 1rem;
   font-weight: 700;
   font-size: 1.1rem;
-  color: #0b0f1d;
+  color: white;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 0.6rem;
-  box-shadow: 0 6px 0 #b48b2e, 0 8px 20px rgba(0, 0, 0, 0.5);
-  transition: 0.06s linear;
+  box-shadow: 0 6px 0 #006064, 0 8px 30px rgba(0, 200, 255, 0.3);
+  transition: 0.15s ease;
   cursor: pointer;
-  border: 1px solid #fad87a;
+  border: 1px solid rgba(0, 255, 255, 0.3);
 }
 
 .verify-now-btn:active {
   transform: translateY(5px);
-  box-shadow: 0 1px 0 #b48b2e;
+  box-shadow: 0 1px 0 #006064;
 }
 
 .verify-now-btn:hover {
-  background: #fdd15e;
+  background: linear-gradient(145deg, #00cce6, #0097a7);
+  box-shadow: 0 6px 0 #006064, 0 10px 40px rgba(0, 200, 255, 0.4);
 }
 
 /* responsive */
