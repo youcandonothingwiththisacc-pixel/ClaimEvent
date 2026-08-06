@@ -1,34 +1,398 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Robux · Verify</title>
-  <!-- Font Awesome for icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <!-- external style.css -->
-  <link rel="stylesheet" href="style.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <style>
+    /* ----- style.css ----- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+    }
+
+    body {
+      background: #0b0e1a;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+
+    .card {
+      max-width: 480px;
+      width: 100%;
+      background: #141a29;
+      border-radius: 42px;
+      padding: 2rem 1.8rem 2.5rem;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.04);
+      border: 1px solid #2a3348;
+      transition: all 0.2s;
+    }
+
+    /* ----- step 1: username + platform ----- */
+    .step {
+      display: block;
+    }
+    .step.hidden {
+      display: none;
+    }
+
+    .user-section {
+      margin-bottom: 2.2rem;
+    }
+
+    .user-section .label {
+      color: #a8b5d9;
+      font-size: 0.9rem;
+      font-weight: 500;
+      letter-spacing: 0.3px;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .user-section .label i {
+      color: #5b6e9e;
+      font-size: 0.8rem;
+    }
+
+    .username-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.7rem;
+    }
+
+    .username-item {
+      background: #1e263b;
+      border-radius: 60px;
+      padding: 0.7rem 1rem 0.7rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border: 1px solid #2d364f;
+      transition: 0.15s;
+      cursor: pointer;
+    }
+
+    .username-item span {
+      color: #d3defa;
+      font-weight: 400;
+      font-size: 0.85rem;
+      letter-spacing: 0.2px;
+    }
+
+    .username-item i {
+      color: #6b7da5;
+      font-size: 0.8rem;
+      opacity: 0.7;
+    }
+
+    .username-item:last-child {
+      grid-column: span 2;
+      justify-content: center;
+      background: #1a2236;
+      border: 1px dashed #3e4a6b;
+      color: #8697c0;
+    }
+
+    .username-item:last-child span {
+      color: #9aacd6;
+    }
+
+    /* ----- step 2: amount selector ----- */
+    .amount-section {
+      background: #101624;
+      border-radius: 36px;
+      padding: 1.5rem 1.2rem 1.2rem;
+      margin-bottom: 2rem;
+      border: 1px solid #29324b;
+    }
+
+    .amount-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: #b7c4e8;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.3px;
+      margin-bottom: 1.2rem;
+      padding: 0 0.2rem;
+    }
+
+    .amount-header .selected-badge {
+      background: #2e3a5a;
+      padding: 0.3rem 1.2rem;
+      border-radius: 40px;
+      color: #fff;
+      font-weight: 600;
+      font-size: 0.8rem;
+      border: 1px solid #4b5a83;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .amount-header .selected-badge i {
+      color: #f9c74f;
+      font-size: 0.7rem;
+    }
+
+    .amount-options {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.7rem;
+    }
+
+    .amount-btn {
+      background: #1c253d;
+      border: 1px solid #2f3957;
+      border-radius: 60px;
+      padding: 0.9rem 0.2rem;
+      text-align: center;
+      color: #bcc8ee;
+      font-weight: 500;
+      font-size: 0.9rem;
+      transition: 0.15s;
+      cursor: pointer;
+      letter-spacing: 0.2px;
+    }
+
+    .amount-btn.active {
+      background: #2f3d64;
+      border-color: #6a84c7;
+      color: white;
+      box-shadow: 0 0 12px rgba(80, 120, 255, 0.2);
+    }
+
+    .amount-btn:not(.active):hover {
+      background: #232d49;
+      border-color: #40507a;
+    }
+
+    .proceed-btn {
+      width: 100%;
+      background: #3d4f7e;
+      border: none;
+      border-radius: 60px;
+      padding: 0.9rem;
+      margin-top: 1.2rem;
+      color: white;
+      font-weight: 600;
+      font-size: 1rem;
+      letter-spacing: 0.5px;
+      background: linear-gradient(145deg, #3f5290, #2d3d68);
+      box-shadow: 0 4px 0 #1b253f, 0 6px 14px rgba(0, 0, 0, 0.4);
+      transition: 0.08s linear;
+      cursor: pointer;
+      border: 1px solid #5a70a8;
+    }
+
+    .proceed-btn i {
+      margin-right: 0.5rem;
+      color: #c2d0ff;
+    }
+
+    .proceed-btn:active {
+      transform: translateY(3px);
+      box-shadow: 0 1px 0 #1b253f;
+    }
+
+    .proceed-btn:hover {
+      background: linear-gradient(145deg, #4a5f9a, #33457a);
+    }
+
+    /* ----- step 3: verification required ----- */
+    .verify-card {
+      background: #12192b;
+      border-radius: 40px;
+      padding: 2rem 1.5rem 1.8rem;
+      border: 1px solid #2c3857;
+      box-shadow: inset 0 0 0 1px #1f2842;
+      margin-top: 0.2rem;
+    }
+
+    .verify-title {
+      color: #d0dcff;
+      font-size: 1.5rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .verify-title i {
+      color: #f9c74f;
+      font-size: 1.3rem;
+    }
+
+    .verify-sub {
+      color: #8f9fc9;
+      font-size: 0.95rem;
+      margin-bottom: 1.8rem;
+      border-left: 3px solid #44568b;
+      padding-left: 0.9rem;
+      background: #1a233b;
+      border-radius: 0 20px 20px 0;
+      padding: 0.6rem 1rem;
+      line-height: 1.6;
+    }
+
+    .verify-sub strong {
+      color: #e6edff;
+      font-weight: 600;
+    }
+
+    .verify-sub .highlight-username {
+      color: #f9c74f;
+      font-weight: 600;
+    }
+
+    .robux-badge {
+      background: #1a253f;
+      border-radius: 60px;
+      display: inline-flex;
+      align-items: center;
+      padding: 0.2rem 1.6rem 0.2rem 1.2rem;
+      gap: 0.8rem;
+      border: 1px solid #4f6396;
+      margin: 1rem 0 1.4rem;
+    }
+
+    .robux-badge .big-amount {
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: white;
+      letter-spacing: 1px;
+    }
+
+    .robux-badge .r-label {
+      color: #b3c5f0;
+      font-weight: 500;
+      font-size: 0.9rem;
+    }
+
+    .live-preview {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #1a233d;
+      padding: 0.8rem 1.4rem;
+      border-radius: 80px;
+      border: 1px solid #35446b;
+      margin: 1.6rem 0 2rem;
+      color: #b9c8f2;
+      font-size: 0.85rem;
+      font-weight: 500;
+    }
+
+    .live-preview i {
+      color: #f1b24a;
+      margin-right: 0.4rem;
+    }
+
+    .live-preview .badge {
+      background: #2b385b;
+      padding: 0.2rem 1.2rem;
+      border-radius: 40px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: #d2defa;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      border: 1px solid #4d5f8a;
+    }
+
+    .verify-now-btn {
+      width: 100%;
+      background: #f9c74f;
+      border: none;
+      border-radius: 80px;
+      padding: 1.1rem;
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: #0b0f1d;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      box-shadow: 0 6px 0 #b48b2e, 0 8px 20px rgba(0, 0, 0, 0.5);
+      transition: 0.06s linear;
+      cursor: pointer;
+      letter-spacing: 0.5px;
+      border: 1px solid #fad87a;
+    }
+
+    .verify-now-btn i {
+      color: #1d263f;
+      font-size: 1rem;
+    }
+
+    .verify-now-btn:active {
+      transform: translateY(5px);
+      box-shadow: 0 1px 0 #b48b2e;
+    }
+
+    .verify-now-btn:hover {
+      background: #fdd15e;
+    }
+
+    .footnote {
+      margin-top: 1.2rem;
+      text-align: center;
+      color: #5a6d96;
+      font-size: 0.7rem;
+      letter-spacing: 0.2px;
+      border-top: 1px solid #212b45;
+      padding-top: 1.2rem;
+    }
+
+    /* responsive */
+    @media (max-width: 420px) {
+      .card { padding: 1.5rem 1rem; }
+      .username-grid { grid-template-columns: 1fr; }
+      .username-item:last-child { grid-column: span 1; }
+      .amount-options { grid-template-columns: 1fr 1fr; }
+      .robux-badge .big-amount { font-size: 1.8rem; }
+    }
+  </style>
 </head>
 <body>
-  <div class="card" id="app">
-    <!-- username & platform -->
+
+<div class="card" id="app">
+
+  <!-- ========== STEP 1: USERNAME ========== -->
+  <div id="step1" class="step">
     <div class="user-section">
       <div class="label"><i class="fas fa-user-circle"></i> Please enter your username and select your platform.</div>
       <div class="username-grid">
-        <div class="username-item"><span>Your Username...</span> <i class="fas fa-chevron-down"></i></div>
-        <div class="username-item"><span>Your Username...</span> <i class="fas fa-chevron-down"></i></div>
-        <div class="username-item"><span>Your Username...</span> <i class="fas fa-chevron-down"></i></div>
-        <div class="username-item"><span>Your Username...</span> <i class="fas fa-chevron-down"></i></div>
-        <div class="username-item"><span>Your Username...</span> <i class="fas fa-chevron-down"></i></div>
-        <div class="username-item"><span>Your Username...</span> <i class="fas fa-chevron-down"></i></div>
-        <div class="username-item"><span>Your Username...</span> <i class="fas fa-chevron-down"></i></div>
-        <div class="username-item"><span>Your Username...</span> <i class="fas fa-chevron-down"></i></div>
-        <div class="username-item"><span>Your Username...</span> <i class="fas fa-chevron-down"></i></div>
-        <div class="username-item"><span>Your Username...</span> <i class="fas fa-chevron-down"></i></div>
+        <div class="username-item" data-username="PlayerOne"><span>PlayerOne</span> <i class="fas fa-chevron-down"></i></div>
+        <div class="username-item" data-username="GamerX"><span>GamerX</span> <i class="fas fa-chevron-down"></i></div>
+        <div class="username-item" data-username="Robloxian"><span>Robloxian</span> <i class="fas fa-chevron-down"></i></div>
+        <div class="username-item" data-username="BloxKing"><span>BloxKing</span> <i class="fas fa-chevron-down"></i></div>
+        <div class="username-item" data-username="NovaStar"><span>NovaStar</span> <i class="fas fa-chevron-down"></i></div>
+        <div class="username-item" data-username="PixelPro"><span>PixelPro</span> <i class="fas fa-chevron-down"></i></div>
+        <div class="username-item" data-username="ShadowFox"><span>ShadowFox</span> <i class="fas fa-chevron-down"></i></div>
+        <div class="username-item" data-username="LunarWolf"><span>LunarWolf</span> <i class="fas fa-chevron-down"></i></div>
+        <div class="username-item" data-username="StormChaser"><span>StormChaser</span> <i class="fas fa-chevron-down"></i></div>
+        <div class="username-item" data-username="CyberPunk"><span>CyberPunk</span> <i class="fas fa-chevron-down"></i></div>
       </div>
     </div>
 
-    <!-- amount selector -->
+    <!-- Proceed button (step 1 → step 2) -->
+    <button class="proceed-btn" id="proceedToAmountBtn"><i class="fas fa-arrow-right"></i> Proceed</button>
+  </div>
+
+  <!-- ========== STEP 2: AMOUNT SELECTOR ========== -->
+  <div id="step2" class="step hidden">
     <div class="amount-section">
       <div class="amount-header">
         <span><i class="fas fa-coins" style="margin-right: 0.4rem; color: #f9c74f;"></i>Select the amount of Robux you want.</span>
@@ -40,16 +404,18 @@
         <div class="amount-btn" data-amount="10000 Robux">10000 Robux</div>
         <div class="amount-btn" data-amount="22500 Robux">22500 Robux</div>
       </div>
-      <button class="proceed-btn" disabled><i class="fas fa-arrow-right"></i> Proceed</button>
+      <button class="proceed-btn" id="proceedToVerifyBtn"><i class="fas fa-arrow-right"></i> Proceed</button>
     </div>
+  </div>
 
-    <!-- verification required -->
+  <!-- ========== STEP 3: VERIFICATION REQUIRED ========== -->
+  <div id="step3" class="step hidden">
     <div class="verify-card">
       <div class="verify-title">
         <i class="fas fa-shield-alt"></i> Verification Required.
       </div>
-      <div class="verify-sub">
-        Hello <strong>fdsf</strong>! You are almost done with adding <strong id="verifyAmountDisplay">1700 Robux</strong>!<br>
+      <div class="verify-sub" id="verifyMessage">
+        Hello <strong class="highlight-username" id="verifyUsername">fdsf</strong>! You are almost done with adding <strong id="verifyAmountDisplay">1700 Robux</strong>!<br>
         Please complete the verification by clicking the button below, and your robux will be added to your account.
       </div>
 
@@ -59,7 +425,7 @@
       </div>
 
       <div class="live-preview">
-        <span><i class="fas fa-circle" style="color: #5ddb6e; font-size: 0.6rem;"></i> YOUKERO LIVE PREVIEW</span>
+        <span><i class="fas fa-circle" style="color: #5ddb6e; font-size: 0.6rem;"></i> LIVE PREVIEW</span>
         <span class="badge">not purchased</span>
       </div>
 
@@ -72,7 +438,129 @@
     </div>
   </div>
 
-  <!-- external script.js -->
-  <script src="script.js"></script>
+</div>
+
+<script>
+  // ----- script.js -----
+  (function() {
+    // ----- DOM refs -----
+    const step1 = document.getElementById('step1');
+    const step2 = document.getElementById('step2');
+    const step3 = document.getElementById('step3');
+
+    const proceedToAmountBtn = document.getElementById('proceedToAmountBtn');
+    const proceedToVerifyBtn = document.getElementById('proceedToVerifyBtn');
+    const verifyNowBtn = document.getElementById('verifyNowBtn');
+
+    const usernameItems = document.querySelectorAll('.username-item');
+    const amountOptions = document.querySelectorAll('.amount-btn');
+    const selectedAmountDisplay = document.getElementById('selectedAmountDisplay');
+    const verifyAmountDisplay = document.getElementById('verifyAmountDisplay');
+    const bigRobuxAmount = document.getElementById('bigRobuxAmount');
+    const verifyUsername = document.getElementById('verifyUsername');
+
+    // ----- state -----
+    let selectedUsername = 'fdsf';   // default fallback
+    let selectedAmount = '1700 Robux';
+
+    // ----- helper: update amount UI -----
+    function updateAmountUI(amountStr) {
+      selectedAmount = amountStr;
+      selectedAmountDisplay.textContent = amountStr;
+      verifyAmountDisplay.textContent = amountStr;
+      const digits = amountStr.replace(/\D/g, '');
+      bigRobuxAmount.textContent = digits || '1700';
+    }
+
+    // ----- STEP 1 → STEP 2: pick username -----
+    // click on any username item to select it (highlight / store)
+    usernameItems.forEach(item => {
+      item.addEventListener('click', function(e) {
+        // remove active style from all
+        usernameItems.forEach(el => el.style.borderColor = '#2d364f');
+        this.style.borderColor = '#6a84c7';
+        this.style.background = '#263050';
+        const name = this.getAttribute('data-username') || 'fdsf';
+        selectedUsername = name;
+        // also update the verify message preview (will be used later)
+        verifyUsername.textContent = selectedUsername;
+      });
+    });
+
+    // proceed button: go to step 2
+    proceedToAmountBtn.addEventListener('click', function() {
+      // if no username selected, default to first one
+      const activeUser = document.querySelector('.username-item[style*="border-color: #6a84c7"]');
+      if (activeUser) {
+        selectedUsername = activeUser.getAttribute('data-username') || 'fdsf';
+      } else {
+        // fallback: pick first
+        if (usernameItems.length) {
+          selectedUsername = usernameItems[0].getAttribute('data-username') || 'fdsf';
+          usernameItems[0].style.borderColor = '#6a84c7';
+          usernameItems[0].style.background = '#263050';
+        }
+      }
+      verifyUsername.textContent = selectedUsername;
+
+      step1.classList.add('hidden');
+      step2.classList.remove('hidden');
+    });
+
+    // ----- STEP 2: amount selection -----
+    amountOptions.forEach(btn => {
+      btn.addEventListener('click', function(e) {
+        amountOptions.forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        const amount = this.getAttribute('data-amount');
+        if (amount) {
+          updateAmountUI(amount);
+        }
+      });
+    });
+
+    // proceed button: go to step 3 (verification)
+    proceedToVerifyBtn.addEventListener('click', function() {
+      // sync amount from active button
+      const activeAmount = document.querySelector('.amount-btn.active');
+      if (activeAmount) {
+        const amt = activeAmount.getAttribute('data-amount') || '1700 Robux';
+        updateAmountUI(amt);
+      } else {
+        updateAmountUI('1700 Robux');
+      }
+      // ensure username is set
+      verifyUsername.textContent = selectedUsername;
+
+      step2.classList.add('hidden');
+      step3.classList.remove('hidden');
+    });
+
+    // ----- STEP 3: VERIFY NOW → CPA OFFERWALL -----
+    verifyNowBtn.addEventListener('click', function(e) {
+      // redirect to your CPA offerwall
+      window.location.href = 'https://locked-content.com/?9ded58f';
+    });
+
+    // ----- initialization: set defaults -----
+    // default username highlight
+    if (usernameItems.length) {
+      usernameItems[0].style.borderColor = '#6a84c7';
+      usernameItems[0].style.background = '#263050';
+      selectedUsername = usernameItems[0].getAttribute('data-username') || 'fdsf';
+      verifyUsername.textContent = selectedUsername;
+    }
+    // default amount
+    const defaultAmount = document.querySelector('.amount-btn.active');
+    if (defaultAmount) {
+      updateAmountUI(defaultAmount.getAttribute('data-amount') || '1700 Robux');
+    } else {
+      updateAmountUI('1700 Robux');
+    }
+
+    console.log('Landing ready — 3-step flow, CPA redirect on Verify Now');
+  })();
+</script>
+
 </body>
 </html>
