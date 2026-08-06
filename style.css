@@ -23,7 +23,6 @@ body {
   padding: 2rem 1.8rem 2.5rem;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.04);
   border: 1px solid #2a3348;
-  transition: all 0.2s;
 }
 
 /* ----- step visibility ----- */
@@ -44,76 +43,72 @@ body {
   font-size: 0.9rem;
   font-weight: 500;
   letter-spacing: 0.3px;
-  margin-bottom: 0.5rem;
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
+  margin-bottom: 1rem;
 }
 
-.user-section .label i {
-  color: #5b6e9e;
-  font-size: 0.8rem;
-}
-
-.username-input-wrapper {
-  display: flex;
-  flex-direction: column;
+.username-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: 0.7rem;
 }
 
-.username-input {
+.username-item {
   background: #1e263b;
   border-radius: 60px;
-  padding: 0.9rem 1.5rem;
+  padding: 0.7rem 1rem 0.7rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   border: 1px solid #2d364f;
-  color: #d3defa;
-  font-size: 0.95rem;
-  outline: none;
   transition: 0.15s;
-  width: 100%;
 }
 
-.username-input::placeholder {
+.username-item span {
+  color: #d3defa;
+  font-weight: 400;
+  font-size: 0.85rem;
+  letter-spacing: 0.2px;
+}
+
+.username-item i {
   color: #6b7da5;
+  font-size: 0.8rem;
   opacity: 0.7;
 }
 
-.username-input:focus {
-  border-color: #6a84c7;
-  background: #263050;
-  box-shadow: 0 0 12px rgba(80, 120, 255, 0.1);
-}
-
-.platform-selector {
+/* ----- proceed button ----- */
+.proceed-btn {
   width: 100%;
-}
-
-.platform-select {
-  background: #1e263b;
+  border: none;
   border-radius: 60px;
-  padding: 0.9rem 1.5rem;
-  border: 1px solid #2d364f;
-  color: #d3defa;
-  font-size: 0.95rem;
-  outline: none;
-  transition: 0.15s;
-  width: 100%;
+  padding: 0.9rem;
+  margin-top: 1.2rem;
+  color: white;
+  font-weight: 600;
+  font-size: 1rem;
+  letter-spacing: 0.5px;
+  background: linear-gradient(145deg, #3f5290, #2d3d68);
+  box-shadow: 0 4px 0 #1b253f, 0 6px 14px rgba(0, 0, 0, 0.4);
+  transition: 0.08s linear;
   cursor: pointer;
-  appearance: none;
-  -webkit-appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%236b7da5' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 1.2rem center;
+  border: 1px solid #5a70a8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
 }
 
-.platform-select:focus {
-  border-color: #6a84c7;
-  background-color: #263050;
+.proceed-btn i {
+  color: #c2d0ff;
 }
 
-.platform-select option {
-  background: #1e263b;
-  color: #d3defa;
+.proceed-btn:active {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 #1b253f;
+}
+
+.proceed-btn:hover {
+  background: linear-gradient(145deg, #4a5f9a, #33457a);
 }
 
 /* ----- amount selector ----- */
@@ -127,16 +122,14 @@ body {
 
 .amount-header {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
   color: #b7c4e8;
   font-size: 0.85rem;
   font-weight: 500;
   letter-spacing: 0.3px;
   margin-bottom: 1.2rem;
-  padding: 0 0.2rem;
-  flex-wrap: wrap;
-  gap: 0.5rem;
 }
 
 .amount-header .selected-badge {
@@ -174,7 +167,10 @@ body {
   font-size: 0.9rem;
   transition: 0.15s;
   cursor: pointer;
-  letter-spacing: 0.2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
 }
 
 .amount-btn.active {
@@ -189,96 +185,55 @@ body {
   border-color: #40507a;
 }
 
-.proceed-btn {
-  width: 100%;
-  border: none;
-  border-radius: 60px;
-  padding: 0.9rem;
-  margin-top: 1.2rem;
-  color: white;
-  font-weight: 600;
-  font-size: 1rem;
-  letter-spacing: 0.5px;
-  background: linear-gradient(145deg, #3f5290, #2d3d68);
-  box-shadow: 0 4px 0 #1b253f, 0 6px 14px rgba(0, 0, 0, 0.4);
-  transition: 0.08s linear;
-  cursor: pointer;
-  border: 1px solid #5a70a8;
-}
-
-.proceed-btn i {
-  margin-right: 0.5rem;
-  color: #c2d0ff;
-}
-
-.proceed-btn:active {
-  transform: translateY(3px);
-  box-shadow: 0 1px 0 #1b253f;
-}
-
-.proceed-btn:hover {
-  background: linear-gradient(145deg, #4a5f9a, #33457a);
-}
-
 /* ----- verification card ----- */
 .verify-card {
   background: #12192b;
   border-radius: 40px;
-  padding: 2rem 1.5rem 1.8rem;
+  padding: 1.5rem;
   border: 1px solid #2c3857;
   box-shadow: inset 0 0 0 1px #1f2842;
-  margin-top: 0.2rem;
   text-align: center;
 }
 
-/* ----- verification badge image ----- */
-.verify-badge-image {
-  display: block;
-  width: 80px;
-  height: auto;
-  margin: 0 auto 1rem;
-  border-radius: 12px;
-  background: #1a253f;
-  padding: 8px;
-  border: 1px solid #4f6396;
-}
-
-/* ----- MOVING ROBUX ICON (float animation) ----- */
-.robux-icon {
-  height: 28px;
-  width: auto;
+.live-preview-badge {
   display: inline-block;
-  vertical-align: middle;
-  animation: floatIcon 3s ease-in-out infinite;
-}
-
-@keyframes floatIcon {
-  0%, 100% { 
-    transform: translateY(0px) scale(1); 
-  }
-  50% { 
-    transform: translateY(-6px) scale(1.05); 
-  }
+  background: #1a233d;
+  padding: 0.4rem 1.2rem;
+  border-radius: 40px;
+  border: 1px solid #35446b;
+  color: #b9c8f2;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  margin-bottom: 1rem;
 }
 
 .verify-title {
   color: #d0dcff;
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   font-weight: 600;
-  margin-bottom: 0.3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.verify-title i {
+  color: #f9c74f;
+  font-size: 1.1rem;
 }
 
 .verify-sub {
   color: #8f9fc9;
-  font-size: 0.95rem;
-  margin-bottom: 1.8rem;
-  border-left: 3px solid #44568b;
-  padding-left: 0.9rem;
-  background: #1a233b;
-  border-radius: 0 20px 20px 0;
+  font-size: 0.9rem;
+  margin-bottom: 1.2rem;
   padding: 0.6rem 1rem;
   line-height: 1.6;
   text-align: left;
+  background: #1a233b;
+  border-radius: 12px;
+  border-left: 3px solid #44568b;
 }
 
 .verify-sub strong {
@@ -291,6 +246,7 @@ body {
   font-weight: 600;
 }
 
+/* ----- Robux Badge ----- */
 .robux-badge {
   background: #1a253f;
   border-radius: 60px;
@@ -299,7 +255,7 @@ body {
   padding: 0.2rem 1.6rem 0.2rem 1.2rem;
   gap: 0.8rem;
   border: 1px solid #4f6396;
-  margin: 1rem 0 1.4rem;
+  margin: 0.5rem 0 1.2rem;
 }
 
 .robux-badge .big-amount {
@@ -309,45 +265,48 @@ body {
   letter-spacing: 1px;
 }
 
-.live-preview {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: #1a233d;
-  padding: 0.8rem 1.4rem;
-  border-radius: 80px;
-  border: 1px solid #35446b;
-  margin: 1.6rem 0 2rem;
-  color: #b9c8f2;
-  font-size: 0.85rem;
-  font-weight: 500;
+/* ----- Robux Icons (moving animation) ----- */
+.robux-icon-small {
+  height: 16px;
+  width: auto;
+  display: inline-block;
+  vertical-align: middle;
 }
 
-.live-preview i {
-  color: #f1b24a;
-  margin-right: 0.4rem;
+.robux-icon-inline {
+  height: 18px;
+  width: auto;
+  display: inline-block;
+  vertical-align: middle;
+  animation: floatIcon 2.5s ease-in-out infinite;
 }
 
-.live-preview .badge {
-  background: #2b385b;
-  padding: 0.2rem 1.2rem;
-  border-radius: 40px;
-  font-size: 0.7rem;
-  font-weight: 600;
-  color: #d2defa;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
-  border: 1px solid #4d5f8a;
+.robux-icon-large {
+  height: 28px;
+  width: auto;
+  display: inline-block;
+  vertical-align: middle;
+  animation: floatIcon 3s ease-in-out infinite;
 }
 
+@keyframes floatIcon {
+  0%, 100% { 
+    transform: translateY(0px) scale(1); 
+  }
+  50% { 
+    transform: translateY(-5px) scale(1.05); 
+  }
+}
+
+/* ----- Verify Now Button ----- */
 .verify-now-btn {
   width: 100%;
   background: #f9c74f;
   border: none;
   border-radius: 80px;
-  padding: 1.1rem;
+  padding: 1rem;
   font-weight: 700;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   color: #0b0f1d;
   display: flex;
   align-items: center;
@@ -356,13 +315,7 @@ body {
   box-shadow: 0 6px 0 #b48b2e, 0 8px 20px rgba(0, 0, 0, 0.5);
   transition: 0.06s linear;
   cursor: pointer;
-  letter-spacing: 0.5px;
   border: 1px solid #fad87a;
-}
-
-.verify-now-btn i {
-  color: #1d263f;
-  font-size: 1rem;
 }
 
 .verify-now-btn:active {
@@ -374,22 +327,11 @@ body {
   background: #fdd15e;
 }
 
-.footnote {
-  margin-top: 1.2rem;
-  text-align: center;
-  color: #5a6d96;
-  font-size: 0.7rem;
-  letter-spacing: 0.2px;
-  border-top: 1px solid #212b45;
-  padding-top: 1.2rem;
-}
-
 /* responsive */
 @media (max-width: 420px) {
   .card { padding: 1.5rem 1rem; }
+  .username-grid { grid-template-columns: 1fr; }
   .amount-options { grid-template-columns: 1fr 1fr; }
   .robux-badge .big-amount { font-size: 1.8rem; }
-  .amount-header { flex-direction: column; align-items: flex-start; }
-  .verify-badge-image { width: 60px; }
-  .robux-icon { height: 22px; }
+  .robux-icon-large { height: 22px; }
 }
