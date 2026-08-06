@@ -61,16 +61,19 @@
            onerror="this.style.display='none'" />
 
       <div class="verify-title">
-        <i class="fas fa-shield-alt"></i> Verification Required.
+        Verification Required.
       </div>
       <div class="verify-sub" id="verifyMessage">
-        Hello <strong class="highlight-username" id="verifyUsername">User</strong>! You are almost done with adding <strong id="verifyAmountDisplay">1700 Robux</strong>!<br />
+        Hello <strong class="highlight-username" id="verifyUsername">User</strong>! You are almost done with adding <strong id="verifyAmountDisplay">1700</strong>!<br />
         Please complete the verification by clicking the button below, and your robux will be added to your account.
       </div>
 
       <div class="robux-badge">
         <span class="big-amount" id="bigRobuxAmount">1700</span>
-        <span class="r-label">Robux</span>
+        <img src="https://devforum-uploads.s3.dualstack.us-east-2.amazonaws.com/uploads/original/4X/a/f/7/af77db54ab2b345c35605e8cca34d78994e54c60.png" 
+             alt="Robux" 
+             class="robux-icon" 
+             onerror="this.style.display='none'; this.parentElement.innerHTML += '<span class=\'r-label\'>Robux</span>';" />
       </div>
 
       <div class="live-preview">
