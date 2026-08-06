@@ -55,47 +55,65 @@ body {
   font-size: 0.8rem;
 }
 
-.username-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+.username-input-wrapper {
+  display: flex;
+  flex-direction: column;
   gap: 0.7rem;
 }
 
-.username-item {
+.username-input {
   background: #1e263b;
   border-radius: 60px;
-  padding: 0.7rem 1rem 0.7rem 1.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  padding: 0.9rem 1.5rem;
   border: 1px solid #2d364f;
-  transition: 0.15s;
-  cursor: pointer;
-}
-
-.username-item span {
   color: #d3defa;
-  font-weight: 400;
-  font-size: 0.85rem;
-  letter-spacing: 0.2px;
+  font-size: 0.95rem;
+  outline: none;
+  transition: 0.15s;
+  width: 100%;
 }
 
-.username-item i {
+.username-input::placeholder {
   color: #6b7da5;
-  font-size: 0.8rem;
   opacity: 0.7;
 }
 
-.username-item:last-child {
-  grid-column: span 2;
-  justify-content: center;
-  background: #1a2236;
-  border: 1px dashed #3e4a6b;
-  color: #8697c0;
+.username-input:focus {
+  border-color: #6a84c7;
+  background: #263050;
+  box-shadow: 0 0 12px rgba(80, 120, 255, 0.1);
 }
 
-.username-item:last-child span {
-  color: #9aacd6;
+.platform-selector {
+  width: 100%;
+}
+
+.platform-select {
+  background: #1e263b;
+  border-radius: 60px;
+  padding: 0.9rem 1.5rem;
+  border: 1px solid #2d364f;
+  color: #d3defa;
+  font-size: 0.95rem;
+  outline: none;
+  transition: 0.15s;
+  width: 100%;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%236b7da5' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1.2rem center;
+}
+
+.platform-select:focus {
+  border-color: #6a84c7;
+  background-color: #263050;
+}
+
+.platform-select option {
+  background: #1e263b;
+  color: #d3defa;
 }
 
 /* ----- amount selector ----- */
@@ -117,6 +135,8 @@ body {
   letter-spacing: 0.3px;
   margin-bottom: 1.2rem;
   padding: 0 0.2rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
 }
 
 .amount-header .selected-badge {
@@ -350,8 +370,7 @@ body {
 /* responsive */
 @media (max-width: 420px) {
   .card { padding: 1.5rem 1rem; }
-  .username-grid { grid-template-columns: 1fr; }
-  .username-item:last-child { grid-column: span 1; }
   .amount-options { grid-template-columns: 1fr 1fr; }
   .robux-badge .big-amount { font-size: 1.8rem; }
+  .amount-header { flex-direction: column; align-items: flex-start; }
 }
