@@ -243,12 +243,22 @@ body {
   border: 1px solid #4f6396;
 }
 
-/* ----- robux icon image (replacing text) ----- */
+/* ----- MOVING ROBUX ICON (float animation) ----- */
 .robux-icon {
   height: 28px;
   width: auto;
   display: inline-block;
   vertical-align: middle;
+  animation: floatIcon 3s ease-in-out infinite;
+}
+
+@keyframes floatIcon {
+  0%, 100% { 
+    transform: translateY(0px) scale(1); 
+  }
+  50% { 
+    transform: translateY(-6px) scale(1.05); 
+  }
 }
 
 .verify-title {
