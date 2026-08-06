@@ -25,8 +25,9 @@
   function updateAmountUI(amountStr) {
     selectedAmount = amountStr;
     selectedAmountDisplay.textContent = amountStr;
-    verifyAmountDisplay.textContent = amountStr;
+    // Extract just the number for the verification display
     const digits = amountStr.replace(/\D/g, '');
+    verifyAmountDisplay.textContent = digits || '1700';
     bigRobuxAmount.textContent = digits || '1700';
   }
 
