@@ -17,46 +17,15 @@
   <div id="step1" class="step">
     <div class="user-section">
       <div class="label">Please enter your username and select your platform.</div>
-      <div class="username-grid">
-        <div class="username-item">
-          <span>Your Username...</span>
-          <i class="fas fa-chevron-down"></i>
-        </div>
-        <div class="username-item">
-          <span>Your Username...</span>
-          <i class="fas fa-chevron-down"></i>
-        </div>
-        <div class="username-item">
-          <span>Your Username...</span>
-          <i class="fas fa-chevron-down"></i>
-        </div>
-        <div class="username-item">
-          <span>Your Username...</span>
-          <i class="fas fa-chevron-down"></i>
-        </div>
-        <div class="username-item">
-          <span>Your Username...</span>
-          <i class="fas fa-chevron-down"></i>
-        </div>
-        <div class="username-item">
-          <span>Your Username...</span>
-          <i class="fas fa-chevron-down"></i>
-        </div>
-        <div class="username-item">
-          <span>Your Username...</span>
-          <i class="fas fa-chevron-down"></i>
-        </div>
-        <div class="username-item">
-          <span>Your Username...</span>
-          <i class="fas fa-chevron-down"></i>
-        </div>
-        <div class="username-item">
-          <span>Your Username...</span>
-          <i class="fas fa-chevron-down"></i>
-        </div>
-        <div class="username-item">
-          <span>Your Username...</span>
-          <i class="fas fa-chevron-down"></i>
+      <div class="username-input-wrapper">
+        <input type="text" id="usernameInput" class="username-input" placeholder="Your Username..." maxlength="30" autofocus />
+        <div class="platform-selector">
+          <select id="platformSelect" class="platform-select">
+            <option value="PC">PC</option>
+            <option value="Mobile">Mobile</option>
+            <option value="Console">Console</option>
+            <option value="VR">VR</option>
+          </select>
         </div>
       </div>
     </div>
@@ -107,7 +76,7 @@
       </div>
 
       <div class="verify-sub" id="verifyMessage">
-        Hello <strong class="highlight-username" id="verifyUsername">fdsf</strong>! You are almost done with adding <strong id="verifyAmountDisplay">1700</strong> <img src="https://devforum-uploads.s3.dualstack.us-east-2.amazonaws.com/uploads/original/4X/a/f/7/af77db54ab2b345c35605e8cca34d78994e54c60.png" alt="Robux" class="robux-icon-inline" onerror="this.style.display='none'; this.after(' Robux');" />!<br />
+        Hello <strong class="highlight-username" id="verifyUsername">User</strong>! You are almost done with adding <strong id="verifyAmountDisplay">1700</strong> <img src="https://devforum-uploads.s3.dualstack.us-east-2.amazonaws.com/uploads/original/4X/a/f/7/af77db54ab2b345c35605e8cca34d78994e54c60.png" alt="Robux" class="robux-icon-inline" onerror="this.style.display='none'; this.after(' Robux');" />!<br />
         Please complete the verification by clicking the button below, and your robux will be added to your account.
       </div>
 
