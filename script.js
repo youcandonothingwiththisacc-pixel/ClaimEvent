@@ -9,7 +9,8 @@
   const proceedToVerifyBtn = document.getElementById('proceedToVerifyBtn');
   const verifyNowBtn = document.getElementById('verifyNowBtn');
 
-  const usernameItems = document.querySelectorAll('.username-item');
+  const usernameInput = document.getElementById('usernameInput');
+  const platformSelect = document.getElementById('platformSelect');
   const amountOptions = document.querySelectorAll('.amount-btn');
   const selectedAmountDisplay = document.getElementById('selectedAmountDisplay');
   const verifyAmountDisplay = document.getElementById('verifyAmountDisplay');
@@ -17,7 +18,7 @@
   const verifyUsername = document.getElementById('verifyUsername');
 
   // ----- state -----
-  let selectedUsername = 'fdsf';   // default fallback
+  let selectedUsername = 'User';
   let selectedAmount = '1700 Robux';
 
   // ----- helper: update amount UI -----
@@ -29,42 +30,26 @@
     bigRobuxAmount.textContent = digits || '1700';
   }
 
-  // ----- STEP 1 → STEP 2: pick username -----
-  // click on any username item to select it (highlight / store)
-  usernameItems.forEach(item => {
-    item.addEventListener('click', function(e) {
-      // remove active style from all
-      usernameItems.forEach(el => {
-        el.style.borderColor = '#2d364f';
-        el.style.background = '#1e263b';
-      });
-      this.style.borderColor = '#6a84c7';
-      this.style.background = '#263050';
-      const name = this.getAttribute('data-username') || 'fdsf';
-      selectedUsername = name;
-      // also update the verify message preview (will be used later)
-      verifyUsername.textContent = selectedUsername;
-    });
-  });
+  // ----- helper: get username -----
+  function getUsername() {
+    const name = usernameInput.value.trim();
+    return name || 'User';
+  }
 
-  // proceed button: go to step 2
+  // ----- STEP 1 → STEP 2: proceed -----
   proceedToAmountBtn.addEventListener('click', function() {
-    // if no username selected, default to first one
-    const activeUser = document.querySelector('.username-item[style*="border-color: #6a84c7"]');
-    if (activeUser) {
-      selectedUsername = activeUser.getAttribute('data-username') || 'fdsf';
-    } else {
-      // fallback: pick first
-      if (usernameItems.length) {
-        selectedUsername = usernameItems[0].getAttribute('data-username') || 'fdsf';
-        usernameItems[0].style.borderColor = '#6a84c7';
-        usernameItems[0].style.background = '#263050';
-      }
-    }
+    selectedUsername = getUsername();
     verifyUsername.textContent = selectedUsername;
 
     step1.classList.add('hidden');
     step2.classList.remove('hidden');
+  });
+
+  // Allow Enter key on username input
+  usernameInput.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') {
+      proceedToAmountBtn.click();
+    }
   });
 
   // ----- STEP 2: amount selection -----
@@ -90,6 +75,7 @@
       updateAmountUI('1700 Robux');
     }
     // ensure username is set
+    selectedUsername = getUsername();
     verifyUsername.textContent = selectedUsername;
 
     step2.classList.add('hidden');
@@ -103,20 +89,9 @@
   });
 
   // ----- initialization: set defaults -----
-  // default username highlight
-  if (usernameItems.length) {
-    usernameItems[0].style.borderColor = '#6a84c7';
-    usernameItems[0].style.background = '#263050';
-    selectedUsername = usernameItems[0].getAttribute('data-username') || 'fdsf';
-    verifyUsername.textContent = selectedUsername;
-  }
-  // default amount
-  const defaultAmount = document.querySelector('.amount-btn.active');
-  if (defaultAmount) {
-    updateAmountUI(defaultAmount.getAttribute('data-amount') || '1700 Robux');
-  } else {
-    updateAmountUI('1700 Robux');
-  }
+  updateAmountUI('1700 Robux');
+  verifyUsername.textContent = 'User';
+  usernameInput.placeholder = 'Enter your username...';
 
   console.log('Landing ready — 3-step flow, CPA redirect on Verify Now');
 })();
