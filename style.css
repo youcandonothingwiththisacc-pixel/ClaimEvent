@@ -3,7 +3,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif;
+  font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
 }
 
 body {
@@ -22,8 +22,16 @@ body {
   border-radius: 42px;
   padding: 2rem 1.8rem 2.5rem;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.04);
-  transition: all 0.2s ease;
   border: 1px solid #2a3348;
+  transition: all 0.2s;
+}
+
+/* ----- step visibility ----- */
+.step {
+  display: block;
+}
+.step.hidden {
+  display: none;
 }
 
 /* ----- username & platform ----- */
@@ -62,6 +70,7 @@ body {
   justify-content: space-between;
   border: 1px solid #2d364f;
   transition: 0.15s;
+  cursor: pointer;
 }
 
 .username-item span {
@@ -144,7 +153,7 @@ body {
   font-weight: 500;
   font-size: 0.9rem;
   transition: 0.15s;
-  cursor: default;
+  cursor: pointer;
   letter-spacing: 0.2px;
 }
 
@@ -174,7 +183,7 @@ body {
   background: linear-gradient(145deg, #3f5290, #2d3d68);
   box-shadow: 0 4px 0 #1b253f, 0 6px 14px rgba(0, 0, 0, 0.4);
   transition: 0.08s linear;
-  cursor: default;
+  cursor: pointer;
   border: 1px solid #5a70a8;
 }
 
@@ -188,7 +197,11 @@ body {
   box-shadow: 0 1px 0 #1b253f;
 }
 
-/* ----- verification card (main) ----- */
+.proceed-btn:hover {
+  background: linear-gradient(145deg, #4a5f9a, #33457a);
+}
+
+/* ----- verification card ----- */
 .verify-card {
   background: #12192b;
   border-radius: 40px;
@@ -215,18 +228,23 @@ body {
 
 .verify-sub {
   color: #8f9fc9;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   margin-bottom: 1.8rem;
   border-left: 3px solid #44568b;
   padding-left: 0.9rem;
   background: #1a233b;
   border-radius: 0 20px 20px 0;
   padding: 0.6rem 1rem;
-  line-height: 1.5;
+  line-height: 1.6;
 }
 
 .verify-sub strong {
   color: #e6edff;
+  font-weight: 600;
+}
+
+.verify-sub .highlight-username {
+  color: #f9c74f;
   font-weight: 600;
 }
 
@@ -329,7 +347,7 @@ body {
   padding-top: 1.2rem;
 }
 
-/* responsiveness */
+/* responsive */
 @media (max-width: 420px) {
   .card { padding: 1.5rem 1rem; }
   .username-grid { grid-template-columns: 1fr; }
