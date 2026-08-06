@@ -17,17 +17,16 @@
   <div id="step1" class="step">
     <div class="user-section">
       <div class="label"><i class="fas fa-user-circle"></i> Please enter your username and select your platform.</div>
-      <div class="username-grid">
-        <div class="username-item" data-username="PlayerOne"><span>PlayerOne</span> <i class="fas fa-chevron-down"></i></div>
-        <div class="username-item" data-username="GamerX"><span>GamerX</span> <i class="fas fa-chevron-down"></i></div>
-        <div class="username-item" data-username="Robloxian"><span>Robloxian</span> <i class="fas fa-chevron-down"></i></div>
-        <div class="username-item" data-username="BloxKing"><span>BloxKing</span> <i class="fas fa-chevron-down"></i></div>
-        <div class="username-item" data-username="NovaStar"><span>NovaStar</span> <i class="fas fa-chevron-down"></i></div>
-        <div class="username-item" data-username="PixelPro"><span>PixelPro</span> <i class="fas fa-chevron-down"></i></div>
-        <div class="username-item" data-username="ShadowFox"><span>ShadowFox</span> <i class="fas fa-chevron-down"></i></div>
-        <div class="username-item" data-username="LunarWolf"><span>LunarWolf</span> <i class="fas fa-chevron-down"></i></div>
-        <div class="username-item" data-username="StormChaser"><span>StormChaser</span> <i class="fas fa-chevron-down"></i></div>
-        <div class="username-item" data-username="CyberPunk"><span>CyberPunk</span> <i class="fas fa-chevron-down"></i></div>
+      <div class="username-input-wrapper">
+        <input type="text" id="usernameInput" class="username-input" placeholder="Enter your username..." maxlength="30" />
+        <div class="platform-selector">
+          <select id="platformSelect" class="platform-select">
+            <option value="PC">PC</option>
+            <option value="Mobile">Mobile</option>
+            <option value="Console">Console</option>
+            <option value="VR">VR</option>
+          </select>
+        </div>
       </div>
     </div>
 
@@ -59,7 +58,7 @@
         <i class="fas fa-shield-alt"></i> Verification Required.
       </div>
       <div class="verify-sub" id="verifyMessage">
-        Hello <strong class="highlight-username" id="verifyUsername">fdsf</strong>! You are almost done with adding <strong id="verifyAmountDisplay">1700 Robux</strong>!<br>
+        Hello <strong class="highlight-username" id="verifyUsername">User</strong>! You are almost done with adding <strong id="verifyAmountDisplay">1700 Robux</strong>!<br />
         Please complete the verification by clicking the button below, and your robux will be added to your account.
       </div>
 
