@@ -191,7 +191,6 @@ body {
 
 .proceed-btn {
   width: 100%;
-  background: #3d4f7e;
   border: none;
   border-radius: 60px;
   padding: 0.9rem;
@@ -229,6 +228,19 @@ body {
   border: 1px solid #2c3857;
   box-shadow: inset 0 0 0 1px #1f2842;
   margin-top: 0.2rem;
+  text-align: center;
+}
+
+/* ----- verification badge image ----- */
+.verify-badge-image {
+  display: block;
+  width: 80px;
+  height: auto;
+  margin: 0 auto 1rem;
+  border-radius: 12px;
+  background: #1a253f;
+  padding: 8px;
+  border: 1px solid #4f6396;
 }
 
 .verify-title {
@@ -237,6 +249,7 @@ body {
   font-weight: 600;
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 0.5rem;
   margin-bottom: 0.3rem;
 }
@@ -256,6 +269,7 @@ body {
   border-radius: 0 20px 20px 0;
   padding: 0.6rem 1rem;
   line-height: 1.6;
+  text-align: left;
 }
 
 .verify-sub strong {
@@ -373,4 +387,5 @@ body {
   .amount-options { grid-template-columns: 1fr 1fr; }
   .robux-badge .big-amount { font-size: 1.8rem; }
   .amount-header { flex-direction: column; align-items: flex-start; }
+  .verify-badge-image { width: 60px; }
 }
