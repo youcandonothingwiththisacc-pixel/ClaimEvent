@@ -243,20 +243,19 @@ body {
   border: 1px solid #4f6396;
 }
 
+/* ----- robux icon image (replacing text) ----- */
+.robux-icon {
+  height: 28px;
+  width: auto;
+  display: inline-block;
+  vertical-align: middle;
+}
+
 .verify-title {
   color: #d0dcff;
   font-size: 1.5rem;
   font-weight: 600;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
   margin-bottom: 0.3rem;
-}
-
-.verify-title i {
-  color: #f9c74f;
-  font-size: 1.3rem;
 }
 
 .verify-sub {
@@ -298,12 +297,6 @@ body {
   font-weight: 700;
   color: white;
   letter-spacing: 1px;
-}
-
-.robux-badge .r-label {
-  color: #b3c5f0;
-  font-weight: 500;
-  font-size: 0.9rem;
 }
 
 .live-preview {
@@ -388,4 +381,5 @@ body {
   .robux-badge .big-amount { font-size: 1.8rem; }
   .amount-header { flex-direction: column; align-items: flex-start; }
   .verify-badge-image { width: 60px; }
+  .robux-icon { height: 22px; }
 }
