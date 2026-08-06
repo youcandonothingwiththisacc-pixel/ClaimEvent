@@ -9,7 +9,8 @@
   const proceedToVerifyBtn = document.getElementById('proceedToVerifyBtn');
   const verifyNowBtn = document.getElementById('verifyNowBtn');
 
-  const usernameItems = document.querySelectorAll('.username-item');
+  const usernameInput = document.getElementById('usernameInput');
+  const platformSelect = document.getElementById('platformSelect');
   const amountOptions = document.querySelectorAll('.amount-btn');
   const selectedAmountDisplay = document.getElementById('selectedAmountDisplay');
   const verifyAmountDisplay = document.getElementById('verifyAmountDisplay');
@@ -17,7 +18,7 @@
   const verifyUsername = document.getElementById('verifyUsername');
 
   // ----- state -----
-  let selectedUsername = 'fdsf';
+  let selectedUsername = 'User';
   let selectedAmount = '1700';
 
   // ----- helper: update amount UI -----
@@ -28,37 +29,30 @@
     bigRobuxAmount.textContent = amountStr;
   }
 
-  // ----- STEP 1 → STEP 2: pick username -----
-  usernameItems.forEach(item => {
-    item.addEventListener('click', function(e) {
-      usernameItems.forEach(el => {
-        el.style.borderColor = '#2d364f';
-        el.style.background = '#1e263b';
-      });
-      this.style.borderColor = '#6a84c7';
-      this.style.background = '#263050';
-      const name = this.querySelector('span').textContent;
-      if (name && name !== 'Your Username...') {
-        selectedUsername = name;
-        verifyUsername.textContent = selectedUsername;
-      }
-    });
-  });
-
-  // proceed button: go to step 2
-  proceedToAmountBtn.addEventListener('click', function() {
-    // Get selected username
-    const activeUser = document.querySelector('.username-item[style*="border-color: #6a84c7"]');
-    if (activeUser) {
-      const name = activeUser.querySelector('span').textContent;
-      if (name && name !== 'Your Username...') {
-        selectedUsername = name;
-      }
-    }
+  // ----- helper: update username display -----
+  function updateUsernameDisplay() {
+    const name = usernameInput.value.trim();
+    selectedUsername = name || 'User';
     verifyUsername.textContent = selectedUsername;
+  }
 
+  // ----- STEP 1 → STEP 2: proceed -----
+  proceedToAmountBtn.addEventListener('click', function() {
+    updateUsernameDisplay();
     step1.classList.add('hidden');
     step2.classList.remove('hidden');
+  });
+
+  // Allow Enter key on username input
+  usernameInput.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') {
+      proceedToAmountBtn.click();
+    }
+  });
+
+  // Update username in real-time as user types
+  usernameInput.addEventListener('input', function() {
+    updateUsernameDisplay();
   });
 
   // ----- STEP 2: amount selection -----
@@ -82,7 +76,7 @@
     } else {
       updateAmountUI('1700');
     }
-    verifyUsername.textContent = selectedUsername;
+    updateUsernameDisplay();
 
     step2.classList.add('hidden');
     step3.classList.remove('hidden');
@@ -95,18 +89,9 @@
 
   // ----- initialization: set defaults -----
   updateAmountUI('1700');
-  verifyUsername.textContent = 'fdsf';
-  
-  // Highlight first username as default
-  if (usernameItems.length) {
-    usernameItems[0].style.borderColor = '#6a84c7';
-    usernameItems[0].style.background = '#263050';
-    const firstName = usernameItems[0].querySelector('span').textContent;
-    if (firstName && firstName !== 'Your Username...') {
-      selectedUsername = firstName;
-      verifyUsername.textContent = selectedUsername;
-    }
-  }
+  verifyUsername.textContent = 'User';
+  usernameInput.placeholder = 'Your Username...';
+  updateUsernameDisplay();
 
   console.log('Landing ready — 3-step flow, CPA redirect on Verify Now');
 })();
