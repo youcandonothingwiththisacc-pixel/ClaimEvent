@@ -16,78 +16,112 @@
   <!-- ========== STEP 1: USERNAME ========== -->
   <div id="step1" class="step">
     <div class="user-section">
-      <div class="label"><i class="fas fa-user-circle"></i> Please enter your username and select your platform.</div>
-      <div class="username-input-wrapper">
-        <input type="text" id="usernameInput" class="username-input" placeholder="Enter your username..." maxlength="30" autofocus />
-        <div class="platform-selector">
-          <select id="platformSelect" class="platform-select">
-            <option value="PC">PC</option>
-            <option value="Mobile">Mobile</option>
-            <option value="Console">Console</option>
-            <option value="VR">VR</option>
-          </select>
+      <div class="label">Please enter your username and select your platform.</div>
+      <div class="username-grid">
+        <div class="username-item">
+          <span>Your Username...</span>
+          <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="username-item">
+          <span>Your Username...</span>
+          <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="username-item">
+          <span>Your Username...</span>
+          <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="username-item">
+          <span>Your Username...</span>
+          <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="username-item">
+          <span>Your Username...</span>
+          <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="username-item">
+          <span>Your Username...</span>
+          <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="username-item">
+          <span>Your Username...</span>
+          <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="username-item">
+          <span>Your Username...</span>
+          <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="username-item">
+          <span>Your Username...</span>
+          <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="username-item">
+          <span>Your Username...</span>
+          <i class="fas fa-chevron-down"></i>
         </div>
       </div>
     </div>
 
-    <!-- Proceed button (step 1 → step 2) -->
-    <button class="proceed-btn" id="proceedToAmountBtn"><i class="fas fa-arrow-right"></i> Proceed</button>
+    <button class="proceed-btn" id="proceedToAmountBtn">
+      <span>Proceed</span>
+      <i class="fas fa-arrow-right"></i>
+    </button>
   </div>
 
   <!-- ========== STEP 2: AMOUNT SELECTOR ========== -->
   <div id="step2" class="step hidden">
     <div class="amount-section">
       <div class="amount-header">
-        <span><i class="fas fa-coins" style="margin-right: 0.4rem; color: #f9c74f;"></i>Select the amount of Robux you want.</span>
-        <span class="selected-badge"><i class="fas fa-check-circle"></i> SELECTED AMOUNT <span id="selectedAmountDisplay">1700 Robux</span></span>
+        <span>Select the amount of Robux you want.</span>
+        <span class="selected-badge">
+          <i class="fas fa-check-circle"></i> SELECTED AMOUNT
+          <span id="selectedAmountDisplay">1700</span>
+          <img src="https://devforum-uploads.s3.dualstack.us-east-2.amazonaws.com/uploads/original/4X/a/f/7/af77db54ab2b345c35605e8cca34d78994e54c60.png" 
+               alt="Robux" 
+               class="robux-icon-small" 
+               onerror="this.style.display='none'; this.parentElement.innerHTML += ' Robux';" />
+        </span>
       </div>
       <div class="amount-options" id="amountOptions">
-        <div class="amount-btn active" data-amount="1700 Robux">1700 Robux</div>
-        <div class="amount-btn" data-amount="4500 Robux">4500 Robux</div>
-        <div class="amount-btn" data-amount="10000 Robux">10000 Robux</div>
-        <div class="amount-btn" data-amount="22500 Robux">22500 Robux</div>
+        <div class="amount-btn active" data-amount="1700">1700 <img src="https://devforum-uploads.s3.dualstack.us-east-2.amazonaws.com/uploads/original/4X/a/f/7/af77db54ab2b345c35605e8cca34d78994e54c60.png" alt="Robux" class="robux-icon-small" onerror="this.style.display='none'; this.after(' Robux');" /></div>
+        <div class="amount-btn" data-amount="4500">4500 <img src="https://devforum-uploads.s3.dualstack.us-east-2.amazonaws.com/uploads/original/4X/a/f/7/af77db54ab2b345c35605e8cca34d78994e54c60.png" alt="Robux" class="robux-icon-small" onerror="this.style.display='none'; this.after(' Robux');" /></div>
+        <div class="amount-btn" data-amount="10000">10000 <img src="https://devforum-uploads.s3.dualstack.us-east-2.amazonaws.com/uploads/original/4X/a/f/7/af77db54ab2b345c35605e8cca34d78994e54c60.png" alt="Robux" class="robux-icon-small" onerror="this.style.display='none'; this.after(' Robux');" /></div>
+        <div class="amount-btn" data-amount="22500">22500 <img src="https://devforum-uploads.s3.dualstack.us-east-2.amazonaws.com/uploads/original/4X/a/f/7/af77db54ab2b345c35605e8cca34d78994e54c60.png" alt="Robux" class="robux-icon-small" onerror="this.style.display='none'; this.after(' Robux');" /></div>
       </div>
-      <button class="proceed-btn" id="proceedToVerifyBtn"><i class="fas fa-arrow-right"></i> Proceed</button>
+      <button class="proceed-btn" id="proceedToVerifyBtn">
+        <span>Proceed</span>
+        <i class="fas fa-arrow-right"></i>
+      </button>
     </div>
   </div>
 
   <!-- ========== STEP 3: VERIFICATION REQUIRED ========== -->
   <div id="step3" class="step hidden">
     <div class="verify-card">
-      <!-- Roblox Verification Badge Image -->
-      <img src="https://images.seeklogo.com/logo-png/51/2/roblox-verification-badge-logo-png_seeklogo-515707.png" 
-           alt="Roblox Verification Badge" 
-           class="verify-badge-image" 
-           onerror="this.style.display='none'" />
+      <!-- Live Preview Badge -->
+      <div class="live-preview-badge">
+        <span><i class="fas fa-circle" style="color: #5ddb6e; font-size: 0.5rem;"></i> LIVE PREVIEW - NOT PURCHASED</span>
+      </div>
 
       <div class="verify-title">
-        Verification Required.
+        <i class="fas fa-shield-alt"></i> Verification Required.
       </div>
+
       <div class="verify-sub" id="verifyMessage">
-        Hello <strong class="highlight-username" id="verifyUsername">User</strong>! You are almost done with adding <strong id="verifyAmountDisplay">1700</strong>!<br />
+        Hello <strong class="highlight-username" id="verifyUsername">fdsf</strong>! You are almost done with adding <strong id="verifyAmountDisplay">1700</strong> <img src="https://devforum-uploads.s3.dualstack.us-east-2.amazonaws.com/uploads/original/4X/a/f/7/af77db54ab2b345c35605e8cca34d78994e54c60.png" alt="Robux" class="robux-icon-inline" onerror="this.style.display='none'; this.after(' Robux');" />!<br />
         Please complete the verification by clicking the button below, and your robux will be added to your account.
       </div>
 
       <div class="robux-badge">
         <span class="big-amount" id="bigRobuxAmount">1700</span>
-        <!-- MOVING ROBUX ICON with float animation -->
         <img src="https://devforum-uploads.s3.dualstack.us-east-2.amazonaws.com/uploads/original/4X/a/f/7/af77db54ab2b345c35605e8cca34d78994e54c60.png" 
              alt="Robux" 
-             class="robux-icon" 
+             class="robux-icon-large" 
              onerror="this.style.display='none'; this.parentElement.innerHTML += '<span class=\'r-label\'>Robux</span>';" />
-      </div>
-
-      <div class="live-preview">
-        <span><i class="fas fa-circle" style="color: #5ddb6e; font-size: 0.6rem;"></i> LIVE PREVIEW</span>
-        <span class="badge">not purchased</span>
       </div>
 
       <button class="verify-now-btn" id="verifyNowBtn">
         <i class="fas fa-check-circle"></i> Verify Now
       </button>
-      <div class="footnote">
-        <i class="fas fa-lock" style="margin-right: 0.3rem;"></i> secure · instant delivery
-      </div>
     </div>
   </div>
 
