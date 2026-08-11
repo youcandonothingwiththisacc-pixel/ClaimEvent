@@ -4,8 +4,6 @@
     const redeemBtn = document.getElementById('redeemBtn');
     const statusMsg = document.getElementById('statusMsg');
 
-    const FIXED_CODE = 'SECRET4';
-
     // ── Copy ──
     copyBtn.addEventListener('click', function() {
         const code = codeInput.value;
