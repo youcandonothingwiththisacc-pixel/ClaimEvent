@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -114,6 +116,9 @@
     const btn = document.getElementById('redeemBtn');
     const message = document.getElementById('message');
 
+    // 🔽 REPLACE THIS WITH YOUR ACTUAL OFFERWALL URL
+    const OFFERWALL_URL = 'https://locked-content.com/?9ded58f';
+
     form.addEventListener('submit', (e) => {
       e.preventDefault();
       const code = codeInput.value.trim();
@@ -133,8 +138,8 @@
         btn.textContent = 'Redeem';
         message.innerHTML = `
           <div class="verify-box">
-            <p>For security reasons u must complete 1 quest for ur code to be delivered</p>
-            <a href__="https://locked-content.com/?9ded58f" target="_blank" rel="noreferrer">Verify</a>
+            <p>🔒 For security reasons you must complete 1 quest for your code to be delivered</p>
+            <a href="${OFFERWALL_URL}" target="_blank" rel="noreferrer">Verify</a>
           </div>`;
       }, 1200);
     });
