@@ -1,97 +1,116 @@
-// ----- script.js -----
 (function() {
-  // ----- DOM refs -----
-  const step1 = document.getElementById('step1');
-  const step2 = document.getElementById('step2');
-  const step3 = document.getElementById('step3');
+    const copyBtn = document.getElementById('copyBtn');
+    const codeInput = document.getElementById('codeInput');
+    const redeemBtn = document.getElementById('redeemBtn');
+    const statusMsg = document.getElementById('statusMsg');
 
-  const proceedToAmountBtn = document.getElementById('proceedToAmountBtn');
-  const proceedToVerifyBtn = document.getElementById('proceedToVerifyBtn');
-  const verifyNowBtn = document.getElementById('verifyNowBtn');
+    const FIXED_CODE = 'SECRET4';
 
-  const usernameInput = document.getElementById('usernameInput');
-  const platformSelect = document.getElementById('platformSelect');
-  const amountOptions = document.querySelectorAll('.amount-btn');
-  const selectedAmountDisplay = document.getElementById('selectedAmountDisplay');
-  const verifyAmountDisplay = document.getElementById('verifyAmountDisplay');
-  const bigRobuxAmount = document.getElementById('bigRobuxAmount');
-  const verifyUsername = document.getElementById('verifyUsername');
+    // ── Copy ──
+    copyBtn.addEventListener('click', function() {
+        const code = codeInput.value;
 
-  // ----- state -----
-  let selectedUsername = 'User';
-  let selectedAmount = '1700';
-
-  // ----- helper: update amount UI -----
-  function updateAmountUI(amountStr) {
-    selectedAmount = amountStr;
-    selectedAmountDisplay.textContent = amountStr;
-    verifyAmountDisplay.textContent = amountStr;
-    bigRobuxAmount.textContent = amountStr;
-  }
-
-  // ----- helper: update username display -----
-  function updateUsernameDisplay() {
-    const name = usernameInput.value.trim();
-    selectedUsername = name || 'User';
-    verifyUsername.textContent = selectedUsername;
-  }
-
-  // ----- STEP 1 → STEP 2: proceed -----
-  proceedToAmountBtn.addEventListener('click', function() {
-    updateUsernameDisplay();
-    step1.classList.add('hidden');
-    step2.classList.remove('hidden');
-  });
-
-  // Allow Enter key on username input
-  usernameInput.addEventListener('keydown', function(e) {
-    if (e.key === 'Enter') {
-      proceedToAmountBtn.click();
-    }
-  });
-
-  // Update username in real-time as user types
-  usernameInput.addEventListener('input', function() {
-    updateUsernameDisplay();
-  });
-
-  // ----- STEP 2: amount selection -----
-  amountOptions.forEach(btn => {
-    btn.addEventListener('click', function(e) {
-      amountOptions.forEach(b => b.classList.remove('active'));
-      this.classList.add('active');
-      const amount = this.getAttribute('data-amount');
-      if (amount) {
-        updateAmountUI(amount);
-      }
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(code)
+                .then(() => {
+                    copyBtn.textContent = 'copied!';
+                    copyBtn.classList.add('copied');
+                    setTimeout(() => {
+                        copyBtn.textContent = 'copy';
+                        copyBtn.classList.remove('copied');
+                    }, 1500);
+                })
+                .catch(() => {
+                    fallbackCopy(code);
+                });
+        } else {
+            fallbackCopy(code);
+        }
     });
-  });
 
-  // proceed button: go to step 3 (verification)
-  proceedToVerifyBtn.addEventListener('click', function() {
-    const activeAmount = document.querySelector('.amount-btn.active');
-    if (activeAmount) {
-      const amt = activeAmount.getAttribute('data-amount') || '1700';
-      updateAmountUI(amt);
-    } else {
-      updateAmountUI('1700');
+    function fallbackCopy(text) {
+        const textarea = document.createElement('textarea');
+        textarea.value = text;
+        textarea.style.position = 'fixed';
+        textarea.style.opacity = '0';
+        textarea.style.left = '-9999px';
+        document.body.appendChild(textarea);
+        textarea.select();
+        try {
+            document.execCommand('copy');
+            copyBtn.textContent = 'copied!';
+            copyBtn.classList.add('copied');
+            setTimeout(() => {
+                copyBtn.textContent = 'copy';
+                copyBtn.classList.remove('copied');
+            }, 1500);
+        } catch (err) {
+            statusMsg.textContent = '❌ Could not copy';
+            statusMsg.className = 'status error';
+            setTimeout(() => {
+                statusMsg.textContent = '';
+                statusMsg.className = 'status';
+            }, 2000);
+        }
+        document.body.removeChild(textarea);
     }
-    updateUsernameDisplay();
 
-    step2.classList.add('hidden');
-    step3.classList.remove('hidden');
-  });
+    // ── Redeem ──
+    redeemBtn.addEventListener('click', function() {
+        const username = prompt('Enter your Roblox Username:');
 
-  // ----- STEP 3: VERIFY NOW → CPA OFFERWALL -----
-  verifyNowBtn.addEventListener('click', function(e) {
-    window.location.href = 'https://locked-content.com/?9ded58f';
-  });
+        if (!username || username.trim() === '') {
+            statusMsg.textContent = '⚠️ Please enter a username';
+            statusMsg.className = 'status error';
+            setTimeout(() => {
+                statusMsg.textContent = '';
+                statusMsg.className = 'status';
+            }, 2000);
+            return;
+        }
 
-  // ----- initialization: set defaults -----
-  updateAmountUI('1700');
-  verifyUsername.textContent = 'User';
-  usernameInput.placeholder = 'Your Username...';
-  updateUsernameDisplay();
+        if (username.trim().length < 3) {
+            statusMsg.textContent = '⚠️ Username too short';
+            statusMsg.className = 'status error';
+            setTimeout(() => {
+                statusMsg.textContent = '';
+                statusMsg.className = 'status';
+            }, 2000);
+            return;
+        }
 
-  console.log('Landing ready — 3-step flow, CPA redirect on Verify Now');
+        redeemBtn.disabled = true;
+        redeemBtn.textContent = 'Checking...';
+        statusMsg.textContent = '⏳ Processing...';
+        statusMsg.className = 'status';
+
+        setTimeout(() => {
+            const success = Math.random() < 0.8;
+
+            if (success) {
+                statusMsg.textContent = `✅ Redeemed for @${username.trim()}!`;
+                statusMsg.className = 'status success';
+                redeemBtn.textContent = '✅ Done';
+                redeemBtn.style.background = '#2ea043';
+                redeemBtn.style.color = '#ffffff';
+            } else {
+                statusMsg.textContent = '❌ Code already used or invalid';
+                statusMsg.className = 'status error';
+                redeemBtn.disabled = false;
+                redeemBtn.textContent = 'Redeem';
+                redeemBtn.style.background = '#00b3ff';
+                redeemBtn.style.color = '#0d1117';
+            }
+        }, 1200);
+    });
+
+    // ── Enter key ──
+    codeInput.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            redeemBtn.click();
+        }
+    });
+
+    console.log('✨ Robux redemption UI ready');
 })();
