@@ -21,6 +21,7 @@ body {
     width: 400px;
     max-width: 92%;
     border: 1px solid #30363d;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
 }
 
 .title {
@@ -48,6 +49,7 @@ body {
     font-weight: 700;
     letter-spacing: 3px;
     font-family: 'Courier New', monospace;
+    user-select: none;
 }
 
 .copy-btn {
@@ -110,12 +112,16 @@ body {
     color: #ffffff;
     font-size: 13px;
     outline: none;
-    font-family: 'Courier New', monospace;
-    letter-spacing: 1px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
 }
 
 .redeem-row input:focus {
     border-color: #00b3ff;
+    box-shadow: 0 0 0 3px rgba(0, 179, 255, 0.15);
+}
+
+.redeem-row input::placeholder {
+    color: #484f58;
 }
 
 .redeem-row .redeem-btn {
@@ -128,6 +134,7 @@ body {
     font-size: 13px;
     cursor: pointer;
     transition: 0.2s;
+    white-space: nowrap;
 }
 
 .redeem-row .redeem-btn:hover {
