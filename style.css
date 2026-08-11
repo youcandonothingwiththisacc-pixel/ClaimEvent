@@ -50,6 +50,7 @@ body {
     letter-spacing: 3px;
     font-family: 'Courier New', monospace;
     user-select: none;
+    pointer-events: none;
 }
 
 .copy-btn {
