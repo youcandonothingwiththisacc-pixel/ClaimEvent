@@ -23,7 +23,6 @@ body {
     border: 1px solid #30363d;
 }
 
-/* ── Header ── */
 .title {
     color: #ffffff;
     font-size: 22px;
@@ -32,7 +31,6 @@ body {
     margin-bottom: 10px;
 }
 
-/* ── Code Box ── */
 .code-box {
     background: #161b22;
     border: 2px solid #00b3ff;
@@ -74,7 +72,6 @@ body {
     color: #ffffff;
 }
 
-/* ── Remaining ── */
 .remaining {
     color: #ff6b6b;
     font-size: 13px;
@@ -83,7 +80,6 @@ body {
     margin: 4px 0 18px 0;
 }
 
-/* ── Redeem Section ── */
 .redeem-section {
     background: #161b22;
     border-radius: 8px;
@@ -150,7 +146,6 @@ body {
     text-align: left;
 }
 
-/* ── Status ── */
 .status {
     color: #8b949e;
     font-size: 12px;
@@ -167,7 +162,6 @@ body {
     color: #f85149;
 }
 
-/* ── Responsive ── */
 @media (max-width: 420px) {
     .container {
         padding: 20px 16px 20px;
