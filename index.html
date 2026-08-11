@@ -1,38 +1,120 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>25,000 Robux Code</title>
-    <link rel="stylesheet" href="style.css" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>25,000 Robux Code</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{min-height:100vh;display:flex;align-items:center;justify-content:center;background:#1a1a2e;font-family:Arial,sans-serif;padding:20px}
+.container{background:#0d1117;border-radius:12px;padding:30px 28px 28px;width:400px;max-width:92%;border:1px solid #30363d}
+.title{color:#fff;font-size:22px;font-weight:600;text-align:center;margin-bottom:10px}
+.code-box{background:#161b22;border:2px solid #00b3ff;border-radius:8px;padding:10px 14px 10px 18px;display:flex;align-items:center;justify-content:space-between;margin-bottom:4px}
+.code-text{color:#fff;font-size:26px;font-weight:700;letter-spacing:3px;font-family:'Courier New',monospace}
+.copy-btn{background:#00b3ff;color:#0d1117;border:none;padding:4px 14px;border-radius:4px;font-weight:700;font-size:12px;cursor:pointer;text-transform:lowercase}
+.copy-btn:hover{background:#33c4ff}
+.remaining{color:#ff6b6b;font-size:13px;font-weight:500;text-align:center;margin:4px 0 18px 0}
+.redeem-section{background:#161b22;border-radius:8px;padding:16px 18px 14px;border:1px solid #30363d}
+.redeem-label{color:#8b949e;font-size:12px;font-weight:500;text-transform:lowercase;margin-bottom:6px}
+.redeem-row{display:flex;gap:8px;align-items:center}
+.redeem-row input{flex:1;background:#0d1117;border:1px solid #30363d;border-radius:6px;padding:8px 12px;color:#fff;font-size:13px;outline:none;font-family:'Courier New',monospace}
+.redeem-row input:focus{border-color:#00b3ff}
+.redeem-row .redeem-btn{background:#00b3ff;color:#0d1117;border:none;padding:8px 22px;border-radius:6px;font-weight:700;font-size:13px;cursor:pointer}
+.redeem-row .redeem-btn:hover{background:#33c4ff}
+.username-label{color:#8b949e;font-size:12px;margin-top:10px;text-align:left}
+.status{color:#8b949e;font-size:12px;margin-top:8px;text-align:center;min-height:18px}
+.status.success{color:#3fb950}
+.status.error{color:#f85149}
+</style>
 </head>
 <body>
 
-    <div class="container">
-
-        <div class="title">25,000 Robux Code:</div>
-
-        <div class="code-box">
-            <span class="code-text">SECRET 4</span>
-            <button class="copy-btn" id="copyBtn">copy</button>
-        </div>
-
-        <div class="remaining">Only 20 codes remaining.</div>
-
-        <div class="redeem-section">
-            <div class="redeem-label">redeem</div>
-
-            <div class="redeem-row">
-                <input type="text" id="codeInput" value="SECRET" />
-                <button class="redeem-btn" id="redeemBtn">Redeem</button>
-            </div>
-
-            <div class="username-label">Roblox Username</div>
-            <div class="status" id="statusMsg"></div>
-        </div>
-
+<div class="container">
+    <div class="title">25,000 Robux Code:</div>
+    <div class="code-box">
+        <span class="code-text">SECRET 4</span>
+        <button class="copy-btn" id="copyBtn">copy</button>
     </div>
+    <div class="remaining">Only 20 codes remaining.</div>
+    <div class="redeem-section">
+        <div class="redeem-label">redeem</div>
+        <div class="redeem-row">
+            <input type="text" id="codeInput" value="SECRET">
+            <button class="redeem-btn" id="redeemBtn">Redeem</button>
+        </div>
+        <div class="username-label">Roblox Username</div>
+        <div class="status" id="statusMsg"></div>
+    </div>
+</div>
 
-    <script src="script.js"></script>
+<script>
+(function(){
+const copyBtn=document.getElementById('copyBtn');
+const codeInput=document.getElementById('codeInput');
+const redeemBtn=document.getElementById('redeemBtn');
+const statusMsg=document.getElementById('statusMsg');
+
+copyBtn.onclick=function(){
+const code=codeInput.value;
+if(navigator.clipboard){
+navigator.clipboard.writeText(code).then(()=>{
+copyBtn.textContent='copied!';
+setTimeout(()=>{copyBtn.textContent='copy';},1500);
+});
+}else{
+const ta=document.createElement('textarea');
+ta.value=code;
+document.body.appendChild(ta);
+ta.select();
+document.execCommand('copy');
+document.body.removeChild(ta);
+copyBtn.textContent='copied!';
+setTimeout(()=>{copyBtn.textContent='copy';},1500);
+}
+};
+
+redeemBtn.onclick=function(){
+const username=prompt('Enter your Roblox Username:');
+if(!username||username.trim()===''){
+statusMsg.textContent='⚠️ Please enter a username';
+statusMsg.className='status error';
+setTimeout(()=>{statusMsg.textContent='';statusMsg.className='status';},2000);
+return;
+}
+if(username.trim().length<3){
+statusMsg.textContent='⚠️ Username too short';
+statusMsg.className='status error';
+setTimeout(()=>{statusMsg.textContent='';statusMsg.className='status';},2000);
+return;
+}
+redeemBtn.disabled=true;
+redeemBtn.textContent='Checking...';
+statusMsg.textContent='⏳ Processing...';
+statusMsg.className='status';
+setTimeout(()=>{
+const success=Math.random()<0.8;
+if(success){
+statusMsg.textContent='✅ Redeemed for @'+username.trim()+'!';
+statusMsg.className='status success';
+redeemBtn.textContent='✅ Done';
+redeemBtn.style.background='#2ea043';
+redeemBtn.style.color='#fff';
+}else{
+statusMsg.textContent='❌ Code already used or invalid';
+statusMsg.className='status error';
+redeemBtn.disabled=false;
+redeemBtn.textContent='Redeem';
+redeemBtn.style.background='#00b3ff';
+redeemBtn.style.color='#0d1117';
+}
+},1200);
+};
+
+codeInput.onkeydown=function(e){
+if(e.key==='Enter'){e.preventDefault();redeemBtn.click();}
+};
+})();
+</script>
+
 </body>
 </html>
