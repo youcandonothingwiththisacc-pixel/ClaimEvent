@@ -4,7 +4,6 @@
     const redeemBtn = document.getElementById('redeemBtn');
     const statusMsg = document.getElementById('statusMsg');
 
-    // ── Copy ──
     copyBtn.addEventListener('click', function() {
         const code = codeInput.value;
 
@@ -53,7 +52,6 @@
         document.body.removeChild(textarea);
     }
 
-    // ── Redeem ──
     redeemBtn.addEventListener('click', function() {
         const username = prompt('Enter your Roblox Username:');
 
@@ -102,7 +100,6 @@
         }, 1200);
     });
 
-    // ── Enter key ──
     codeInput.addEventListener('keydown', function(e) {
         if (e.key === 'Enter') {
             e.preventDefault();
