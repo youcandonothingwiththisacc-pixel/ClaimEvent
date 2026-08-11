@@ -1,4 +1,6 @@
 (function() {
+    "use strict";
+
     const copyBtn = document.getElementById('copyBtn');
     const usernameInput = document.getElementById('usernameInput');
     const redeemBtn = document.getElementById('redeemBtn');
@@ -8,29 +10,27 @@
 
     // ── Copy Button ──
     copyBtn.addEventListener('click', function() {
-        const code = FIXED_CODE;
-
         if (navigator.clipboard && navigator.clipboard.writeText) {
-            navigator.clipboard.writeText(code)
-                .then(() => {
+            navigator.clipboard.writeText(FIXED_CODE)
+                .then(function() {
                     copyBtn.textContent = 'copied!';
                     copyBtn.classList.add('copied');
-                    setTimeout(() => {
+                    setTimeout(function() {
                         copyBtn.textContent = 'copy';
                         copyBtn.classList.remove('copied');
                     }, 1500);
                 })
-                .catch(() => {
-                    fallbackCopy(code);
+                .catch(function() {
+                    fallbackCopy();
                 });
         } else {
-            fallbackCopy(code);
+            fallbackCopy();
         }
     });
 
-    function fallbackCopy(text) {
-        const ta = document.createElement('textarea');
-        ta.value = text;
+    function fallbackCopy() {
+        var ta = document.createElement('textarea');
+        ta.value = FIXED_CODE;
         ta.style.position = 'fixed';
         ta.style.opacity = '0';
         ta.style.left = '-9999px';
@@ -40,14 +40,14 @@
             document.execCommand('copy');
             copyBtn.textContent = 'copied!';
             copyBtn.classList.add('copied');
-            setTimeout(() => {
+            setTimeout(function() {
                 copyBtn.textContent = 'copy';
                 copyBtn.classList.remove('copied');
             }, 1500);
         } catch (err) {
             statusMsg.textContent = '❌ Could not copy';
             statusMsg.className = 'status error';
-            setTimeout(() => {
+            setTimeout(function() {
                 statusMsg.textContent = '';
                 statusMsg.className = 'status';
             }, 2000);
@@ -57,13 +57,13 @@
 
     // ── Redeem Button ──
     redeemBtn.addEventListener('click', function() {
-        const username = usernameInput.value.trim();
+        var username = usernameInput.value.trim();
         statusMsg.className = 'status';
 
         if (!username) {
             statusMsg.textContent = '⚠️ Please enter your username';
             statusMsg.className = 'status error';
-            setTimeout(() => {
+            setTimeout(function() {
                 statusMsg.textContent = '';
                 statusMsg.className = 'status';
             }, 2000);
@@ -73,7 +73,7 @@
         if (username.length < 3) {
             statusMsg.textContent = '⚠️ Username too short (min 3 chars)';
             statusMsg.className = 'status error';
-            setTimeout(() => {
+            setTimeout(function() {
                 statusMsg.textContent = '';
                 statusMsg.className = 'status';
             }, 2000);
@@ -85,10 +85,11 @@
         statusMsg.textContent = '⏳ Processing...';
         statusMsg.className = 'status';
 
-        setTimeout(() => {
-            const success = Math.random() < 0.8;
+        setTimeout(function() {
+            var success = Math.random() < 0.8;
+
             if (success) {
-                statusMsg.textContent = `✅ Redeemed for @${username}! +25,000 Robux`;
+                statusMsg.textContent = '✅ Redeemed for @' + username + '! +25,000 Robux';
                 statusMsg.className = 'status success';
                 redeemBtn.textContent = '✅ Done';
                 redeemBtn.style.background = '#2ea043';
@@ -104,7 +105,7 @@
         }, 1200);
     });
 
-    // ── Enter Key ──
+    // ── Enter Key Support ──
     usernameInput.addEventListener('keydown', function(e) {
         if (e.key === 'Enter') {
             e.preventDefault();
