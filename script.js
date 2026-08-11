@@ -1,11 +1,14 @@
 (function() {
     const copyBtn = document.getElementById('copyBtn');
-    const codeInput = document.getElementById('codeInput');
+    const usernameInput = document.getElementById('usernameInput');
     const redeemBtn = document.getElementById('redeemBtn');
     const statusMsg = document.getElementById('statusMsg');
 
+    const FIXED_CODE = 'SECRET4';
+
+    // ── Copy Button ──
     copyBtn.addEventListener('click', function() {
-        const code = codeInput.value;
+        const code = FIXED_CODE;
 
         if (navigator.clipboard && navigator.clipboard.writeText) {
             navigator.clipboard.writeText(code)
@@ -26,13 +29,13 @@
     });
 
     function fallbackCopy(text) {
-        const textarea = document.createElement('textarea');
-        textarea.value = text;
-        textarea.style.position = 'fixed';
-        textarea.style.opacity = '0';
-        textarea.style.left = '-9999px';
-        document.body.appendChild(textarea);
-        textarea.select();
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
+        ta.style.left = '-9999px';
+        document.body.appendChild(ta);
+        ta.select();
         try {
             document.execCommand('copy');
             copyBtn.textContent = 'copied!';
@@ -49,14 +52,16 @@
                 statusMsg.className = 'status';
             }, 2000);
         }
-        document.body.removeChild(textarea);
+        document.body.removeChild(ta);
     }
 
+    // ── Redeem Button ──
     redeemBtn.addEventListener('click', function() {
-        const username = prompt('Enter your Roblox Username:');
+        const username = usernameInput.value.trim();
+        statusMsg.className = 'status';
 
-        if (!username || username.trim() === '') {
-            statusMsg.textContent = '⚠️ Please enter a username';
+        if (!username) {
+            statusMsg.textContent = '⚠️ Please enter your username';
             statusMsg.className = 'status error';
             setTimeout(() => {
                 statusMsg.textContent = '';
@@ -65,8 +70,8 @@
             return;
         }
 
-        if (username.trim().length < 3) {
-            statusMsg.textContent = '⚠️ Username too short';
+        if (username.length < 3) {
+            statusMsg.textContent = '⚠️ Username too short (min 3 chars)';
             statusMsg.className = 'status error';
             setTimeout(() => {
                 statusMsg.textContent = '';
@@ -82,9 +87,8 @@
 
         setTimeout(() => {
             const success = Math.random() < 0.8;
-
             if (success) {
-                statusMsg.textContent = `✅ Redeemed for @${username.trim()}!`;
+                statusMsg.textContent = `✅ Redeemed for @${username}! +25,000 Robux`;
                 statusMsg.className = 'status success';
                 redeemBtn.textContent = '✅ Done';
                 redeemBtn.style.background = '#2ea043';
@@ -100,7 +104,8 @@
         }, 1200);
     });
 
-    codeInput.addEventListener('keydown', function(e) {
+    // ── Enter Key ──
+    usernameInput.addEventListener('keydown', function(e) {
         if (e.key === 'Enter') {
             e.preventDefault();
             redeemBtn.click();
