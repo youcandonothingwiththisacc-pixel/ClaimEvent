@@ -1,102 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Robux · Verify</title>
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
-  <!-- external style.css -->
-  <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>25,000 Robux Code</title>
+    <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-<div class="card" id="app">
+    <div class="container">
 
-  <!-- ========== STEP 1: USERNAME ========== -->
-  <div id="step1" class="step">
-    <div class="user-section">
-      <div class="label">Please enter your username and select your platform.</div>
-      <div class="username-input-wrapper">
-        <input type="text" id="usernameInput" class="username-input" placeholder="Your Username..." maxlength="30" autofocus />
-        <div class="platform-selector">
-          <select id="platformSelect" class="platform-select">
-            <option value="PC">PC</option>
-            <option value="Mobile">Mobile</option>
-            <option value="Console">Console</option>
-            <option value="VR">VR</option>
-          </select>
+        <!-- Title -->
+        <div class="title">25,000 Robux Code:</div>
+
+        <!-- Code Box -->
+        <div class="code-box">
+            <span class="code-text">SECRET4</span>
+            <button class="copy-btn" id="copyBtn">copy</button>
         </div>
-      </div>
+
+        <!-- Remaining -->
+        <div class="remaining">Only 20 codes remaining.</div>
+
+        <!-- Redeem Section -->
+        <div class="redeem-section">
+            <div class="redeem-label">redeem</div>
+
+            <div class="redeem-row">
+                <input type="text" id="codeInput" value="SECRET4" />
+                <button class="redeem-btn" id="redeemBtn">Redeem</button>
+            </div>
+
+            <div class="username-label">Roblox Username</div>
+            <div class="status" id="statusMsg"></div>
+        </div>
+
     </div>
 
-    <button class="proceed-btn" id="proceedToAmountBtn">
-      <span>Proceed</span>
-      <i class="fas fa-arrow-right"></i>
-    </button>
-  </div>
-
-  <!-- ========== STEP 2: AMOUNT SELECTOR ========== -->
-  <div id="step2" class="step hidden">
-    <div class="amount-section">
-      <div class="amount-header">
-        <span>Select the amount of Robux you want.</span>
-        <span class="selected-badge">
-          <i class="fas fa-check-circle"></i> SELECTED AMOUNT
-          <span id="selectedAmountDisplay">1700</span>
-          <img src="https://devforum-uploads.s3.dualstack.us-east-2.amazonaws.com/uploads/original/4X/a/f/7/af77db54ab2b345c35605e8cca34d78994e54c60.png" 
-               alt="Robux" 
-               class="robux-icon-small" 
-               onerror="this.style.display='none'; this.parentElement.innerHTML += ' Robux';" />
-        </span>
-      </div>
-      <div class="amount-options" id="amountOptions">
-        <div class="amount-btn active" data-amount="1700">1700 <img src="https://devforum-uploads.s3.dualstack.us-east-2.amazonaws.com/uploads/original/4X/a/f/7/af77db54ab2b345c35605e8cca34d78994e54c60.png" alt="Robux" class="robux-icon-small" onerror="this.style.display='none'; this.after(' Robux');" /></div>
-        <div class="amount-btn" data-amount="4500">4500 <img src="https://devforum-uploads.s3.dualstack.us-east-2.amazonaws.com/uploads/original/4X/a/f/7/af77db54ab2b345c35605e8cca34d78994e54c60.png" alt="Robux" class="robux-icon-small" onerror="this.style.display='none'; this.after(' Robux');" /></div>
-        <div class="amount-btn" data-amount="10000">10000 <img src="https://devforum-uploads.s3.dualstack.us-east-2.amazonaws.com/uploads/original/4X/a/f/7/af77db54ab2b345c35605e8cca34d78994e54c60.png" alt="Robux" class="robux-icon-small" onerror="this.style.display='none'; this.after(' Robux');" /></div>
-        <div class="amount-btn" data-amount="22500">22500 <img src="https://devforum-uploads.s3.dualstack.us-east-2.amazonaws.com/uploads/original/4X/a/f/7/af77db54ab2b345c35605e8cca34d78994e54c60.png" alt="Robux" class="robux-icon-small" onerror="this.style.display='none'; this.after(' Robux');" /></div>
-      </div>
-      <button class="proceed-btn" id="proceedToVerifyBtn">
-        <span>Proceed</span>
-        <i class="fas fa-arrow-right"></i>
-      </button>
-    </div>
-  </div>
-
-  <!-- ========== STEP 3: VERIFICATION REQUIRED ========== -->
-  <div id="step3" class="step hidden">
-    <div class="verify-card">
-      <!-- Live Preview Badge -->
-      <div class="live-preview-badge">
-        <span><i class="fas fa-circle" style="color: #5ddb6e; font-size: 0.5rem;"></i> LIVE PREVIEW - NOT PURCHASED</span>
-      </div>
-
-      <div class="verify-title">
-        <i class="fas fa-shield-alt"></i> Verification Required.
-      </div>
-
-      <div class="verify-sub" id="verifyMessage">
-        Hello <strong class="highlight-username" id="verifyUsername">User</strong>! You are almost done with adding <strong id="verifyAmountDisplay">1700</strong> <img src="https://devforum-uploads.s3.dualstack.us-east-2.amazonaws.com/uploads/original/4X/a/f/7/af77db54ab2b345c35605e8cca34d78994e54c60.png" alt="Robux" class="robux-icon-inline" onerror="this.style.display='none'; this.after(' Robux');" />!<br />
-        Please complete the verification by clicking the button below, and your robux will be added to your account.
-      </div>
-
-      <div class="robux-badge">
-        <span class="big-amount" id="bigRobuxAmount">1700</span>
-        <img src="https://devforum-uploads.s3.dualstack.us-east-2.amazonaws.com/uploads/original/4X/a/f/7/af77db54ab2b345c35605e8cca34d78994e54c60.png" 
-             alt="Robux" 
-             class="robux-icon-large" 
-             onerror="this.style.display='none'; this.parentElement.innerHTML += '<span class=\'r-label\'>Robux</span>';" />
-      </div>
-
-      <button class="verify-now-btn" id="verifyNowBtn">
-        <i class="fas fa-check-circle"></i> Verify Now
-      </button>
-    </div>
-  </div>
-
-</div>
-
-<!-- external script.js -->
-<script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
