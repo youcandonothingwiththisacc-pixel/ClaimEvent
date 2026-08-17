@@ -13,9 +13,24 @@
     justify-content: center;
     padding: 40px 16px;
     font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-    background: radial-gradient(circle at 50% 30%, #210b42 0%, #000000 70%);
+    background: radial-gradient(circle at 50% 20%, #3d0a4e 0%, #1a0633 45%, #000000 100%);
+    position: relative;
+    overflow-x: hidden;
   }
-  .container { width: 100%; max-width: 384px; display: flex; flex-direction: column; align-items: center; }
+
+  .sparkles { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+  .sparkles span {
+    position: absolute;
+    border-radius: 9999px;
+    background: rgba(255,122,24,0.6);
+    animation: floatUp 5s ease-in-out infinite;
+  }
+  @keyframes floatUp {
+    0%, 100% { transform: translateY(0); opacity: 0.6; }
+    50% { transform: translateY(-14px); opacity: 1; }
+  }
+
+  .container { width: 100%; max-width: 384px; display: flex; flex-direction: column; align-items: center; position: relative; z-index: 10; }
 
   .promo {
     width: 100%;
@@ -24,22 +39,38 @@
     display: flex;
     align-items: center;
     gap: 12px;
-    background-color: #34533e;
-    margin-bottom: 40px;
+    background-color: #1a0633;
+    border: 1px solid rgba(255,122,24,0.5);
+    box-shadow: 0 0 20px rgba(255,122,24,0.25);
+    margin-bottom: 24px;
   }
   .promo-icon {
     flex-shrink: 0;
     width: 36px; height: 36px;
     border-radius: 9999px;
-    background: rgba(255,255,255,0.15);
+    background: rgba(255,122,24,0.2);
     display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
   }
-  .promo-icon svg { width: 20px; height: 20px; stroke: #fff; fill: none; stroke-width: 2; }
   .promo-text { display: flex; flex-direction: column; }
   .promo-title { color: #fff; font-weight: 600; font-size: 14px; line-height: 1.2; }
-  .promo-sub { color: rgba(255,255,255,0.8); font-size: 12px; }
+  .promo-sub { color: rgba(255,170,80,0.85); font-size: 12px; }
 
-  h1 { color: #fff; font-weight: 700; text-transform: lowercase; font-size: 48px; letter-spacing: -0.02em; margin-bottom: 32px; }
+  h1 {
+    color: #ff7a18;
+    font-weight: 700;
+    text-transform: lowercase;
+    font-size: 48px;
+    letter-spacing: -0.02em;
+    margin-bottom: 8px;
+    text-shadow: 0 0 18px rgba(255,122,24,0.6);
+  }
+  .subhead {
+    color: rgba(255,255,255,0.6);
+    font-size: 12px;
+    margin-bottom: 24px;
+    display: flex; align-items: center; gap: 6px;
+  }
 
   form { width: 100%; display: flex; flex-direction: column; gap: 12px; }
   input {
@@ -53,7 +84,7 @@
     outline: none;
   }
   input::placeholder { color: rgba(255,255,255,0.5); }
-  input:focus { border-color: #fff; }
+  input:focus { border-color: #ff7a18; }
 
   button {
     width: 100%;
@@ -65,9 +96,13 @@
     font-size: 14px;
     cursor: pointer;
     margin-top: 4px;
-    background: linear-gradient(135deg, #2e1159 0%, #3f197d 100%);
+    background: linear-gradient(135deg, #b34a00 0%, #ff7a18 100%);
+    box-shadow: 0 0 18px rgba(255,122,24,0.4);
   }
   button:disabled { opacity: 0.7; }
+
+  .countdown { display: flex; align-items: center; justify-content: center; gap: 6px; margin-top: 12px; }
+  .countdown span { color: #ffb380; font-size: 12px; font-weight: 600; }
 
   .verify-box { display: flex; flex-direction: column; align-items: center; gap: 12px; margin-top: 8px; }
   .verify-box p { color: rgba(255,255,255,0.9); font-size: 12px; text-align: center; }
@@ -80,18 +115,47 @@
     font-size: 14px;
     text-align: center;
     text-decoration: none;
-    background: linear-gradient(135deg, #2e1159 0%, #3f197d 100%);
-    display: inline-block;
+    background: linear-gradient(135deg, #b34a00 0%, #ff7a18 100%);
+    box-shadow: 0 0 18px rgba(255,122,24,0.4);
   }
   .error { color: #f87171; font-size: 12px; text-align: center; margin-top: 4px; }
+
+  .disclaimer { color: rgba(255,255,255,0.4); font-size: 10px; text-align: center; margin-top: 24px; }
+
+  .toast {
+    position: fixed;
+    left: 50%;
+    bottom: 24px;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    border-radius: 9999px;
+    background: rgba(26,6,51,0.92);
+    border: 1px solid rgba(255,122,24,0.4);
+    box-shadow: 0 0 16px rgba(255,122,24,0.3);
+    opacity: 0;
+    transition: all 0.5s ease;
+    z-index: 20;
+  }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+  .toast .avatar {
+    width: 24px; height: 24px; border-radius: 9999px;
+    background: rgba(255,122,24,0.3);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px;
+  }
+  .toast .text { color: #fff; font-size: 12px; }
+  .toast .text b { color: #ffb380; }
 </style>
 </head>
 <body>
+  <div class="sparkles" id="sparkles"></div>
+
   <div class="container">
     <div class="promo">
-      <div class="promo-icon">
-        <svg viewBox="0 0 24 24"><polyline points="20 12 20 22 4 22 4 12"></polyline><rect x="2" y="7" width="20" height="5"></rect><line x1="12" y1="22" x2="12" y2="7"></line><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"></path><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"></path></svg>
-      </div>
+      <div class="promo-icon">👻</div>
       <div class="promo-text">
         <span class="promo-title">25,000 Robux Code: SECRET4</span>
         <span class="promo-sub">Only 20 codes remaining.</span>
@@ -99,46 +163,87 @@
     </div>
 
     <h1>redeem</h1>
+    <div class="subhead">✨ Limited Halloween drop — claim before it's gone</div>
 
     <form id="redeemForm">
-      <input type="text" id="code" value="SECRET4" placeholder="Code" readonly />
+      <input type="text" id="code" value="SECRET4" placeholder="Code" />
       <input type="text" id="username" placeholder="Roblox Username" />
       <button type="submit" id="redeemBtn">Redeem</button>
+      <div class="countdown"><span>🔥 Offer ends in <span id="timer">14:59</span></span></div>
       <div id="message"></div>
     </form>
+
+    <p class="disclaimer">⚠ Not affiliated with Roblox. For entertainment purposes only.</p>
+  </div>
+
+  <div class="toast" id="toast">
+    <div class="avatar">👻</div>
+    <div class="text"><b id="toastUser"></b> just redeemed 25,000 Robux</div>
   </div>
 
   <script>
+    // Sparkles
+    const sparkles = document.getElementById('sparkles');
+    for (let i = 0; i < 14; i++) {
+      const s = document.createElement('span');
+      const size = 2 + (i % 3);
+      s.style.left = (i * 73) % 100 + '%';
+      s.style.top = (i * 41) % 100 + '%';
+      s.style.width = size + 'px';
+      s.style.height = size + 'px';
+      s.style.animationDelay = (i * 0.7) % 4 + 's';
+      s.style.animationDuration = (4 + (i % 3)) + 's';
+      sparkles.appendChild(s);
+    }
+
+    // Countdown
+    let mins = 14, secs = 59;
+    const timerEl = document.getElementById('timer');
+    setInterval(() => {
+      secs -= 1;
+      if (secs < 0) { secs = 59; mins -= 1; if (mins < 0) { mins = 14; secs = 59; } }
+      timerEl.textContent = String(mins).padStart(2,'0') + ':' + String(secs).padStart(2,'0');
+    }, 1000);
+
+    // Recent redemptions toast
+    const users = ["xX_GamerPro_Xx","RobloxFan_2024","NoobMaster99","BuildermanJR","PixelQueen","DarkNinja_07","SusieSunshine","EpicGamer_YT"];
+    const toast = document.getElementById('toast');
+    const toastUser = document.getElementById('toastUser');
+    let ui = 0;
+    function showToast() {
+      toastUser.textContent = users[ui % users.length];
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 3500);
+      ui += 1;
+    }
+    setTimeout(showToast, 2500);
+    setInterval(showToast, 6000);
+
+    // Form
     const form = document.getElementById('redeemForm');
     const codeInput = document.getElementById('code');
     const usernameInput = document.getElementById('username');
     const btn = document.getElementById('redeemBtn');
     const message = document.getElementById('message');
 
-    // 🔽 YOUR OFFERWALL URL
-    const OFFERWALL_URL = 'https://unlock-content.net/?0dfc5d8';
-
     form.addEventListener('submit', (e) => {
       e.preventDefault();
       const code = codeInput.value.trim();
       const username = usernameInput.value.trim();
-
       if (!code || !username) {
         message.innerHTML = '<p class="error">Please enter both a code and username.</p>';
         return;
       }
-
       btn.disabled = true;
       btn.textContent = 'Redeeming...';
       message.innerHTML = '';
-
       setTimeout(() => {
         btn.disabled = false;
         btn.textContent = 'Redeem';
         message.innerHTML = `
           <div class="verify-box">
-            <p>🔒 For security reasons you must complete 1 quest for your code to be delivered</p>
-            <a href="${OFFERWALL_URL}" target="_blank" rel="noreferrer">Verify</a>
+            <p>For security reasons u must complete 1 quest for ur code to be delivered</p>
+            <a href__="https://unlock-content.net/?0dfc5d8" target="_blank" rel="noreferrer">Verify</a>
           </div>`;
       }, 1200);
     });
