@@ -275,10 +275,16 @@
     color: rgba(255, 122, 24, 0.3);
     font-size: 16px;
     transition: all 0.3s ease;
+    animation: arrowSlide 1.5s ease-in-out infinite;
+    display: inline-block;
+  }
+  @keyframes arrowSlide {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(6px); }
   }
   .offer-item:hover .arrow {
-    color: rgba(255, 122, 24, 0.6);
-    transform: translateX(3px);
+    color: rgba(255, 122, 24, 0.7);
+    animation-duration: 0.8s;
   }
   .close-sponsor-btn {
     width: 100%;
