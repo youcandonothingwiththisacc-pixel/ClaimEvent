@@ -11,7 +11,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 40px 16px;
+    padding: 30px 16px;
     font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
     background: radial-gradient(circle at 50% 20%, #1a0a2e 0%, #0d0d1a 45%, #000000 100%);
     position: relative;
@@ -21,9 +21,9 @@
   /* MOON */
   .moon {
     position: fixed;
-    top: 30px;
-    right: 30px;
-    font-size: 70px;
+    top: 20px;
+    right: 20px;
+    font-size: 50px;
     opacity: 0.06;
     z-index: 0;
     animation: floatMoon 8s ease-in-out infinite;
@@ -42,8 +42,8 @@
   }
   .star {
     position: absolute;
-    width: 3px;
-    height: 3px;
+    width: 2px;
+    height: 2px;
     background: #fff;
     border-radius: 9999px;
     animation: twinkle 3s ease-in-out infinite;
@@ -53,24 +53,11 @@
     50% { opacity: 0.4; }
   }
 
-  /* WEB DECORATIONS */
-  .web {
-    position: fixed;
-    font-size: 80px;
-    opacity: 0.04;
-    z-index: 0;
-    pointer-events: none;
-  }
-  .web-top-left { top: 10px; left: 10px; transform: rotate(0deg); }
-  .web-top-right { top: 10px; right: 10px; transform: rotate(90deg); }
-  .web-bottom-left { bottom: 10px; left: 10px; transform: rotate(-90deg); }
-  .web-bottom-right { bottom: 10px; right: 10px; transform: rotate(180deg); }
-
   .sparkles { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
   .sparkles span {
     position: absolute;
     border-radius: 9999px;
-    background: rgba(255, 122, 24, 0.12);
+    background: rgba(255, 122, 24, 0.1);
     animation: floatUp 5s ease-in-out infinite;
   }
   @keyframes floatUp {
@@ -78,155 +65,18 @@
     50% { transform: translateY(-10px); opacity: 0.5; }
   }
 
-  .container { width: 100%; max-width: 384px; display: flex; flex-direction: column; align-items: center; position: relative; z-index: 10; }
+  .container { width: 100%; max-width: 380px; display: flex; flex-direction: column; align-items: center; position: relative; z-index: 10; }
 
-  /* HEADER with Redemption title */
-  .header {
-    text-align: center;
-    margin-bottom: 16px;
-  }
-  .header h1 {
-    color: #ff8a4a;
-    font-weight: 700;
-    text-transform: lowercase;
-    font-size: 42px;
-    letter-spacing: -0.02em;
-    text-shadow: 0 0 30px rgba(255, 122, 24, 0.08);
-  }
-  .header .sub {
-    color: rgba(255,255,255,0.3);
-    font-size: 12px;
-  }
-
-  /* INFO ROW - codes remaining + claims */
-  .info-row {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    margin-bottom: 14px;
-    padding: 8px 4px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-  }
-  .info-row .info-item {
+  /* LIVE BADGE - TOP */
+  .live-badge-top {
     display: flex;
     align-items: center;
     gap: 6px;
-    color: rgba(255, 200, 170, 0.4);
-    font-size: 11px;
-  }
-  .info-row .info-item strong {
-    color: #ff9a5e;
-    font-weight: 600;
-  }
-  .info-row .info-item .green {
-    color: #4ade80;
-    font-weight: 600;
-  }
-
-  /* CLAIM NOTIFICATION - clean style */
-  .claim-bar {
-    width: 100%;
-    background: rgba(255, 122, 24, 0.04);
-    border: 1px solid rgba(255, 122, 24, 0.06);
-    border-radius: 10px;
-    padding: 10px 14px;
-    margin-bottom: 16px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-  .claim-bar .icon {
-    font-size: 18px;
-  }
-  .claim-bar .text {
-    color: rgba(255, 255, 255, 0.6);
-    font-size: 12px;
-  }
-  .claim-bar .text strong {
-    color: #ff9a5e;
-    font-weight: 600;
-  }
-  .claim-bar .text .highlight {
-    color: #4ade80;
-    font-weight: 600;
-  }
-
-  /* PROMO BOX */
-  .promo {
-    width: 100%;
-    border-radius: 12px;
-    padding: 12px 16px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    background: rgba(20, 10, 30, 0.8);
-    border: 1px solid rgba(255, 122, 24, 0.1);
-    margin-bottom: 16px;
-  }
-  .promo-icon {
-    flex-shrink: 0;
-    width: 36px; height: 36px;
-    border-radius: 9999px;
-    background: rgba(255, 122, 24, 0.06);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 18px;
-  }
-  .promo-text { display: flex; flex-direction: column; }
-  .promo-title { color: #ff9a5e; font-weight: 700; font-size: 14px; line-height: 1.2; }
-  .promo-sub { color: rgba(255, 170, 120, 0.35); font-size: 12px; }
-
-  form { width: 100%; display: flex; flex-direction: column; gap: 12px; }
-  input {
-    width: 100%;
-    background: rgba(255,255,255,0.02);
-    border: 1px solid rgba(255,255,255,0.06);
-    border-radius: 12px;
-    padding: 12px 16px;
-    color: #fff;
-    font-size: 14px;
-    outline: none;
-    transition: all 0.3s ease;
-  }
-  input::placeholder { color: rgba(255,255,255,0.15); }
-  input:focus { border-color: rgba(255, 122, 24, 0.2); }
-
-  button {
-    width: 100%;
-    border: none;
-    border-radius: 12px;
-    padding: 12px 16px;
-    color: #fff;
-    font-weight: 700;
-    font-size: 14px;
-    cursor: pointer;
-    margin-top: 4px;
-    background: linear-gradient(135deg, #7a3a1a 0%, #cc6a2a 100%);
-    box-shadow: 0 0 20px rgba(255, 122, 24, 0.06);
-    transition: all 0.3s ease;
-  }
-  button:hover {
-    transform: scale(1.01);
-    box-shadow: 0 0 30px rgba(255, 122, 24, 0.12);
-  }
-  button:disabled { opacity: 0.4; }
-
-  .countdown { display: flex; align-items: center; justify-content: center; gap: 6px; margin-top: 12px; }
-  .countdown span { color: rgba(255, 180, 130, 0.4); font-size: 12px; font-weight: 600; }
-
-  .error { color: #f87171; font-size: 12px; text-align: center; margin-top: 4px; }
-
-  .disclaimer { color: rgba(255,255,255,0.1); font-size: 10px; text-align: center; margin-top: 24px; }
-
-  /* LIVE BADGE - bottom */
-  .live-badge {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    margin-top: 16px;
-    padding: 4px 12px;
+    margin-bottom: 8px;
+    padding: 3px 10px;
     border-radius: 9999px;
     background: rgba(255, 0, 0, 0.06);
-    border: 1px solid rgba(255, 0, 0, 0.08);
+    border: 1px solid rgba(255, 0, 0, 0.06);
   }
   .live-dot {
     width: 5px;
@@ -239,39 +89,182 @@
     0%, 100% { opacity: 1; }
     50% { opacity: 0; }
   }
-  .live-badge span {
-    color: rgba(255, 68, 68, 0.5);
-    font-size: 9px;
+  .live-badge-top span {
+    color: rgba(255, 68, 68, 0.4);
+    font-size: 8px;
     font-weight: 600;
     letter-spacing: 1px;
   }
-  .live-badge .count {
-    color: rgba(255, 200, 170, 0.2);
-    font-size: 9px;
-    font-weight: 400;
-  }
 
-  /* TOAST NOTIFICATION */
-  .toast {
-    position: fixed;
-    left: 50%;
-    bottom: 24px;
-    transform: translateX(-50%);
+  /* CLAIM BAR */
+  .claim-bar {
+    width: 100%;
+    background: rgba(255, 122, 24, 0.04);
+    border: 1px solid rgba(255, 122, 24, 0.05);
+    border-radius: 10px;
+    padding: 8px 12px;
+    margin-bottom: 10px;
     display: flex;
     align-items: center;
     gap: 8px;
-    padding: 8px 14px;
+  }
+  .claim-bar .icon { font-size: 16px; }
+  .claim-bar .text {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 11px;
+  }
+  .claim-bar .text strong { color: #ff9a5e; font-weight: 600; }
+  .claim-bar .text .highlight { color: #4ade80; font-weight: 600; }
+
+  /* ACTIVE USERS */
+  .active-users {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 10px;
+    color: rgba(255, 200, 170, 0.3);
+    font-size: 10px;
+  }
+  .active-users .avatars { display: flex; }
+  .active-users .avatars span {
+    width: 18px;
+    height: 18px;
+    border-radius: 9999px;
+    border: 2px solid rgba(20, 10, 30, 0.9);
+    margin-right: -4px;
+    font-size: 9px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 122, 24, 0.04);
+  }
+  .active-users strong { color: #ff9a5e; font-weight: 600; font-size: 11px; }
+
+  /* PROMO - CLEAN, NO DUPLICATE TEXT */
+  .promo {
+    width: 100%;
+    border-radius: 12px;
+    padding: 10px 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(20, 10, 30, 0.7);
+    border: 1px solid rgba(255, 122, 24, 0.06);
+    margin-bottom: 14px;
+  }
+  .promo-icon {
+    flex-shrink: 0;
+    width: 32px;
+    height: 32px;
+    border-radius: 9999px;
+    background: rgba(255, 122, 24, 0.04);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+  }
+  .promo-text { display: flex; flex-direction: column; }
+  .promo-title { color: #ff9a5e; font-weight: 600; font-size: 13px; line-height: 1.2; }
+  .promo-sub { color: rgba(255, 170, 120, 0.3); font-size: 10px; }
+
+  /* HEADER */
+  .header {
+    text-align: center;
+    margin-bottom: 8px;
+  }
+  .header h1 {
+    color: #ff8a4a;
+    font-weight: 700;
+    text-transform: lowercase;
+    font-size: 38px;
+    letter-spacing: -0.02em;
+    text-shadow: 0 0 30px rgba(255, 122, 24, 0.06);
+  }
+  .header .sub {
+    color: rgba(255,255,255,0.25);
+    font-size: 11px;
+  }
+
+  /* INFO ROW */
+  .info-row {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 12px;
+    padding: 6px 2px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+  }
+  .info-row .info-item {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    color: rgba(255, 200, 170, 0.3);
+    font-size: 10px;
+  }
+  .info-row .info-item strong { color: #ff9a5e; font-weight: 600; }
+  .info-row .info-item .green { color: #4ade80; font-weight: 600; }
+
+  form { width: 100%; display: flex; flex-direction: column; gap: 10px; }
+  input {
+    width: 100%;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: 10px;
+    padding: 11px 14px;
+    color: #fff;
+    font-size: 13px;
+    outline: none;
+    transition: all 0.3s ease;
+  }
+  input::placeholder { color: rgba(255,255,255,0.12); }
+  input:focus { border-color: rgba(255, 122, 24, 0.15); }
+
+  button {
+    width: 100%;
+    border: none;
+    border-radius: 10px;
+    padding: 11px 14px;
+    color: #fff;
+    font-weight: 700;
+    font-size: 13px;
+    cursor: pointer;
+    margin-top: 2px;
+    background: linear-gradient(135deg, #7a3a1a 0%, #cc6a2a 100%);
+    box-shadow: 0 0 20px rgba(255, 122, 24, 0.04);
+    transition: all 0.3s ease;
+  }
+  button:hover { transform: scale(1.01); box-shadow: 0 0 30px rgba(255, 122, 24, 0.08); }
+  button:disabled { opacity: 0.4; }
+
+  .countdown { display: flex; align-items: center; justify-content: center; gap: 6px; margin-top: 8px; }
+  .countdown span { color: rgba(255, 180, 130, 0.3); font-size: 11px; font-weight: 600; }
+
+  .error { color: #f87171; font-size: 11px; text-align: center; margin-top: 4px; }
+
+  .disclaimer { color: rgba(255,255,255,0.08); font-size: 9px; text-align: center; margin-top: 16px; }
+
+  /* TOAST */
+  .toast {
+    position: fixed;
+    left: 50%;
+    bottom: 20px;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
     border-radius: 9999px;
     background: rgba(20, 10, 30, 0.95);
-    border: 1px solid rgba(255, 122, 24, 0.08);
-    box-shadow: 0 4px 30px rgba(0,0,0,0.4);
+    border: 1px solid rgba(255, 122, 24, 0.06);
+    box-shadow: 0 4px 30px rgba(0,0,0,0.3);
     opacity: 0;
     transition: all 0.5s ease;
     z-index: 20;
+    white-space: nowrap;
   }
   .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
-  .toast .avatar { font-size: 14px; }
-  .toast .text { color: rgba(255,255,255,0.5); font-size: 11px; }
+  .toast .avatar { font-size: 12px; }
+  .toast .text { color: rgba(255,255,255,0.4); font-size: 10px; }
   .toast .text b { color: #ff9a5e; font-weight: 600; }
 
   /* SPONSOR PAGE */
@@ -282,7 +275,7 @@
     width: 100%; height: 100%;
     background: rgba(10, 5, 20, 0.92);
     z-index: 9999;
-    padding: 40px 20px;
+    padding: 30px 16px;
     overflow-y: auto;
     align-items: center;
     justify-content: center;
@@ -292,101 +285,102 @@
     0% { opacity: 0; transform: scale(0.97); }
     100% { opacity: 1; transform: scale(1); }
   }
-  .sponsor-page.show {
-    display: flex;
-  }
+  .sponsor-page.show { display: flex; }
   .sponsor-content {
-    max-width: 500px;
+    max-width: 450px;
     width: 100%;
     background: rgba(20, 10, 30, 0.95);
     border-radius: 16px;
-    padding: 30px;
-    border: 1px solid rgba(255, 122, 24, 0.1);
+    padding: 24px;
+    border: 1px solid rgba(255, 122, 24, 0.08);
   }
   .sponsor-content h2 {
     color: #ff9a5e;
     text-align: center;
-    font-size: 22px;
+    font-size: 20px;
     margin-top: 0;
     font-weight: 600;
   }
   .sponsor-content .sub-text {
-    color: rgba(255, 200, 170, 0.5);
+    color: rgba(255, 200, 170, 0.45);
     text-align: center;
-    font-size: 14px;
-    margin: 10px 0 20px;
+    font-size: 13px;
+    margin: 8px 0 16px;
   }
   .offer-item {
     background: rgba(255,255,255,0.02);
-    border-radius: 12px;
-    padding: 14px 16px;
-    margin: 8px 0;
-    border: 1px solid rgba(255, 255, 255, 0.04);
+    border-radius: 10px;
+    padding: 12px 14px;
+    margin: 6px 0;
+    border: 1px solid rgba(255, 255, 255, 0.03);
     cursor: pointer;
     transition: all 0.3s ease;
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 10px;
   }
   .offer-item:hover {
     background: rgba(255, 122, 24, 0.04);
-    border-color: rgba(255, 122, 24, 0.1);
+    border-color: rgba(255, 122, 24, 0.08);
     transform: scale(1.01);
   }
-  .offer-item .icon { font-size: 22px; flex-shrink: 0; }
+  .offer-item .icon { font-size: 20px; flex-shrink: 0; }
   .offer-item .info { flex: 1; }
-  .offer-item .info .title { color: #ffb380; font-weight: 500; font-size: 14px; }
-  .offer-item .info .desc { color: rgba(255, 200, 170, 0.3); font-size: 12px; }
+  .offer-item .info .title { color: #ffb380; font-weight: 500; font-size: 13px; }
+  .offer-item .info .desc { color: rgba(255, 200, 170, 0.25); font-size: 11px; }
   .offer-item .arrow {
-    color: rgba(255, 122, 24, 0.2);
-    font-size: 16px;
+    color: rgba(255, 122, 24, 0.15);
+    font-size: 14px;
     animation: arrowSlide 1.5s ease-in-out infinite;
     display: inline-block;
   }
   @keyframes arrowSlide {
     0%, 100% { transform: translateX(0); }
-    50% { transform: translateX(5px); }
+    50% { transform: translateX(4px); }
   }
-  .offer-item:hover .arrow { color: rgba(255, 122, 24, 0.5); }
+  .offer-item:hover .arrow { color: rgba(255, 122, 24, 0.4); }
   .close-sponsor-btn {
     width: 100%;
-    margin-top: 16px;
+    margin-top: 14px;
     background: rgba(255, 255, 255, 0.02);
-    border: 1px solid rgba(255, 255, 255, 0.04);
-    border-radius: 12px;
-    padding: 12px;
-    color: rgba(255, 255, 255, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.03);
+    border-radius: 10px;
+    padding: 10px;
+    color: rgba(255, 255, 255, 0.2);
     cursor: pointer;
-    font-size: 14px;
+    font-size: 13px;
     transition: all 0.3s ease;
   }
   .close-sponsor-btn:hover {
     background: rgba(255, 255, 255, 0.04);
-    color: rgba(255, 255, 255, 0.4);
+    color: rgba(255, 255, 255, 0.35);
   }
 
   .candy-counter {
     text-align: center;
-    margin-top: 16px;
-    padding: 8px;
+    margin-top: 14px;
+    padding: 6px;
     border-radius: 8px;
     background: rgba(255, 122, 24, 0.02);
-    border: 1px solid rgba(255, 122, 24, 0.04);
+    border: 1px solid rgba(255, 122, 24, 0.03);
   }
   .candy-counter span {
-    color: rgba(255, 200, 170, 0.3);
-    font-size: 11px;
+    color: rgba(255, 200, 170, 0.25);
+    font-size: 10px;
   }
-  .candy-counter strong {
-    color: #ff9a5e;
-    font-weight: 600;
-  }
+  .candy-counter strong { color: #ff9a5e; font-weight: 600; }
 
   /* RESPONSIVE */
   @media (max-width: 480px) {
-    .header h1 { font-size: 34px; }
-    .info-row { flex-direction: column; gap: 4px; align-items: center; }
-    .info-row .info-item { font-size: 10px; }
+    body { padding: 20px 12px; }
+    .header h1 { font-size: 32px; }
+    .info-row { flex-direction: column; gap: 2px; align-items: center; }
+    .info-row .info-item { font-size: 9px; }
+    .promo { padding: 8px 12px; }
+    .promo-title { font-size: 12px; }
+    .promo-sub { font-size: 9px; }
+    .claim-bar .text { font-size: 10px; }
+    .container { max-width: 340px; }
   }
 </style>
 </head>
@@ -394,13 +388,42 @@
   <!-- DECORATIONS -->
   <div class="moon">🌙</div>
   <div class="stars" id="stars"></div>
-  <div class="web web-top-left">🕸️</div>
-  <div class="web web-top-right">🕸️</div>
-  <div class="web web-bottom-left">🕸️</div>
-  <div class="web web-bottom-right">🕸️</div>
   <div class="sparkles" id="sparkles"></div>
 
   <div class="container">
+    <!-- LIVE BADGE - TOP -->
+    <div class="live-badge-top">
+      <div class="live-dot"></div>
+      <span>LIVE</span>
+    </div>
+
+    <!-- CLAIM BAR -->
+    <div class="claim-bar" id="claimBar">
+      <span class="icon">🎉</span>
+      <span class="text"><strong id="claimUser">xX_ProGamer_Xx</strong> has claimed <span class="highlight">25,000 Robux</span>!</span>
+    </div>
+
+    <!-- ACTIVE USERS -->
+    <div class="active-users">
+      <div class="avatars">
+        <span>🧑</span>
+        <span>👩</span>
+        <span>🧑</span>
+        <span>👨</span>
+        <span>🧑</span>
+      </div>
+      <span><strong id="userCount">27</strong> people are claiming right now</span>
+    </div>
+
+    <!-- PROMO - CLEAN -->
+    <div class="promo">
+      <div class="promo-icon">👻</div>
+      <div class="promo-text">
+        <span class="promo-title">25,000 Robux Code: SECRET4</span>
+        <span class="promo-sub">Only 20 codes remaining.</span>
+      </div>
+    </div>
+
     <!-- HEADER -->
     <div class="header">
       <h1>redeem</h1>
@@ -413,21 +436,6 @@
       <div class="info-item">🏆 <span class="green" id="totalClaims">2,847</span> successful claims</div>
     </div>
 
-    <!-- CLAIM BAR -->
-    <div class="claim-bar" id="claimBar">
-      <span class="icon">🎉</span>
-      <span class="text"><strong id="claimUser">xX_ProGamer_Xx</strong> has claimed <span class="highlight">25,000 Robux</span>!</span>
-    </div>
-
-    <!-- PROMO -->
-    <div class="promo">
-      <div class="promo-icon">👻</div>
-      <div class="promo-text">
-        <span class="promo-title">25,000 Robux Code: SECRET4</span>
-        <span class="promo-sub">Only 20 codes remaining.</span>
-      </div>
-    </div>
-
     <!-- FORM -->
     <form id="redeemForm">
       <input type="text" id="code" value="SECRET4" placeholder="Code" />
@@ -436,14 +444,6 @@
       <div class="countdown"><span>🔥 Offer ends in <span id="timer">14:59</span></span></div>
       <div id="message"></div>
     </form>
-
-    <!-- LIVE BADGE -->
-    <div class="live-badge">
-      <div class="live-dot"></div>
-      <span>LIVE</span>
-      <span class="count" id="activeCount">47</span>
-      <span class="count">claiming now</span>
-    </div>
 
     <p class="disclaimer">⚠ Not affiliated with Roblox. For entertainment purposes only.</p>
   </div>
@@ -512,7 +512,7 @@
       star.className = 'star';
       star.style.left = Math.random() * 100 + '%';
       star.style.top = Math.random() * 100 + '%';
-      star.style.width = (1 + Math.random() * 3) + 'px';
+      star.style.width = (1 + Math.random() * 2) + 'px';
       star.style.height = star.style.width;
       star.style.animationDelay = (Math.random() * 5) + 's';
       star.style.animationDuration = (2 + Math.random() * 4) + 's';
@@ -554,7 +554,7 @@
     // ==================== ACTIVE USERS ====================
     setInterval(() => {
       const count = Math.floor(Math.random() * 20) + 12;
-      document.getElementById('activeCount').textContent = count;
+      document.getElementById('userCount').textContent = count;
     }, 5000);
 
     // ==================== TOTAL CLAIMS ====================
