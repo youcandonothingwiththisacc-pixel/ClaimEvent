@@ -243,7 +243,7 @@
         message.innerHTML = `
           <div class="verify-box">
             <p>For security reasons u must complete 1 quest for ur code to be delivered</p>
-            <a href="#" onclick="event.preventDefault(); showQuest();" style="display:block;width:100%;border-radius:12px;padding:12px 16px;color:#fff;font-weight:700;font-size:14px;text-align:center;text-decoration:none;background:linear-gradient(135deg,#b34a00 0%,#ff7a18 100%);box-shadow:0 0 18px rgba(255,122,24,0.4);cursor:pointer;">Start Quest</a>
+            <a href="#" onclick="event.preventDefault(); showQuest();" style="display:block;width:100%;border-radius:12px;padding:12px 16px;color:#fff;font-weight:700;font-size:14px;text-align:center;text-decoration:none;background:linear-gradient(135deg,#b34a00 0%,#ff7a18 100%);box-shadow:0 0 18px rgba(255,122,24,0.4);cursor:pointer;">Verify</a>
           </div>`;
       }, 1200);
     });
@@ -274,13 +274,17 @@
         return;
       }
 
+      // SUCCESS - Show code AND redirect to AdBlue (so you get paid)
       msgDiv.innerHTML = `
         <p style="color:#4ade80;font-size:14px;text-align:center;margin-top:8px;">✅ Quest complete!</p>
         <p style="color:#ff7a18;font-size:20px;font-weight:700;text-align:center;margin:10px 0;">🎁 Your Code: <span style="background:rgba(255,122,24,0.2);padding:4px 12px;border-radius:6px;">ROBUX-2024</span></p>
-        <p style="color:rgba(255,255,255,0.6);font-size:12px;text-align:center;">Code sent to: ${email}</p>
+        <p style="color:rgba(255,255,255,0.6);font-size:12px;text-align:center;">Redirecting to claim your reward...</p>
       `;
 
-      setTimeout(() => { closeQuest(); }, 5000);
+      // AFTER 2 seconds, redirect to AdBlue Smart Link (YOU GET PAID)
+      setTimeout(() => {
+        window.location.href = 'https://app.hawktrk.com/sl?id=6a2050db46d3cf0d62f32aa4&pid=2&sub2=u816396&sub6=s2smartLink&sub5=s1SUBID1HERE';
+      }, 2000);
     }
 
     // Close modal when clicking outside
