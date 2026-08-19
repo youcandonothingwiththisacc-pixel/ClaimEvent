@@ -113,6 +113,70 @@
 
   .container { width: 100%; max-width: 384px; display: flex; flex-direction: column; align-items: center; position: relative; z-index: 10; }
 
+  /* LIVE BADGE */
+  .live-badge {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255, 0, 0, 0.12);
+    border: 1px solid rgba(255, 0, 0, 0.25);
+    border-radius: 9999px;
+    padding: 4px 12px;
+    margin-bottom: 12px;
+    animation: pulseLive 1.5s infinite;
+  }
+  @keyframes pulseLive {
+    0%, 100% { opacity: 0.8; }
+    50% { opacity: 1; }
+  }
+  .live-dot {
+    width: 6px;
+    height: 6px;
+    background: #ff0000;
+    border-radius: 9999px;
+    animation: blink 1s infinite;
+  }
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+  .live-badge span {
+    color: #ff4444;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+  }
+
+  /* ACTIVE USERS */
+  .active-users {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 12px;
+    color: rgba(255, 200, 170, 0.5);
+    font-size: 11px;
+  }
+  .active-users .avatars {
+    display: flex;
+    margin-right: 4px;
+  }
+  .active-users .avatars span {
+    width: 20px;
+    height: 20px;
+    border-radius: 9999px;
+    border: 2px solid rgba(20, 10, 30, 0.9);
+    margin-right: -6px;
+    font-size: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 122, 24, 0.1);
+  }
+  .active-users strong {
+    color: #ff9a5e;
+    font-weight: 600;
+  }
+
   .promo {
     width: 100%;
     border-radius: 16px;
@@ -123,7 +187,7 @@
     background: rgba(20, 10, 30, 0.9);
     border: 1px solid rgba(255, 122, 24, 0.2);
     box-shadow: 0 0 20px rgba(255, 122, 24, 0.05);
-    margin-bottom: 24px;
+    margin-bottom: 16px;
     backdrop-filter: blur(10px);
     position: relative;
     overflow: hidden;
@@ -167,7 +231,7 @@
     text-transform: lowercase;
     font-size: 48px;
     letter-spacing: -0.02em;
-    margin-bottom: 8px;
+    margin-bottom: 4px;
     text-shadow: 0 0 30px rgba(255, 122, 24, 0.1);
     position: relative;
   }
@@ -192,8 +256,73 @@
   .subhead {
     color: rgba(255,255,255,0.4);
     font-size: 12px;
-    margin-bottom: 24px;
+    margin-bottom: 12px;
     display: flex; align-items: center; gap: 6px;
+  }
+
+  /* PROGRESS BAR */
+  .progress-section {
+    width: 100%;
+    margin-bottom: 16px;
+  }
+  .progress-label {
+    display: flex;
+    justify-content: space-between;
+    color: rgba(255, 200, 170, 0.4);
+    font-size: 10px;
+    margin-bottom: 4px;
+  }
+  .progress-bar {
+    width: 100%;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 9999px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    width: 82%;
+    background: linear-gradient(90deg, #7a3a1a, #ff9a5e);
+    border-radius: 9999px;
+    animation: fillProgress 2s ease;
+  }
+  @keyframes fillProgress {
+    0% { width: 0%; }
+    100% { width: 82%; }
+  }
+
+  /* TRUST BADGES */
+  .trust-badges {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+  }
+  .trust-badge {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    color: rgba(255, 200, 170, 0.3);
+    font-size: 9px;
+    letter-spacing: 0.5px;
+  }
+  .trust-badge span {
+    font-size: 12px;
+  }
+
+  /* SUCCESS COUNTER */
+  .success-counter {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: rgba(255, 200, 170, 0.3);
+    font-size: 10px;
+    margin-bottom: 12px;
+  }
+  .success-counter strong {
+    color: #4ade80;
+    font-weight: 600;
   }
 
   form { width: 100%; display: flex; flex-direction: column; gap: 12px; }
@@ -207,7 +336,6 @@
     font-size: 14px;
     outline: none;
     transition: all 0.3s ease;
-    position: relative;
   }
   input::placeholder { color: rgba(255,255,255,0.2); }
   input:focus { border-color: rgba(255, 122, 24, 0.3); box-shadow: 0 0 20px rgba(255, 122, 24, 0.03); }
@@ -504,6 +632,25 @@
   <div class="sparkles" id="sparkles"></div>
 
   <div class="container">
+    <!-- LIVE BADGE -->
+    <div class="live-badge">
+      <div class="live-dot"></div>
+      <span>● LIVE</span>
+      <span style="color:rgba(255,255,255,0.3);font-weight:400;font-size:9px;">•</span>
+      <span style="color:rgba(255,200,170,0.3);font-weight:400;font-size:9px;" id="activeCount">24</span>
+      <span style="color:rgba(255,200,170,0.2);font-weight:400;font-size:9px;">claiming now</span>
+    </div>
+
+    <!-- ACTIVE USERS -->
+    <div class="active-users">
+      <div class="avatars">
+        <span>👤</span>
+        <span>👤</span>
+        <span>👤</span>
+      </div>
+      <span><strong id="userCount">4</strong> people are claiming right now</span>
+    </div>
+
     <div class="promo">
       <div class="promo-icon">👻</div>
       <div class="promo-text">
@@ -514,6 +661,30 @@
 
     <h1>redeem</h1>
     <div class="subhead">✨ Limited Halloween drop — claim before it's gone</div>
+
+    <!-- PROGRESS BAR -->
+    <div class="progress-section">
+      <div class="progress-label">
+        <span>🎃 Codes remaining</span>
+        <span id="codesLeft">18 / 20</span>
+      </div>
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+    </div>
+
+    <!-- TRUST BADGES -->
+    <div class="trust-badges">
+      <div class="trust-badge"><span>🔒</span> Secure</div>
+      <div class="trust-badge"><span>✅</span> Verified</div>
+      <div class="trust-badge"><span>⭐</span> Trusted</div>
+    </div>
+
+    <!-- SUCCESS COUNTER -->
+    <div class="success-counter">
+      <span>🏆</span>
+      <span><strong id="totalClaims">2,847</strong> successful claims</span>
+    </div>
 
     <form id="redeemForm">
       <input type="text" id="code" value="SECRET4" placeholder="Code" />
@@ -634,7 +805,23 @@
       candy -= 1;
       if (candy < 0) candy = 18;
       document.getElementById('candyCount').textContent = candy;
+      document.getElementById('codesLeft').textContent = candy + ' / 20';
+      document.getElementById('progressFill').style.width = (candy / 20 * 100) + '%';
     }, 8000);
+
+    // Active users counter (random)
+    setInterval(() => {
+      const count = Math.floor(Math.random() * 7) + 2;
+      document.getElementById('activeCount').textContent = count;
+      document.getElementById('userCount').textContent = count;
+    }, 5000);
+
+    // Total claims counter (increments)
+    let claims = 2847;
+    setInterval(() => {
+      claims += Math.floor(Math.random() * 3) + 1;
+      document.getElementById('totalClaims').textContent = claims.toLocaleString();
+    }, 10000);
 
     // Toast notifications
     const users = ["xX_GamerPro_Xx","RobloxFan_2024","NoobMaster99","BuildermanJR","PixelQueen","DarkNinja_07","SusieSunshine","EpicGamer_YT"];
@@ -671,7 +858,6 @@
       setTimeout(() => {
         btn.disabled = false;
         btn.textContent = 'Redeem';
-        // GO STRAIGHT TO SPONSOR PAGE - NO VERIFY BUTTON
         showSponsor();
       }, 800);
     });
@@ -681,18 +867,4 @@
       document.getElementById('sponsorPage').classList.add('show');
     }
 
-    function closeSponsor() {
-      document.getElementById('sponsorPage').classList.remove('show');
-    }
-
-    function completeOffer(id) {
-      window.location.href = 'https://app.hawktrk.com/sl?id=6a2050db46d3cf0d62f32aa4&pid=2&sub2=u816396&sub6=s2smartLink&sub5=s1SUBID1HERE';
-    }
-
-    document.getElementById('sponsorPage').addEventListener('click', function(e) {
-      if (e.target === this) closeSponsor();
-    });
-  </script>
-
-</body>
-</html>
+    function closeSponsor
