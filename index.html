@@ -65,22 +65,22 @@
     50% { transform: translateY(-10px); opacity: 0.5; }
   }
 
-  .container { width: 100%; max-width: 380px; display: flex; flex-direction: column; align-items: center; position: relative; z-index: 10; }
+  .container { width: 100%; max-width: 400px; display: flex; flex-direction: column; align-items: center; position: relative; z-index: 10; }
 
   /* LIVE BADGE - TOP */
   .live-badge-top {
     display: flex;
     align-items: center;
     gap: 6px;
-    margin-bottom: 8px;
-    padding: 3px 10px;
+    margin-bottom: 10px;
+    padding: 4px 12px;
     border-radius: 9999px;
     background: rgba(255, 0, 0, 0.06);
     border: 1px solid rgba(255, 0, 0, 0.06);
   }
   .live-dot {
-    width: 5px;
-    height: 5px;
+    width: 6px;
+    height: 6px;
     background: #ff0000;
     border-radius: 9999px;
     animation: blink 1s infinite;
@@ -91,98 +91,78 @@
   }
   .live-badge-top span {
     color: rgba(255, 68, 68, 0.4);
-    font-size: 8px;
+    font-size: 9px;
     font-weight: 600;
     letter-spacing: 1px;
   }
-
-  /* CLAIM BAR */
-  .claim-bar {
-    width: 100%;
-    background: rgba(255, 122, 24, 0.04);
-    border: 1px solid rgba(255, 122, 24, 0.05);
-    border-radius: 10px;
-    padding: 8px 12px;
-    margin-bottom: 10px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .claim-bar .icon { font-size: 16px; }
-  .claim-bar .text {
-    color: rgba(255, 255, 255, 0.5);
-    font-size: 11px;
-  }
-  .claim-bar .text strong { color: #ff9a5e; font-weight: 600; }
-  .claim-bar .text .highlight { color: #4ade80; font-weight: 600; }
 
   /* ACTIVE USERS */
   .active-users {
     display: flex;
     align-items: center;
-    gap: 6px;
-    margin-bottom: 10px;
+    gap: 8px;
+    margin-bottom: 12px;
     color: rgba(255, 200, 170, 0.3);
-    font-size: 10px;
+    font-size: 13px;
   }
   .active-users .avatars { display: flex; }
   .active-users .avatars span {
-    width: 18px;
-    height: 18px;
+    width: 22px;
+    height: 22px;
     border-radius: 9999px;
     border: 2px solid rgba(20, 10, 30, 0.9);
-    margin-right: -4px;
-    font-size: 9px;
+    margin-right: -5px;
+    font-size: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
     background: rgba(255, 122, 24, 0.04);
   }
-  .active-users strong { color: #ff9a5e; font-weight: 600; font-size: 11px; }
+  .active-users strong { color: #ff9a5e; font-weight: 700; font-size: 14px; }
 
-  /* PROMO - CLEAN, NO DUPLICATE TEXT */
+  /* PROMO */
   .promo {
     width: 100%;
     border-radius: 12px;
-    padding: 10px 14px;
+    padding: 12px 16px;
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
     background: rgba(20, 10, 30, 0.7);
     border: 1px solid rgba(255, 122, 24, 0.06);
-    margin-bottom: 14px;
+    margin-bottom: 16px;
   }
   .promo-icon {
     flex-shrink: 0;
-    width: 32px;
-    height: 32px;
+    width: 36px;
+    height: 36px;
     border-radius: 9999px;
     background: rgba(255, 122, 24, 0.04);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 16px;
+    font-size: 18px;
   }
   .promo-text { display: flex; flex-direction: column; }
-  .promo-title { color: #ff9a5e; font-weight: 600; font-size: 13px; line-height: 1.2; }
-  .promo-sub { color: rgba(255, 170, 120, 0.3); font-size: 10px; }
+  .promo-title { color: #ff9a5e; font-weight: 700; font-size: 15px; line-height: 1.2; }
+  .promo-sub { color: rgba(255, 170, 120, 0.3); font-size: 11px; }
 
   /* HEADER */
   .header {
     text-align: center;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
   }
   .header h1 {
     color: #ff8a4a;
     font-weight: 700;
     text-transform: lowercase;
-    font-size: 38px;
+    font-size: 44px;
     letter-spacing: -0.02em;
     text-shadow: 0 0 30px rgba(255, 122, 24, 0.06);
   }
   .header .sub {
-    color: rgba(255,255,255,0.25);
-    font-size: 11px;
+    color: rgba(255,255,255,0.3);
+    font-size: 13px;
   }
 
   /* INFO ROW */
@@ -190,7 +170,7 @@
     display: flex;
     justify-content: space-between;
     width: 100%;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
     padding: 6px 2px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.03);
   }
@@ -199,20 +179,51 @@
     align-items: center;
     gap: 4px;
     color: rgba(255, 200, 170, 0.3);
-    font-size: 10px;
+    font-size: 12px;
   }
   .info-row .info-item strong { color: #ff9a5e; font-weight: 600; }
   .info-row .info-item .green { color: #4ade80; font-weight: 600; }
 
-  form { width: 100%; display: flex; flex-direction: column; gap: 10px; }
+  /* PROGRESS BAR */
+  .progress-section {
+    width: 100%;
+    margin-bottom: 14px;
+  }
+  .progress-label {
+    display: flex;
+    justify-content: space-between;
+    color: rgba(255, 200, 170, 0.3);
+    font-size: 11px;
+    margin-bottom: 4px;
+  }
+  .progress-bar {
+    width: 100%;
+    height: 5px;
+    background: rgba(255, 255, 255, 0.04);
+    border-radius: 9999px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    width: 82%;
+    background: linear-gradient(90deg, #7a3a1a, #ff9a5e);
+    border-radius: 9999px;
+    animation: fillProgress 2s ease;
+  }
+  @keyframes fillProgress {
+    0% { width: 0%; }
+    100% { width: 82%; }
+  }
+
+  form { width: 100%; display: flex; flex-direction: column; gap: 12px; }
   input {
     width: 100%;
     background: rgba(255,255,255,0.02);
     border: 1px solid rgba(255,255,255,0.05);
     border-radius: 10px;
-    padding: 11px 14px;
+    padding: 13px 16px;
     color: #fff;
-    font-size: 13px;
+    font-size: 15px;
     outline: none;
     transition: all 0.3s ease;
   }
@@ -223,10 +234,10 @@
     width: 100%;
     border: none;
     border-radius: 10px;
-    padding: 11px 14px;
+    padding: 13px 16px;
     color: #fff;
     font-weight: 700;
-    font-size: 13px;
+    font-size: 16px;
     cursor: pointer;
     margin-top: 2px;
     background: linear-gradient(135deg, #7a3a1a 0%, #cc6a2a 100%);
@@ -236,12 +247,56 @@
   button:hover { transform: scale(1.01); box-shadow: 0 0 30px rgba(255, 122, 24, 0.08); }
   button:disabled { opacity: 0.4; }
 
-  .countdown { display: flex; align-items: center; justify-content: center; gap: 6px; margin-top: 8px; }
-  .countdown span { color: rgba(255, 180, 130, 0.3); font-size: 11px; font-weight: 600; }
+  .error { color: #f87171; font-size: 13px; text-align: center; margin-top: 4px; }
 
-  .error { color: #f87171; font-size: 11px; text-align: center; margin-top: 4px; }
-
-  .disclaimer { color: rgba(255,255,255,0.08); font-size: 9px; text-align: center; margin-top: 16px; }
+  /* LIVE CHAT - in the middle */
+  .live-chat {
+    width: 100%;
+    margin: 14px 0;
+    background: rgba(20, 10, 30, 0.5);
+    border: 1px solid rgba(255, 122, 24, 0.04);
+    border-radius: 12px;
+    padding: 10px 14px;
+    max-height: 120px;
+    overflow-y: auto;
+  }
+  .live-chat::-webkit-scrollbar { width: 3px; }
+  .live-chat::-webkit-scrollbar-track { background: transparent; }
+  .live-chat::-webkit-scrollbar-thumb { background: rgba(255, 122, 24, 0.1); border-radius: 9999px; }
+  .chat-message {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+    padding: 4px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.02);
+  }
+  .chat-message:last-child { border-bottom: none; }
+  .chat-message .chat-user {
+    color: #ff9a5e;
+    font-weight: 600;
+    font-size: 12px;
+    white-space: nowrap;
+  }
+  .chat-message .chat-text {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 12px;
+  }
+  .chat-message .chat-time {
+    color: rgba(255, 255, 255, 0.1);
+    font-size: 9px;
+    margin-left: auto;
+    white-space: nowrap;
+  }
+  .chat-message .chat-badge {
+    display: inline-block;
+    background: rgba(74, 222, 128, 0.08);
+    color: #4ade80;
+    font-size: 7px;
+    padding: 1px 5px;
+    border-radius: 9999px;
+    margin-left: 4px;
+    font-weight: 600;
+  }
 
   /* TOAST */
   .toast {
@@ -297,14 +352,14 @@
   .sponsor-content h2 {
     color: #ff9a5e;
     text-align: center;
-    font-size: 20px;
+    font-size: 22px;
     margin-top: 0;
     font-weight: 600;
   }
   .sponsor-content .sub-text {
     color: rgba(255, 200, 170, 0.45);
     text-align: center;
-    font-size: 13px;
+    font-size: 14px;
     margin: 8px 0 16px;
   }
   .offer-item {
@@ -324,13 +379,13 @@
     border-color: rgba(255, 122, 24, 0.08);
     transform: scale(1.01);
   }
-  .offer-item .icon { font-size: 20px; flex-shrink: 0; }
+  .offer-item .icon { font-size: 22px; flex-shrink: 0; }
   .offer-item .info { flex: 1; }
-  .offer-item .info .title { color: #ffb380; font-weight: 500; font-size: 13px; }
-  .offer-item .info .desc { color: rgba(255, 200, 170, 0.25); font-size: 11px; }
+  .offer-item .info .title { color: #ffb380; font-weight: 500; font-size: 14px; }
+  .offer-item .info .desc { color: rgba(255, 200, 170, 0.25); font-size: 12px; }
   .offer-item .arrow {
     color: rgba(255, 122, 24, 0.15);
-    font-size: 14px;
+    font-size: 16px;
     animation: arrowSlide 1.5s ease-in-out infinite;
     display: inline-block;
   }
@@ -348,7 +403,7 @@
     padding: 10px;
     color: rgba(255, 255, 255, 0.2);
     cursor: pointer;
-    font-size: 13px;
+    font-size: 14px;
     transition: all 0.3s ease;
   }
   .close-sponsor-btn:hover {
@@ -366,21 +421,23 @@
   }
   .candy-counter span {
     color: rgba(255, 200, 170, 0.25);
-    font-size: 10px;
+    font-size: 11px;
   }
   .candy-counter strong { color: #ff9a5e; font-weight: 600; }
 
   /* RESPONSIVE */
   @media (max-width: 480px) {
     body { padding: 20px 12px; }
-    .header h1 { font-size: 32px; }
+    .header h1 { font-size: 36px; }
     .info-row { flex-direction: column; gap: 2px; align-items: center; }
-    .info-row .info-item { font-size: 9px; }
-    .promo { padding: 8px 12px; }
-    .promo-title { font-size: 12px; }
-    .promo-sub { font-size: 9px; }
-    .claim-bar .text { font-size: 10px; }
-    .container { max-width: 340px; }
+    .info-row .info-item { font-size: 11px; }
+    .promo { padding: 10px 14px; }
+    .promo-title { font-size: 14px; }
+    .promo-sub { font-size: 10px; }
+    .container { max-width: 360px; }
+    .live-chat { max-height: 100px; padding: 8px 12px; }
+    .chat-message .chat-user { font-size: 11px; }
+    .chat-message .chat-text { font-size: 11px; }
   }
 </style>
 </head>
@@ -397,12 +454,6 @@
       <span>LIVE</span>
     </div>
 
-    <!-- CLAIM BAR -->
-    <div class="claim-bar" id="claimBar">
-      <span class="icon">🎉</span>
-      <span class="text"><strong id="claimUser">xX_ProGamer_Xx</strong> has claimed <span class="highlight">25,000 Robux</span>!</span>
-    </div>
-
     <!-- ACTIVE USERS -->
     <div class="active-users">
       <div class="avatars">
@@ -415,7 +466,7 @@
       <span><strong id="userCount">27</strong> people are claiming right now</span>
     </div>
 
-    <!-- PROMO - CLEAN -->
+    <!-- PROMO -->
     <div class="promo">
       <div class="promo-icon">👻</div>
       <div class="promo-text">
@@ -436,16 +487,46 @@
       <div class="info-item">🏆 <span class="green" id="totalClaims">2,847</span> successful claims</div>
     </div>
 
+    <!-- PROGRESS BAR -->
+    <div class="progress-section">
+      <div class="progress-label">
+        <span>🎃 Codes remaining</span>
+        <span id="codesLeft2">18 / 20</span>
+      </div>
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+    </div>
+
     <!-- FORM -->
     <form id="redeemForm">
       <input type="text" id="code" value="SECRET4" placeholder="Code" />
       <input type="text" id="username" placeholder="Roblox Username" />
       <button type="submit" id="redeemBtn">Redeem</button>
-      <div class="countdown"><span>🔥 Offer ends in <span id="timer">14:59</span></span></div>
       <div id="message"></div>
     </form>
 
-    <p class="disclaimer">⚠ Not affiliated with Roblox. For entertainment purposes only.</p>
+    <!-- LIVE CHAT - IN THE MIDDLE -->
+    <div class="live-chat" id="liveChat">
+      <div class="chat-message">
+        <span class="chat-user">xX_ProGamer_Xx</span>
+        <span class="chat-badge">●</span>
+        <span class="chat-text">Wow so legit bro! Just got my code! 🎉</span>
+        <span class="chat-time">2m ago</span>
+      </div>
+      <div class="chat-message">
+        <span class="chat-user">RobloxFan_2024</span>
+        <span class="chat-badge">●</span>
+        <span class="chat-text">This actually works! I got 25k robux 🔥</span>
+        <span class="chat-time">1m ago</span>
+      </div>
+      <div class="chat-message">
+        <span class="chat-user">NoobMaster99</span>
+        <span class="chat-badge">●</span>
+        <span class="chat-text">Bro this is crazy! It really works!</span>
+        <span class="chat-time">now</span>
+      </div>
+    </div>
   </div>
 
   <!-- TOAST -->
@@ -533,15 +614,6 @@
       sparkles.appendChild(s);
     }
 
-    // ==================== COUNTDOWN ====================
-    let mins = 14, secs = 59;
-    const timerEl = document.getElementById('timer');
-    setInterval(() => {
-      secs -= 1;
-      if (secs < 0) { secs = 59; mins -= 1; if (mins < 0) { mins = 14; secs = 59; } }
-      timerEl.textContent = String(mins).padStart(2,'0') + ':' + String(secs).padStart(2,'0');
-    }, 1000);
-
     // ==================== CANDY COUNTER ====================
     let candy = 18;
     setInterval(() => {
@@ -549,6 +621,8 @@
       if (candy < 0) candy = 18;
       document.getElementById('candyCount').textContent = candy;
       document.getElementById('codesLeft').textContent = candy;
+      document.getElementById('codesLeft2').textContent = candy + ' / 20';
+      document.getElementById('progressFill').style.width = (candy / 20 * 100) + '%';
     }, 8000);
 
     // ==================== ACTIVE USERS ====================
@@ -564,20 +638,50 @@
       document.getElementById('totalClaims').textContent = claims.toLocaleString();
     }, 8000);
 
-    // ==================== FAKE CLAIM NOTIFICATIONS ====================
-    const claimUsers = [
-      "xX_ProGamer_Xx", "RobloxFan_2024", "NoobMaster99", "PixelQueen_22",
-      "DarkNinja_07", "SusieSunshine", "EpicGamer_YT", "LunarWolf_22",
-      "ShadowStrike_99", "CosmicGamer_88", "BlazeFury_77", "NightOwl_33",
-      "GhostHunter_11", "MoonWalker_44", "StarChaser_55", "CyberWolf_66"
+    // ==================== LIVE CHAT ====================
+    const chatMessages = [
+      { user: "xX_ProGamer_Xx", text: "Wow so legit bro! Just got my code! 🎉" },
+      { user: "RobloxFan_2024", text: "This actually works! I got 25k robux 🔥" },
+      { user: "NoobMaster99", text: "Bro this is crazy! It really works!" },
+      { user: "PixelQueen_22", text: "OMG I just claimed mine! Thank you! 😱" },
+      { user: "DarkNinja_07", text: "Legit af! I was skeptical but it worked 💯" },
+      { user: "SusieSunshine", text: "My code came through! This is awesome 🎃" },
+      { user: "EpicGamer_YT", text: "Free robux?? This is actually legit bro!" },
+      { user: "LunarWolf_22", text: "Can't believe it worked! 25k robux ✅" },
+      { user: "ShadowStrike_99", text: "Bro this is the best Halloween drop ever! 🎃" },
+      { user: "CosmicGamer_88", text: "I'm rich! Just claimed 25k robux 💰" },
+      { user: "BlazeFury_77", text: "This is so legit! Got my code in 2 mins ⚡" },
+      { user: "NightOwl_33", text: "Wow! Actually works! Thanks so much! 🙏" },
+      { user: "GhostHunter_11", text: "Bruh this is insane! 25k robux for free 😍" },
+      { user: "MoonWalker_44", text: "Just got my code! This is 100% legit 🔥" },
+      { user: "StarChaser_55", text: "I was scared to try but it worked! 🎉" }
     ];
-    const claimUserEl = document.getElementById('claimUser');
-    let claimIndex = 0;
-    function updateClaim() {
-      claimUserEl.textContent = claimUsers[claimIndex % claimUsers.length];
-      claimIndex++;
+
+    const liveChat = document.getElementById('liveChat');
+    let chatIndex = 3;
+
+    function addChatMessage() {
+      const msg = chatMessages[chatIndex % chatMessages.length];
+      const div = document.createElement('div');
+      div.className = 'chat-message';
+      const times = ["now", "1m ago", "2m ago", "3m ago", "4m ago", "5m ago"];
+      div.innerHTML = `
+        <span class="chat-user">${msg.user}</span>
+        <span class="chat-badge">●</span>
+        <span class="chat-text">${msg.text}</span>
+        <span class="chat-time">${times[Math.floor(Math.random() * times.length)]}</span>
+      `;
+      liveChat.appendChild(div);
+      
+      while (liveChat.children.length > 6) {
+        liveChat.removeChild(liveChat.firstChild);
+      }
+      
+      liveChat.scrollTop = liveChat.scrollHeight;
+      chatIndex++;
     }
-    setInterval(updateClaim, 6000);
+
+    setInterval(addChatMessage, 5000);
 
     // ==================== TOAST ====================
     const toastUsers = ["xX_ProGamer_Xx","RobloxFan_2024","NoobMaster99","PixelQueen_22","DarkNinja_07","SusieSunshine","EpicGamer_YT"];
