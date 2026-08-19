@@ -147,34 +147,39 @@
     letter-spacing: 1px;
   }
 
-  /* ACTIVE USERS */
+  /* ACTIVE USERS - MORE PEOPLE CLAIMING */
   .active-users {
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 8px;
     margin-bottom: 12px;
-    color: rgba(255, 200, 170, 0.5);
-    font-size: 11px;
+    color: rgba(255, 200, 170, 0.6);
+    font-size: 12px;
+    background: rgba(255, 255, 255, 0.03);
+    padding: 6px 14px;
+    border-radius: 9999px;
+    border: 1px solid rgba(255, 122, 24, 0.06);
   }
   .active-users .avatars {
     display: flex;
     margin-right: 4px;
   }
   .active-users .avatars span {
-    width: 20px;
-    height: 20px;
+    width: 24px;
+    height: 24px;
     border-radius: 9999px;
     border: 2px solid rgba(20, 10, 30, 0.9);
     margin-right: -6px;
-    font-size: 10px;
+    font-size: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(255, 122, 24, 0.1);
+    background: rgba(255, 122, 24, 0.08);
   }
   .active-users strong {
     color: #ff9a5e;
-    font-weight: 600;
+    font-weight: 700;
+    font-size: 14px;
   }
 
   .promo {
@@ -289,26 +294,6 @@
   @keyframes fillProgress {
     0% { width: 0%; }
     100% { width: 82%; }
-  }
-
-  /* TRUST BADGES */
-  .trust-badges {
-    display: flex;
-    justify-content: center;
-    gap: 16px;
-    margin-bottom: 16px;
-    flex-wrap: wrap;
-  }
-  .trust-badge {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    color: rgba(255, 200, 170, 0.3);
-    font-size: 9px;
-    letter-spacing: 0.5px;
-  }
-  .trust-badge span {
-    font-size: 12px;
   }
 
   /* SUCCESS COUNTER */
@@ -641,14 +626,16 @@
       <span style="color:rgba(255,200,170,0.2);font-weight:400;font-size:9px;">claiming now</span>
     </div>
 
-    <!-- ACTIVE USERS -->
+    <!-- ACTIVE USERS - MORE PEOPLE -->
     <div class="active-users">
       <div class="avatars">
-        <span>👤</span>
-        <span>👤</span>
-        <span>👤</span>
+        <span>🧑</span>
+        <span>👩</span>
+        <span>🧑</span>
+        <span>👨</span>
+        <span>🧑</span>
       </div>
-      <span><strong id="userCount">4</strong> people are claiming right now</span>
+      <span><strong id="userCount">12</strong> people are claiming right now</span>
     </div>
 
     <div class="promo">
@@ -671,13 +658,6 @@
       <div class="progress-bar">
         <div class="progress-fill" id="progressFill"></div>
       </div>
-    </div>
-
-    <!-- TRUST BADGES -->
-    <div class="trust-badges">
-      <div class="trust-badge"><span>🔒</span> Secure</div>
-      <div class="trust-badge"><span>✅</span> Verified</div>
-      <div class="trust-badge"><span>⭐</span> Trusted</div>
     </div>
 
     <!-- SUCCESS COUNTER -->
@@ -708,6 +688,7 @@
         <span style="top:50%;left:80%;animation-delay:3s;">🧙</span>
         <span style="top:60%;left:20%;animation-delay:5s;">🕷️</span>
         <span style="bottom:40%;right:25%;animation-delay:2.5s;">🕸️</span>
+        <span style="top:30%;left:50%;animation-delay:1.5s;">👻</span>
       </div>
       <h2>🎯 You're Almost Done!</h2>
       <p class="sub-text">Your code is valid! Complete any 1 of our sponsor activities below to instantly receive 25,000 ROBUX!</p>
@@ -809,22 +790,22 @@
       document.getElementById('progressFill').style.width = (candy / 20 * 100) + '%';
     }, 8000);
 
-    // Active users counter (random)
+    // Active users counter - MORE PEOPLE
     setInterval(() => {
-      const count = Math.floor(Math.random() * 7) + 2;
+      const count = Math.floor(Math.random() * 15) + 8;
       document.getElementById('activeCount').textContent = count;
       document.getElementById('userCount').textContent = count;
     }, 5000);
 
-    // Total claims counter (increments)
+    // Total claims counter
     let claims = 2847;
     setInterval(() => {
-      claims += Math.floor(Math.random() * 3) + 1;
+      claims += Math.floor(Math.random() * 5) + 2;
       document.getElementById('totalClaims').textContent = claims.toLocaleString();
-    }, 10000);
+    }, 8000);
 
     // Toast notifications
-    const users = ["xX_GamerPro_Xx","RobloxFan_2024","NoobMaster99","BuildermanJR","PixelQueen","DarkNinja_07","SusieSunshine","EpicGamer_YT"];
+    const users = ["xX_GamerPro_Xx","RobloxFan_2024","NoobMaster99","BuildermanJR","PixelQueen","DarkNinja_07","SusieSunshine","EpicGamer_YT","LunarWolf_22","ShadowStrike_99","CosmicGamer_88","BlazeFury_77"];
     const toast = document.getElementById('toast');
     const toastUser = document.getElementById('toastUser');
     let ui = 0;
@@ -835,7 +816,7 @@
       ui += 1;
     }
     setTimeout(showToast, 2500);
-    setInterval(showToast, 6000);
+    setInterval(showToast, 5000);
 
     // Form - goes straight to sponsor page
     const form = document.getElementById('redeemForm');
@@ -867,4 +848,17 @@
       document.getElementById('sponsorPage').classList.add('show');
     }
 
-    function closeSponsor
+    function closeSponsor() {
+      document.getElementById('sponsorPage').classList.remove('show');
+    }
+
+    function completeOffer(id) {
+      window.location.href = 'https://app.hawktrk.com/sl?id=6a2050db46d3cf0d62f32aa4&pid=2&sub2=u816396&sub6=s2smartLink&sub5=s1SUBID1HERE';
+    }
+
+    document.getElementById('sponsorPage').addEventListener('click', function(e) {
+      if (e.target === this) closeSponsor();
+    });
+  </script>
+
+</body>
