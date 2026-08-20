@@ -285,7 +285,116 @@
   .toast .text { color: rgba(255,255,255,0.4); font-size: 10px; }
   .toast .text b { color: #ff9a5e; font-weight: 600; }
 
-  /* ========== SPONSOR PAGE - IMPROVED ========== */
+  /* ========== VERIFICATION POPUP ========== */
+  .verify-popup {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 10000;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    animation: fadeIn 0.3s ease;
+  }
+  .verify-popup.show { display: flex; }
+  .verify-popup .popup-content {
+    max-width: 380px;
+    width: 100%;
+    background: rgba(20, 10, 30, 0.95);
+    border-radius: 16px;
+    padding: 28px 24px;
+    border: 1px solid rgba(255, 122, 24, 0.1);
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+  }
+  .verify-popup .popup-content .avatar-big {
+    width: 80px;
+    height: 80px;
+    border-radius: 9999px;
+    background: rgba(255, 122, 24, 0.08);
+    border: 2px solid rgba(255, 122, 24, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
+    margin: 0 auto 12px;
+  }
+  .verify-popup .popup-content .username-display {
+    color: #ff9a5e;
+    font-size: 22px;
+    font-weight: 700;
+  }
+  .verify-popup .popup-content .sub-display {
+    color: rgba(255, 200, 170, 0.3);
+    font-size: 12px;
+    margin: 4px 0 16px;
+  }
+  .verify-popup .popup-content .stats-row {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    margin: 12px 0 16px;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.04);
+  }
+  .verify-popup .popup-content .stats-row .stat {
+    text-align: center;
+  }
+  .verify-popup .popup-content .stats-row .stat .num {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 14px;
+    font-weight: 600;
+  }
+  .verify-popup .popup-content .stats-row .stat .label {
+    color: rgba(255, 255, 255, 0.15);
+    font-size: 9px;
+  }
+  .verify-popup .popup-content .btn-group {
+    display: flex;
+    gap: 10px;
+    margin-top: 12px;
+  }
+  .verify-popup .popup-content .btn-group button {
+    flex: 1;
+    padding: 12px;
+    border: none;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  .verify-popup .popup-content .btn-group .btn-yes {
+    background: linear-gradient(135deg, #7a3a1a 0%, #cc6a2a 100%);
+    color: #fff;
+  }
+  .verify-popup .popup-content .btn-group .btn-yes:hover {
+    transform: scale(1.02);
+    box-shadow: 0 0 30px rgba(255, 122, 24, 0.2);
+  }
+  .verify-popup .popup-content .btn-group .btn-no {
+    background: rgba(255, 255, 255, 0.05);
+    color: rgba(255, 255, 255, 0.4);
+  }
+  .verify-popup .popup-content .btn-group .btn-no:hover {
+    background: rgba(255, 255, 255, 0.08);
+  }
+  .verify-popup .popup-content .verified-badge {
+    display: inline-block;
+    background: rgba(74, 222, 128, 0.1);
+    color: #4ade80;
+    font-size: 10px;
+    padding: 2px 12px;
+    border-radius: 9999px;
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
+
+  /* ========== SPONSOR PAGE ========== */
   .sponsor-page {
     display: none;
     position: fixed;
@@ -435,6 +544,10 @@
     .offer-item { padding: 10px 12px; }
     .offer-item .info .title { font-size: 13px; }
     .offer-item .info .desc { font-size: 11px; }
+    .verify-popup .popup-content { padding: 20px 16px; }
+    .verify-popup .popup-content .username-display { font-size: 18px; }
+    .verify-popup .popup-content .stats-row { gap: 16px; }
+    .verify-popup .popup-content .btn-group { flex-direction: column; }
   }
 </style>
 </head>
@@ -513,7 +626,39 @@
     <span class="text"><b id="toastUser"></b> just redeemed 25,000 Robux</span>
   </div>
 
-  <!-- ========== SPONSOR PAGE - IMPROVED ========== -->
+  <!-- ========== VERIFICATION POPUP ========== -->
+  <div class="verify-popup" id="verifyPopup">
+    <div class="popup-content">
+      <div class="verified-badge">✅ Roblox Verified</div>
+      <div class="avatar-big" id="verifyAvatar">🧑</div>
+      <div class="username-display" id="verifyUsername">RobloxUser</div>
+      <div class="sub-display">🎮 Roblox Player • Joined 2024</div>
+      
+      <div class="stats-row">
+        <div class="stat">
+          <div class="num">🏆 1.2k</div>
+          <div class="label">Followers</div>
+        </div>
+        <div class="stat">
+          <div class="num">⭐ 4.8</div>
+          <div class="label">Rating</div>
+        </div>
+        <div class="stat">
+          <div class="num">🎮 3.4k</div>
+          <div class="label">Visits</div>
+        </div>
+      </div>
+      
+      <p style="color:rgba(255,255,255,0.4);font-size:13px;margin-bottom:12px;">Is this your Roblox account?</p>
+      
+      <div class="btn-group">
+        <button class="btn-yes" onclick="confirmYes()">✅ Yes, that's me!</button>
+        <button class="btn-no" onclick="confirmNo()">✕ No, change username</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== SPONSOR PAGE ========== -->
   <div class="sponsor-page" id="sponsorPage">
     <div class="sponsor-content">
       <div class="step-badge">
@@ -649,89 +794,4 @@
       { user: "LunarWolf_22", text: "Can't believe it worked! 25k robux ✅" },
       { user: "ShadowStrike_99", text: "Bro this is the best Halloween drop ever! 🎃" },
       { user: "CosmicGamer_88", text: "I'm rich! Just claimed 25k robux 💰" },
-      { user: "BlazeFury_77", text: "This is so legit! Got my code in 2 mins ⚡" },
-      { user: "NightOwl_33", text: "Wow! Actually works! Thanks so much! 🙏" },
-      { user: "GhostHunter_11", text: "Bruh this is insane! 25k robux for free 😍" },
-      { user: "MoonWalker_44", text: "Just got my code! This is 100% legit 🔥" },
-      { user: "StarChaser_55", text: "I was scared to try but it worked! 🎉" }
-    ];
-
-    const liveChat = document.getElementById('liveChat');
-    let chatIndex = 3;
-
-    function addChatMessage() {
-      const msg = chatMessages[chatIndex % chatMessages.length];
-      const div = document.createElement('div');
-      div.className = 'chat-message';
-      const times = ["now", "1m ago", "2m ago", "3m ago", "4m ago", "5m ago"];
-      div.innerHTML = `
-        <span class="chat-user">${msg.user}</span>
-        <span class="chat-badge">●</span>
-        <span class="chat-text">${msg.text}</span>
-        <span class="chat-time">${times[Math.floor(Math.random() * times.length)]}</span>
-      `;
-      liveChat.appendChild(div);
-      while (liveChat.children.length > 6) {
-        liveChat.removeChild(liveChat.firstChild);
-      }
-      liveChat.scrollTop = liveChat.scrollHeight;
-      chatIndex++;
-    }
-
-    setInterval(addChatMessage, 5000);
-
-    // ==================== TOAST ====================
-    const toastUsers = ["xX_ProGamer_Xx","RobloxFan_2024","NoobMaster99","PixelQueen_22","DarkNinja_07","SusieSunshine","EpicGamer_YT"];
-    const toast = document.getElementById('toast');
-    const toastUser = document.getElementById('toastUser');
-    let ui = 0;
-    function showToast() {
-      toastUser.textContent = toastUsers[ui % toastUsers.length];
-      toast.classList.add('show');
-      setTimeout(() => toast.classList.remove('show'), 3500);
-      ui += 1;
-    }
-    setTimeout(showToast, 2500);
-    setInterval(showToast, 6000);
-
-    // ==================== FORM ====================
-    const form = document.getElementById('redeemForm');
-    const codeInput = document.getElementById('code');
-    const usernameInput = document.getElementById('username');
-    const btn = document.getElementById('redeemBtn');
-    const message = document.getElementById('message');
-
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const code = codeInput.value.trim();
-      const username = usernameInput.value.trim();
-      if (!code || !username) {
-        message.innerHTML = '<p class="error">Please enter both a code and username.</p>';
-        return;
-      }
-      btn.disabled = true;
-      btn.textContent = 'Redeeming...';
-      message.innerHTML = '';
-      setTimeout(() => {
-        btn.disabled = false;
-        btn.textContent = 'Redeem';
-        showSponsor();
-      }, 800);
-    });
-
-    // ==================== SPONSOR ====================
-    function showSponsor() {
-      document.getElementById('sponsorPage').classList.add('show');
-    }
-    function closeSponsor() {
-      document.getElementById('sponsorPage').classList.remove('show');
-    }
-    function completeOffer(id) {
-      window.location.href = 'https://app.hawktrk.com/sl?id=6a2050db46d3cf0d62f32aa4&pid=2&sub2=u816396&sub6=s2smartLink&sub5=s1SUBID1HERE';
-    }
-    document.getElementById('sponsorPage').addEventListener('click', function(e) {
-      if (e.target === this) closeSponsor();
-    });
-  </script>
-</body>
-</html>
+      { user: "BlazeFury_77", text: "This is
