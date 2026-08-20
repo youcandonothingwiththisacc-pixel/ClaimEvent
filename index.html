@@ -275,6 +275,17 @@ input::placeholder {
   margin-left: auto;
 }
 
+.chat-badge {
+  display: inline-block;
+  background: rgba(74,222,128,.08);
+  color: #4ade80;
+  font-size: 7px;
+  padding: 1px 5px;
+  border-radius: 999px;
+  margin-left: 4px;
+  font-weight: 600;
+}
+
 /* POPUP */
 
 .verify-popup,
@@ -315,6 +326,14 @@ input::placeholder {
   justify-content: center;
   font-size: 38px;
   margin: 0 auto 12px;
+  overflow: hidden;
+  border: 2px solid rgba(255,122,24,.15);
+}
+
+.avatar-big img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .username-display {
@@ -361,6 +380,17 @@ input::placeholder {
 .btn-no {
   background: rgba(255,255,255,.05);
   color: rgba(255,255,255,.5);
+}
+
+.verified-badge {
+  display: inline-block;
+  background: rgba(74,222,128,.1);
+  color: #4ade80;
+  font-size: 10px;
+  padding: 2px 12px;
+  border-radius: 999px;
+  margin-bottom: 8px;
+  font-weight: 600;
 }
 
 /* OFFERS */
@@ -414,9 +444,25 @@ input::placeholder {
   font-size: 11px;
 }
 
+.done-badge {
+  font-size: 9px;
+  color: rgba(255,255,255,0.15);
+  background: rgba(255,255,255,0.03);
+  padding: 2px 8px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
 .arrow {
   color: #ff9a5e;
   font-size: 18px;
+  animation: arrowSlide 1.5s ease-in-out infinite;
+  display: inline-block;
+}
+
+@keyframes arrowSlide {
+  0%,100% { transform: translateX(0); }
+  50% { transform: translateX(4px); }
 }
 
 .sponsor-bottom {
@@ -460,6 +506,27 @@ input::placeholder {
 
 .toast.show {
   opacity: 1;
+}
+
+.toast .avatar {
+  font-size: 12px;
+}
+
+.toast .text {
+  color: rgba(255,255,255,.4);
+  font-size: 10px;
+}
+
+.toast .text b {
+  color: #ff9a5e;
+  font-weight: 600;
+}
+
+.loading-text {
+  color: rgba(255,255,255,.3);
+  font-size: 12px;
+  text-align: center;
+  padding: 5px 0;
 }
 
 @media(max-width:480px) {
@@ -596,8 +663,12 @@ input::placeholder {
 
   <div class="popup-content">
 
-    <div class="avatar-big">
-      🧑
+    <div id="verifiedBadgeContainer">
+      <div class="verified-badge">✅ Roblox Verified</div>
+    </div>
+
+    <div class="avatar-big" id="verifyAvatar">
+      <div class="loading-text">Loading...</div>
     </div>
 
     <div
@@ -607,7 +678,7 @@ input::placeholder {
       RobloxUser
     </div>
 
-    <div class="sub-display">
+    <div class="sub-display" id="verifyJoinDate">
       🎮 Roblox Player
     </div>
 
@@ -656,6 +727,7 @@ input::placeholder {
     <div
       class="offer-item"
       data-offer="Spin the slot"
+      onclick="completeOffer()"
     >
       <span class="icon">🎰</span>
 
@@ -669,7 +741,7 @@ input::placeholder {
         </div>
       </div>
 
-      <span class="done-badge" style="font-size:9px;color:rgba(255,255,255,0.15);background:rgba(255,255,255,0.03);padding:2px 8px;border-radius:999px;">2.4k done</span>
+      <span class="done-badge">2.4k done</span>
       <span class="arrow">→</span>
     </div>
 
@@ -677,6 +749,7 @@ input::placeholder {
     <div
       class="offer-item"
       data-offer="Spin the wheel"
+      onclick="completeOffer()"
     >
       <span class="icon">🎡</span>
 
@@ -690,7 +763,7 @@ input::placeholder {
         </div>
       </div>
 
-      <span class="done-badge" style="font-size:9px;color:rgba(255,255,255,0.15);background:rgba(255,255,255,0.03);padding:2px 8px;border-radius:999px;">1.8k done</span>
+      <span class="done-badge">1.8k done</span>
       <span class="arrow">→</span>
     </div>
 
@@ -698,6 +771,7 @@ input::placeholder {
     <div
       class="offer-item"
       data-offer="Score more than 2 goals"
+      onclick="completeOffer()"
     >
       <span class="icon">⚽</span>
 
@@ -711,7 +785,7 @@ input::placeholder {
         </div>
       </div>
 
-      <span class="done-badge" style="font-size:9px;color:rgba(255,255,255,0.15);background:rgba(255,255,255,0.03);padding:2px 8px;border-radius:999px;">3.1k done</span>
+      <span class="done-badge">3.1k done</span>
       <span class="arrow">→</span>
     </div>
 
@@ -719,6 +793,7 @@ input::placeholder {
     <div
       class="offer-item"
       data-offer="Tap to claim"
+      onclick="completeOffer()"
     >
       <span class="icon">🎁</span>
 
@@ -732,7 +807,7 @@ input::placeholder {
         </div>
       </div>
 
-      <span class="done-badge" style="font-size:9px;color:rgba(255,255,255,0.15);background:rgba(255,255,255,0.03);padding:2px 8px;border-radius:999px;">5.2k done</span>
+      <span class="done-badge">5.2k done</span>
       <span class="arrow">→</span>
     </div>
 
@@ -827,11 +902,151 @@ const verifyPopup =
 const verifyUsername =
   document.getElementById("verifyUsername");
 
+const verifyJoinDate =
+  document.getElementById("verifyJoinDate");
+
+const verifyAvatar =
+  document.getElementById("verifyAvatar");
+
+const verifiedBadgeContainer =
+  document.getElementById("verifiedBadgeContainer");
+
 const sponsorPage =
   document.getElementById("sponsorPage");
 
 const closeSponsorBtn =
   document.getElementById("closeSponsorBtn");
+
+
+/* =========================
+   ROBLOX API FUNCTIONS
+========================= */
+
+async function getRobloxProfile(username) {
+
+  try {
+
+    // Step 1: Search for user by username
+    const searchRes = await fetch(
+      `https://users.roblox.com/v1/users/search?keyword=${encodeURIComponent(username)}`
+    );
+
+    const searchData = await searchRes.json();
+
+    if (!searchData.data || searchData.data.length === 0) {
+      return null;
+    }
+
+    // Find exact match
+    const exactMatch = searchData.data.find(
+      u => u.name.toLowerCase() === username.toLowerCase()
+    );
+
+    const user = exactMatch || searchData.data[0];
+    const userId = user.id;
+
+    // Step 2: Get user details
+    const userRes = await fetch(
+      `https://users.roblox.com/v1/users/${userId}`
+    );
+
+    const userData = await userRes.json();
+
+    // Step 3: Get avatar headshot
+    const avatarRes = await fetch(
+      `https://thumbnails.roblox.com/v1/users/avatar-headshot?userIds=${userId}&size=150x150&format=Png&isCircular=true`
+    );
+
+    const avatarData = await avatarRes.json();
+
+    let avatarUrl = null;
+
+    if (avatarData.data && avatarData.data[0]) {
+      avatarUrl = avatarData.data[0].imageUrl;
+    }
+
+    // Format join date
+    let joinDate = "🎮 Roblox Player";
+
+    if (userData.created) {
+      const date = new Date(userData.created);
+      const month = date.toLocaleString('default', { month: 'long' });
+      const year = date.getFullYear();
+      joinDate = `🎮 Joined ${month} ${year}`;
+    }
+
+    return {
+      username: userData.name,
+      displayName: userData.displayName,
+      userId: userId,
+      joinDate: joinDate,
+      avatarUrl: avatarUrl,
+      hasVerifiedBadge: userData.hasVerifiedBadge || false,
+      created: userData.created
+    };
+
+  } catch (error) {
+
+    console.error("Roblox API error:", error);
+
+    return null;
+  }
+}
+
+
+/* =========================
+   SHOW VERIFICATION POPUP
+========================= */
+
+async function showVerificationPopup(username) {
+
+  // Show loading state
+  verifyUsername.textContent = "Loading...";
+  verifyJoinDate.textContent = "🎮 Fetching Roblox profile...";
+  verifyAvatar.innerHTML = '<div class="loading-text">⏳</div>';
+  verifiedBadgeContainer.style.display = 'none';
+
+  verifyPopup.classList.add("show");
+
+  // Fetch real Roblox profile
+  const profile = await getRobloxProfile(username);
+
+  if (profile) {
+
+    verifyUsername.textContent = profile.displayName || profile.username;
+
+    verifyJoinDate.textContent = profile.joinDate;
+
+    // Show verified badge if they have it
+    if (profile.hasVerifiedBadge) {
+      verifiedBadgeContainer.style.display = 'block';
+      verifiedBadgeContainer.innerHTML = '<div class="verified-badge">✅ Roblox Verified</div>';
+    } else {
+      verifiedBadgeContainer.style.display = 'none';
+    }
+
+    // Show avatar
+    if (profile.avatarUrl) {
+      verifyAvatar.innerHTML = `<img src="${profile.avatarUrl}" alt="${profile.username}" />`;
+    } else {
+      verifyAvatar.innerHTML = `<div style="font-size:38px;">🧑</div>`;
+    }
+
+    // Store the username for later use
+    verifyPopup.dataset.confirmedUsername = profile.username;
+
+  } else {
+
+    // Fallback if profile not found
+    verifyUsername.textContent = username;
+    verifyJoinDate.textContent = "🎮 Roblox Player";
+    verifyAvatar.innerHTML = '<div style="font-size:38px;">🧑</div>';
+    verifiedBadgeContainer.style.display = 'none';
+
+    // Show error toast
+    showToast("⚠️ Could not find Roblox profile");
+  }
+}
 
 
 /* =========================
@@ -884,16 +1099,14 @@ redeemForm.addEventListener("submit", function(e) {
   }
 
 
-  verifyUsername.textContent =
-    username;
-
-  verifyPopup.classList.add("show");
+  // Show verification popup with real Roblox profile
+  showVerificationPopup(username);
 
 });
 
 
 /* =========================
-   YES BUTTON
+   YES BUTTON - Go to sponsor page
 ========================= */
 
 document
@@ -937,37 +1150,16 @@ closeSponsorBtn.addEventListener(
 
 
 /* =========================
-   OFFER BUTTONS
+   COMPLETE OFFER - Redirect to AdBlue
 ========================= */
 
-document
-  .querySelectorAll(".offer-item")
-  .forEach(function(offer) {
+function completeOffer() {
 
-    offer.addEventListener(
-      "click",
-      function() {
+  // Replace with your AdBlue Smart Link URL
+  window.location.href =
+    'https://app.hawktrk.com/sl?id=6a2050db46d3cf0d62f32aa4&pid=2&sub2=u816396&sub6=s2smartLink&sub5=s1SUBID1HERE';
 
-        const offerName =
-          offer.dataset.offer;
-
-        showToast(
-          "Opening: " + offerName
-        );
-
-        /*
-          Put your legitimate offer/affiliate
-          destination here.
-
-          window.location.href =
-            "YOUR_OFFER_URL";
-
-        */
-
-      }
-    );
-
-});
+}
 
 
 /* =========================
@@ -981,10 +1173,10 @@ function showToast(text) {
   const toast =
     document.getElementById("toast");
 
-  const toastText =
-    document.getElementById("toastText");
+  const toastUser =
+    document.getElementById("toastUser");
 
-  toastText.textContent = text;
+  toastUser.textContent = text;
 
   toast.classList.add("show");
 
@@ -996,7 +1188,7 @@ function showToast(text) {
       toast.classList.remove("show");
 
     },
-    2500
+    3000
   );
 
 }
@@ -1063,6 +1255,44 @@ setInterval(function() {
   ).textContent = claims.toLocaleString();
 
 }, 8000);
+
+
+/* =========================
+   TOAST NOTIFICATIONS
+========================= */
+
+const toastUsers = ["xX_ProGamer_Xx","RobloxFan_2024","NoobMaster99","PixelQueen_22","DarkNinja_07","SusieSunshine","EpicGamer_YT"];
+
+let toastIndex = 0;
+
+function showRandomToast() {
+
+  const toast = document.getElementById("toast");
+
+  const toastUser = document.getElementById("toastUser");
+
+  toastUser.textContent = toastUsers[toastIndex % toastUsers.length] + " just redeemed 25,000 Robux";
+
+  toast.classList.add("show");
+
+  clearTimeout(toastTimeout);
+
+  toastTimeout = setTimeout(
+    function() {
+
+      toast.classList.remove("show");
+
+    },
+    3500
+  );
+
+  toastIndex++;
+
+}
+
+setTimeout(showRandomToast, 2500);
+
+setInterval(showRandomToast, 6000);
 
 
 /* =========================
