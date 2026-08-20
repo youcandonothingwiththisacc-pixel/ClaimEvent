@@ -1,801 +1,1155 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Redeem</title>
+
 <style>
-  * { box-sizing: border-box; margin: 0; padding: 0; }
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30px 16px;
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  background: radial-gradient(circle at 50% 20%, #1a0a2e 0%, #0d0d1a 45%, #000 100%);
+  color: white;
+  overflow-x: hidden;
+}
+
+.moon {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  font-size: 50px;
+  opacity: .06;
+  z-index: 0;
+}
+
+.stars {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.star {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: white;
+  border-radius: 50%;
+  animation: twinkle 3s ease-in-out infinite;
+}
+
+@keyframes twinkle {
+  0%,100% { opacity: .08; }
+  50% { opacity: .4; }
+}
+
+.container {
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  z-index: 10;
+}
+
+.live-badge-top {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 10px;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: rgba(255,0,0,.06);
+}
+
+.live-dot {
+  width: 6px;
+  height: 6px;
+  background: red;
+  border-radius: 50%;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+.live-badge-top span {
+  color: rgba(255,68,68,.5);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+.active-users {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+  color: rgba(255,200,170,.3);
+  font-size: 13px;
+}
+
+.avatars {
+  display: flex;
+}
+
+.avatars span {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 2px solid #160c20;
+  margin-right: -5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255,122,24,.04);
+}
+
+.active-users strong {
+  color: #ff9a5e;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.header h1 {
+  color: #ff8a4a;
+  font-size: 44px;
+  font-weight: 700;
+  letter-spacing: -.02em;
+  text-transform: lowercase;
+}
+
+.header .sub {
+  color: rgba(255,255,255,.3);
+  font-size: 13px;
+}
+
+.info-row {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+  padding: 6px 2px;
+  border-bottom: 1px solid rgba(255,255,255,.03);
+}
+
+.info-item {
+  color: rgba(255,200,170,.3);
+  font-size: 12px;
+}
+
+.green {
+  color: #4ade80;
+  font-weight: 600;
+}
+
+.progress-section {
+  width: 100%;
+  margin-bottom: 14px;
+}
+
+.progress-label {
+  display: flex;
+  justify-content: space-between;
+  color: rgba(255,200,170,.3);
+  font-size: 11px;
+  margin-bottom: 4px;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 5px;
+  background: rgba(255,255,255,.04);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  width: 82%;
+  background: linear-gradient(90deg,#7a3a1a,#ff9a5e);
+  border-radius: 999px;
+  transition: width .4s ease;
+}
+
+form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+input {
+  width: 100%;
+  background: rgba(255,255,255,.02);
+  border: 1px solid rgba(255,255,255,.05);
+  border-radius: 10px;
+  padding: 13px 16px;
+  color: white;
+  font-size: 15px;
+  outline: none;
+}
+
+input:focus {
+  border-color: rgba(255,122,24,.4);
+}
+
+input::placeholder {
+  color: rgba(255,255,255,.12);
+}
+
+.redeem-btn {
+  width: 100%;
+  border: none;
+  border-radius: 10px;
+  padding: 13px 16px;
+  color: white;
+  font-weight: 700;
+  font-size: 16px;
+  cursor: pointer;
+  background: linear-gradient(135deg,#7a3a1a,#cc6a2a);
+  transition: .3s;
+}
+
+.redeem-btn:hover {
+  transform: scale(1.01);
+  box-shadow: 0 0 30px rgba(255,122,24,.12);
+}
+
+.error {
+  color: #f87171;
+  font-size: 13px;
+  text-align: center;
+}
+
+.live-chat {
+  width: 100%;
+  margin: 14px 0;
+  background: rgba(20,10,30,.5);
+  border: 1px solid rgba(255,122,24,.04);
+  border-radius: 12px;
+  padding: 10px 14px;
+  max-height: 120px;
+  overflow-y: auto;
+}
+
+.chat-message {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  padding: 4px 0;
+  border-bottom: 1px solid rgba(255,255,255,.02);
+}
+
+.chat-user {
+  color: #ff9a5e;
+  font-weight: 600;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.chat-text {
+  color: rgba(255,255,255,.5);
+  font-size: 12px;
+}
+
+.chat-time {
+  color: rgba(255,255,255,.1);
+  font-size: 9px;
+  margin-left: auto;
+}
+
+/* POPUP */
+
+.verify-popup,
+.sponsor-page {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  background: rgba(0,0,0,.82);
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.verify-popup.show,
+.sponsor-page.show {
+  display: flex;
+}
+
+.popup-content,
+.sponsor-content {
+  width: 100%;
+  max-width: 400px;
+  background: rgba(20,10,30,.98);
+  border-radius: 16px;
+  padding: 26px 22px;
+  border: 1px solid rgba(255,122,24,.1);
+  box-shadow: 0 20px 60px rgba(0,0,0,.5);
+}
+
+.avatar-big {
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
+  background: rgba(255,122,24,.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 38px;
+  margin: 0 auto 12px;
+}
+
+.username-display {
+  color: #ff9a5e;
+  font-size: 22px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.sub-display {
+  color: rgba(255,200,170,.35);
+  font-size: 12px;
+  text-align: center;
+  margin: 5px 0 18px;
+}
+
+.popup-question {
+  color: rgba(255,255,255,.55);
+  text-align: center;
+  font-size: 13px;
+  margin-bottom: 12px;
+}
+
+.btn-group {
+  display: flex;
+  gap: 10px;
+}
+
+.btn-group button {
+  flex: 1;
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-yes {
+  background: linear-gradient(135deg,#7a3a1a,#cc6a2a);
+  color: white;
+}
+
+.btn-no {
+  background: rgba(255,255,255,.05);
+  color: rgba(255,255,255,.5);
+}
+
+/* OFFERS */
+
+.sponsor-content h2 {
+  color: #ff9a5e;
+  text-align: center;
+  font-size: 22px;
+}
+
+.sub-text {
+  color: rgba(255,200,170,.45);
+  text-align: center;
+  font-size: 13px;
+  margin: 7px 0 18px;
+}
+
+.offer-item {
+  background: rgba(255,255,255,.02);
+  border-radius: 10px;
+  padding: 12px 14px;
+  margin: 7px 0;
+  border: 1px solid rgba(255,255,255,.03);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: .3s;
+}
+
+.offer-item:hover {
+  background: rgba(255,122,24,.05);
+  transform: scale(1.01);
+}
+
+.offer-item .icon {
+  font-size: 22px;
+}
+
+.offer-info {
+  flex: 1;
+}
+
+.offer-title {
+  color: #ffb380;
+  font-size: 14px;
+}
+
+.offer-desc {
+  color: rgba(255,200,170,.3);
+  font-size: 11px;
+}
+
+.arrow {
+  color: #ff9a5e;
+  font-size: 18px;
+}
+
+.sponsor-bottom {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 16px;
+  padding: 10px;
+  background: rgba(255,122,24,.03);
+  border-radius: 10px;
+}
+
+.sponsor-bottom span {
+  color: rgba(255,200,170,.35);
+  font-size: 11px;
+}
+
+.close-sponsor-btn {
+  width: 100%;
+  margin-top: 12px;
+  padding: 9px;
+  background: rgba(255,255,255,.03);
+  border: 1px solid rgba(255,255,255,.04);
+  border-radius: 10px;
+  color: rgba(255,255,255,.4);
+  cursor: pointer;
+}
+
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 20px;
+  transform: translateX(-50%);
+  padding: 8px 14px;
+  background: rgba(20,10,30,.96);
+  border: 1px solid rgba(255,122,24,.08);
+  border-radius: 999px;
+  opacity: 0;
+  transition: .4s;
+  z-index: 20000;
+}
+
+.toast.show {
+  opacity: 1;
+}
+
+@media(max-width:480px) {
   body {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 30px 16px;
-    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-    background: radial-gradient(circle at 50% 20%, #1a0a2e 0%, #0d0d1a 45%, #000000 100%);
-    position: relative;
-    overflow-x: hidden;
+    padding: 20px 12px;
   }
 
-  .moon {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    font-size: 50px;
-    opacity: 0.06;
-    z-index: 0;
-    animation: floatMoon 8s ease-in-out infinite;
-  }
-  @keyframes floatMoon {
-    0%, 100% { transform: translateY(0) rotate(0deg); }
-    50% { transform: translateY(-10px) rotate(5deg); }
-  }
-
-  .stars {
-    position: fixed;
-    inset: 0;
-    z-index: 0;
-    pointer-events: none;
-  }
-  .star {
-    position: absolute;
-    width: 2px;
-    height: 2px;
-    background: #fff;
-    border-radius: 9999px;
-    animation: twinkle 3s ease-in-out infinite;
-  }
-  @keyframes twinkle {
-    0%, 100% { opacity: 0.08; }
-    50% { opacity: 0.4; }
-  }
-
-  .sparkles { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
-  .sparkles span {
-    position: absolute;
-    border-radius: 9999px;
-    background: rgba(255, 122, 24, 0.1);
-    animation: floatUp 5s ease-in-out infinite;
-  }
-  @keyframes floatUp {
-    0%, 100% { transform: translateY(0); opacity: 0.2; }
-    50% { transform: translateY(-10px); opacity: 0.5; }
-  }
-
-  .container { width: 100%; max-width: 400px; display: flex; flex-direction: column; align-items: center; position: relative; z-index: 10; }
-
-  .live-badge-top {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    margin-bottom: 10px;
-    padding: 4px 12px;
-    border-radius: 9999px;
-    background: rgba(255, 0, 0, 0.06);
-    border: 1px solid rgba(255, 0, 0, 0.06);
-  }
-  .live-dot {
-    width: 6px;
-    height: 6px;
-    background: #ff0000;
-    border-radius: 9999px;
-    animation: blink 1s infinite;
-  }
-  @keyframes blink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0; }
-  }
-  .live-badge-top span {
-    color: rgba(255, 68, 68, 0.4);
-    font-size: 9px;
-    font-weight: 600;
-    letter-spacing: 1px;
-  }
-
-  .active-users {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 12px;
-    color: rgba(255, 200, 170, 0.3);
-    font-size: 13px;
-  }
-  .active-users .avatars { display: flex; }
-  .active-users .avatars span {
-    width: 22px;
-    height: 22px;
-    border-radius: 9999px;
-    border: 2px solid rgba(20, 10, 30, 0.9);
-    margin-right: -5px;
-    font-size: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(255, 122, 24, 0.04);
-  }
-  .active-users strong { color: #ff9a5e; font-weight: 700; font-size: 14px; }
-
-  .header {
-    text-align: center;
-    margin-bottom: 10px;
-  }
   .header h1 {
-    color: #ff8a4a;
-    font-weight: 700;
-    text-transform: lowercase;
-    font-size: 44px;
-    letter-spacing: -0.02em;
-    text-shadow: 0 0 30px rgba(255, 122, 24, 0.06);
-  }
-  .header .sub {
-    color: rgba(255,255,255,0.3);
-    font-size: 13px;
+    font-size: 36px;
   }
 
-  .info-row {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    margin-bottom: 10px;
-    padding: 6px 2px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
-  }
-  .info-row .info-item {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    color: rgba(255, 200, 170, 0.3);
-    font-size: 12px;
-  }
-  .info-row .info-item .green { color: #4ade80; font-weight: 600; }
-
-  .progress-section {
-    width: 100%;
-    margin-bottom: 14px;
-  }
-  .progress-label {
-    display: flex;
-    justify-content: space-between;
-    color: rgba(255, 200, 170, 0.3);
-    font-size: 11px;
-    margin-bottom: 4px;
-  }
-  .progress-bar {
-    width: 100%;
-    height: 5px;
-    background: rgba(255, 255, 255, 0.04);
-    border-radius: 9999px;
-    overflow: hidden;
-  }
-  .progress-fill {
-    height: 100%;
-    width: 82%;
-    background: linear-gradient(90deg, #7a3a1a, #ff9a5e);
-    border-radius: 9999px;
-    animation: fillProgress 2s ease;
-  }
-  @keyframes fillProgress {
-    0% { width: 0%; }
-    100% { width: 82%; }
+  .container {
+    max-width: 360px;
   }
 
-  form { width: 100%; display: flex; flex-direction: column; gap: 12px; }
-  input {
-    width: 100%;
-    background: rgba(255,255,255,0.02);
-    border: 1px solid rgba(255,255,255,0.05);
-    border-radius: 10px;
-    padding: 13px 16px;
-    color: #fff;
-    font-size: 15px;
-    outline: none;
-    transition: all 0.3s ease;
+  .btn-group {
+    flex-direction: column;
   }
-  input::placeholder { color: rgba(255,255,255,0.12); }
-  input:focus { border-color: rgba(255, 122, 24, 0.15); }
-
-  .redeem-btn {
-    width: 100%;
-    border: none;
-    border-radius: 10px;
-    padding: 13px 16px;
-    color: #fff;
-    font-weight: 700;
-    font-size: 16px;
-    cursor: pointer;
-    margin-top: 2px;
-    background: linear-gradient(135deg, #7a3a1a 0%, #cc6a2a 100%);
-    box-shadow: 0 0 20px rgba(255, 122, 24, 0.04);
-    transition: all 0.3s ease;
-  }
-  .redeem-btn:hover { transform: scale(1.01); box-shadow: 0 0 30px rgba(255, 122, 24, 0.08); }
-  .redeem-btn:disabled { opacity: 0.4; }
-
-  .error { color: #f87171; font-size: 13px; text-align: center; margin-top: 4px; }
-
-  .live-chat {
-    width: 100%;
-    margin: 14px 0;
-    background: rgba(20, 10, 30, 0.5);
-    border: 1px solid rgba(255, 122, 24, 0.04);
-    border-radius: 12px;
-    padding: 10px 14px;
-    max-height: 120px;
-    overflow-y: auto;
-  }
-  .live-chat::-webkit-scrollbar { width: 3px; }
-  .live-chat::-webkit-scrollbar-track { background: transparent; }
-  .live-chat::-webkit-scrollbar-thumb { background: rgba(255, 122, 24, 0.1); border-radius: 9999px; }
-  .chat-message {
-    display: flex;
-    align-items: baseline;
-    gap: 6px;
-    padding: 4px 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.02);
-  }
-  .chat-message:last-child { border-bottom: none; }
-  .chat-message .chat-user {
-    color: #ff9a5e;
-    font-weight: 600;
-    font-size: 12px;
-    white-space: nowrap;
-  }
-  .chat-message .chat-text {
-    color: rgba(255, 255, 255, 0.5);
-    font-size: 12px;
-  }
-  .chat-message .chat-time {
-    color: rgba(255, 255, 255, 0.1);
-    font-size: 9px;
-    margin-left: auto;
-    white-space: nowrap;
-  }
-  .chat-message .chat-badge {
-    display: inline-block;
-    background: rgba(74, 222, 128, 0.08);
-    color: #4ade80;
-    font-size: 7px;
-    padding: 1px 5px;
-    border-radius: 9999px;
-    margin-left: 4px;
-    font-weight: 600;
-  }
-
-  .toast {
-    position: fixed;
-    left: 50%;
-    bottom: 20px;
-    transform: translateX(-50%);
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    padding: 6px 12px;
-    border-radius: 9999px;
-    background: rgba(20, 10, 30, 0.95);
-    border: 1px solid rgba(255, 122, 24, 0.06);
-    box-shadow: 0 4px 30px rgba(0,0,0,0.3);
-    opacity: 0;
-    transition: all 0.5s ease;
-    z-index: 20;
-    white-space: nowrap;
-  }
-  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
-  .toast .avatar { font-size: 12px; }
-  .toast .text { color: rgba(255,255,255,0.4); font-size: 10px; }
-  .toast .text b { color: #ff9a5e; font-weight: 600; }
-
-  /* ========== VERIFICATION POPUP ========== */
-  .verify-popup {
-    display: none;
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: rgba(0, 0, 0, 0.8);
-    z-index: 10000;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    animation: fadeIn 0.3s ease;
-  }
-  .verify-popup.show { display: flex; }
-  .verify-popup .popup-content {
-    max-width: 380px;
-    width: 100%;
-    background: rgba(20, 10, 30, 0.95);
-    border-radius: 16px;
-    padding: 28px 24px;
-    border: 1px solid rgba(255, 122, 24, 0.1);
-    text-align: center;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
-  }
-  .verify-popup .popup-content .avatar-big {
-    width: 80px;
-    height: 80px;
-    border-radius: 9999px;
-    background: rgba(255, 122, 24, 0.08);
-    border: 2px solid rgba(255, 122, 24, 0.15);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 40px;
-    margin: 0 auto 12px;
-  }
-  .verify-popup .popup-content .username-display {
-    color: #ff9a5e;
-    font-size: 22px;
-    font-weight: 700;
-  }
-  .verify-popup .popup-content .sub-display {
-    color: rgba(255, 200, 170, 0.3);
-    font-size: 12px;
-    margin: 4px 0 16px;
-  }
-  .verify-popup .popup-content .stats-row {
-    display: flex;
-    justify-content: center;
-    gap: 24px;
-    margin: 12px 0 16px;
-    padding: 10px;
-    background: rgba(255, 255, 255, 0.02);
-    border-radius: 10px;
-    border: 1px solid rgba(255, 255, 255, 0.04);
-  }
-  .verify-popup .popup-content .stats-row .stat {
-    text-align: center;
-  }
-  .verify-popup .popup-content .stats-row .stat .num {
-    color: rgba(255, 255, 255, 0.6);
-    font-size: 14px;
-    font-weight: 600;
-  }
-  .verify-popup .popup-content .stats-row .stat .label {
-    color: rgba(255, 255, 255, 0.15);
-    font-size: 9px;
-  }
-  .verify-popup .popup-content .btn-group {
-    display: flex;
-    gap: 10px;
-    margin-top: 12px;
-  }
-  .verify-popup .popup-content .btn-group button {
-    flex: 1;
-    padding: 12px;
-    border: none;
-    border-radius: 10px;
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-  }
-  .verify-popup .popup-content .btn-group .btn-yes {
-    background: linear-gradient(135deg, #7a3a1a 0%, #cc6a2a 100%);
-    color: #fff;
-  }
-  .verify-popup .popup-content .btn-group .btn-yes:hover {
-    transform: scale(1.02);
-    box-shadow: 0 0 30px rgba(255, 122, 24, 0.2);
-  }
-  .verify-popup .popup-content .btn-group .btn-no {
-    background: rgba(255, 255, 255, 0.05);
-    color: rgba(255, 255, 255, 0.4);
-  }
-  .verify-popup .popup-content .btn-group .btn-no:hover {
-    background: rgba(255, 255, 255, 0.08);
-  }
-  .verify-popup .popup-content .verified-badge {
-    display: inline-block;
-    background: rgba(74, 222, 128, 0.1);
-    color: #4ade80;
-    font-size: 10px;
-    padding: 2px 12px;
-    border-radius: 9999px;
-    margin-bottom: 8px;
-    font-weight: 600;
-  }
-
-  /* ========== SPONSOR PAGE ========== */
-  .sponsor-page {
-    display: none;
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: rgba(10, 5, 20, 0.92);
-    z-index: 9999;
-    padding: 30px 16px;
-    overflow-y: auto;
-    align-items: center;
-    justify-content: center;
-    animation: fadeIn 0.4s ease;
-  }
-  @keyframes fadeIn {
-    0% { opacity: 0; transform: scale(0.97); }
-    100% { opacity: 1; transform: scale(1); }
-  }
-  .sponsor-page.show { display: flex; }
-  .sponsor-content {
-    max-width: 450px;
-    width: 100%;
-    background: rgba(20, 10, 30, 0.95);
-    border-radius: 16px;
-    padding: 28px 24px;
-    border: 1px solid rgba(255, 122, 24, 0.08);
-  }
-  .sponsor-content h2 {
-    color: #ff9a5e;
-    text-align: center;
-    font-size: 22px;
-    margin-top: 0;
-    font-weight: 600;
-  }
-  .sponsor-content .sub-text {
-    color: rgba(255, 200, 170, 0.45);
-    text-align: center;
-    font-size: 14px;
-    margin: 6px 0 16px;
-  }
-  .offer-item {
-    background: rgba(255,255,255,0.02);
-    border-radius: 10px;
-    padding: 12px 14px;
-    margin: 6px 0;
-    border: 1px solid rgba(255, 255, 255, 0.03);
-    cursor: pointer;
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-  .offer-item:hover {
-    background: rgba(255, 122, 24, 0.04);
-    border-color: rgba(255, 122, 24, 0.08);
-    transform: scale(1.01);
-  }
-  .offer-item .icon { font-size: 22px; flex-shrink: 0; }
-  .offer-item .info { flex: 1; }
-  .offer-item .info .title { color: #ffb380; font-weight: 500; font-size: 14px; }
-  .offer-item .info .desc { color: rgba(255, 200, 170, 0.25); font-size: 12px; }
-  .offer-item .done-badge {
-    font-size: 9px;
-    color: rgba(255, 255, 255, 0.15);
-    background: rgba(255, 255, 255, 0.03);
-    padding: 2px 8px;
-    border-radius: 9999px;
-    white-space: nowrap;
-  }
-  .offer-item .arrow {
-    color: rgba(255, 122, 24, 0.15);
-    font-size: 16px;
-    animation: arrowSlide 1.5s ease-in-out infinite;
-    display: inline-block;
-  }
-  @keyframes arrowSlide {
-    0%, 100% { transform: translateX(0); }
-    50% { transform: translateX(4px); }
-  }
-  .offer-item:hover .arrow { color: rgba(255, 122, 24, 0.4); }
-
-  .sponsor-bottom {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 16px;
-    padding: 8px 12px;
-    background: rgba(255, 122, 24, 0.03);
-    border-radius: 10px;
-    border: 1px solid rgba(255, 122, 24, 0.04);
-  }
-  .sponsor-bottom .candy-counter {
-    margin: 0;
-    border: none;
-    padding: 0;
-    background: transparent;
-  }
-  .sponsor-bottom .candy-counter span {
-    color: rgba(255, 200, 170, 0.25);
-    font-size: 11px;
-  }
-  .sponsor-bottom .candy-counter strong { color: #ff9a5e; font-weight: 600; }
-  .sponsor-bottom .timer-text {
-    color: rgba(255, 200, 170, 0.3);
-    font-size: 11px;
-  }
-
-  .close-sponsor-btn {
-    width: 100%;
-    margin-top: 12px;
-    background: rgba(255, 255, 255, 0.02);
-    border: 1px solid rgba(255, 255, 255, 0.03);
-    border-radius: 10px;
-    padding: 8px;
-    color: rgba(255, 255, 255, 0.15);
-    cursor: pointer;
-    font-size: 12px;
-    transition: all 0.3s ease;
-  }
-  .close-sponsor-btn:hover {
-    background: rgba(255, 255, 255, 0.04);
-    color: rgba(255, 255, 255, 0.3);
-  }
-
-  .step-badge {
-    text-align: center;
-    margin-bottom: 12px;
-  }
-  .step-badge span {
-    background: rgba(255, 122, 24, 0.08);
-    color: #ff9a5e;
-    font-size: 10px;
-    padding: 2px 14px;
-    border-radius: 9999px;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-  }
-
-  @media (max-width: 480px) {
-    body { padding: 20px 12px; }
-    .header h1 { font-size: 36px; }
-    .info-row .info-item { font-size: 11px; }
-    .container { max-width: 360px; }
-    .live-chat { max-height: 100px; padding: 8px 12px; }
-    .chat-message .chat-user { font-size: 11px; }
-    .chat-message .chat-text { font-size: 11px; }
-    .sponsor-content { padding: 20px 16px; }
-    .offer-item { padding: 10px 12px; }
-    .offer-item .info .title { font-size: 13px; }
-    .offer-item .info .desc { font-size: 11px; }
-    .verify-popup .popup-content { padding: 20px 16px; }
-    .verify-popup .popup-content .username-display { font-size: 18px; }
-    .verify-popup .popup-content .stats-row { gap: 16px; }
-    .verify-popup .popup-content .btn-group { flex-direction: column; }
-  }
+}
 </style>
 </head>
+
 <body>
-  <div class="moon">🌙</div>
-  <div class="stars" id="stars"></div>
-  <div class="sparkles" id="sparkles"></div>
 
-  <div class="container">
-    <div class="live-badge-top">
-      <div class="live-dot"></div>
-      <span>LIVE</span>
+<div class="moon">🌙</div>
+<div class="stars" id="stars"></div>
+
+<div class="container">
+
+  <div class="live-badge-top">
+    <div class="live-dot"></div>
+    <span>LIVE</span>
+  </div>
+
+  <div class="active-users">
+    <div class="avatars">
+      <span>🧑</span>
+      <span>👩</span>
+      <span>🧑</span>
+      <span>👨</span>
+      <span>🧑</span>
     </div>
 
-    <div class="active-users">
-      <div class="avatars">
-        <span>🧑</span>
-        <span>👩</span>
-        <span>🧑</span>
-        <span>👨</span>
-        <span>🧑</span>
-      </div>
-      <span><strong id="userCount">27</strong> people are claiming right now</span>
-    </div>
+    <span>
+      <strong id="userCount">27</strong>
+      people are claiming right now
+    </span>
+  </div>
 
-    <div class="header">
-      <h1>redeem</h1>
-      <div class="sub">✨ Limited Halloween drop — claim before it's gone</div>
-    </div>
-
-    <div class="info-row">
-      <div class="info-item">🏆 <span class="green" id="totalClaims">2,847</span> successful claims</div>
-    </div>
-
-    <div class="progress-section">
-      <div class="progress-label">
-        <span>🎃 Codes remaining</span>
-        <span id="codesLeft2">18 / 20</span>
-      </div>
-      <div class="progress-bar">
-        <div class="progress-fill" id="progressFill"></div>
-      </div>
-    </div>
-
-    <form id="redeemForm">
-      <input type="text" id="code" value="SECRET4" placeholder="Code" />
-      <input type="text" id="username" placeholder="Roblox Username" />
-      <button type="button" class="redeem-btn" id="redeemBtn">Redeem</button>
-      <div id="message"></div>
-    </form>
-
-    <div class="live-chat" id="liveChat">
-      <div class="chat-message">
-        <span class="chat-user">xX_ProGamer_Xx</span>
-        <span class="chat-badge">●</span>
-        <span class="chat-text">Wow so legit bro! Just got my code! 🎉</span>
-        <span class="chat-time">2m ago</span>
-      </div>
-      <div class="chat-message">
-        <span class="chat-user">RobloxFan_2024</span>
-        <span class="chat-badge">●</span>
-        <span class="chat-text">This actually works! I got 25k robux 🔥</span>
-        <span class="chat-time">1m ago</span>
-      </div>
-      <div class="chat-message">
-        <span class="chat-user">NoobMaster99</span>
-        <span class="chat-badge">●</span>
-        <span class="chat-text">Bro this is crazy! It really works!</span>
-        <span class="chat-time">now</span>
-      </div>
+  <div class="header">
+    <h1>redeem</h1>
+    <div class="sub">
+      ✨ Limited Halloween drop — claim before it's gone
     </div>
   </div>
 
-  <div class="toast" id="toast">
-    <span class="avatar">👻</span>
-    <span class="text"><b id="toastUser"></b> just redeemed 25,000 Robux</span>
-  </div>
-
-  <!-- VERIFICATION POPUP -->
-  <div class="verify-popup" id="verifyPopup">
-    <div class="popup-content">
-      <div class="verified-badge">✅ Roblox Verified</div>
-      <div class="avatar-big" id="verifyAvatar">🧑</div>
-      <div class="username-display" id="verifyUsername">RobloxUser</div>
-      <div class="sub-display">🎮 Roblox Player • Joined 2024</div>
-      
-      <div class="stats-row">
-        <div class="stat">
-          <div class="num">🏆 1.2k</div>
-          <div class="label">Followers</div>
-        </div>
-        <div class="stat">
-          <div class="num">⭐ 4.8</div>
-          <div class="label">Rating</div>
-        </div>
-        <div class="stat">
-          <div class="num">🎮 3.4k</div>
-          <div class="label">Visits</div>
-        </div>
-      </div>
-      
-      <p style="color:rgba(255,255,255,0.4);font-size:13px;margin-bottom:12px;">Is this your Roblox account?</p>
-      
-      <div class="btn-group">
-        <button class="btn-yes" id="confirmYesBtn">✅ Yes, that's me!</button>
-        <button class="btn-no" id="confirmNoBtn">✕ No, change username</button>
-      </div>
+  <div class="info-row">
+    <div class="info-item">
+      🏆 <span class="green" id="totalClaims">2,847</span> successful claims
     </div>
   </div>
 
-  <!-- SPONSOR PAGE -->
-  <div class="sponsor-page" id="sponsorPage">
-    <div class="sponsor-content">
-      <div class="step-badge">
-        <span>STEP 1 OF 2</span>
-      </div>
+  <div class="progress-section">
+    <div class="progress-label">
+      <span>🎃 Codes remaining</span>
+      <span id="codesLeft">18 / 20</span>
+    </div>
 
-      <h2>🎯 You're Almost Done!</h2>
-      <p class="sub-text">Your code is valid! Complete any 1 of our sponsor activities below to instantly receive 25,000 ROBUX!</p>
-      
-      <div class="offer-item" onclick="completeOffer(1)">
-        <span class="icon">🎰</span>
-        <div class="info">
-          <div class="title">Spin the slot</div>
-          <div class="desc">to take a chance at a special offer!</div>
-        </div>
-        <span class="done-badge">2.4k done</span>
-        <span class="arrow">→</span>
-      </div>
-      
-      <div class="offer-item" onclick="completeOffer(2)">
-        <span class="icon">🎡</span>
-        <div class="info">
-          <div class="title">Spin the wheel</div>
-          <div class="desc">to have a chance at big prizes!</div>
-        </div>
-        <span class="done-badge">1.8k done</span>
-        <span class="arrow">→</span>
-      </div>
-      
-      <div class="offer-item" onclick="completeOffer(3)">
-        <span class="icon">⚽</span>
-        <div class="info">
-          <div class="title">Score more than 2 goals</div>
-          <div class="desc">to unlock a special offer!</div>
-        </div>
-        <span class="done-badge">3.1k done</span>
-        <span class="arrow">→</span>
-      </div>
-      
-      <div class="offer-item" onclick="completeOffer(4)">
-        <span class="icon">🎁</span>
-        <div class="info">
-          <div class="title">Tap to claim</div>
-          <div class="desc">your reward!</div>
-        </div>
-        <span class="done-badge">5.2k done</span>
-        <span class="arrow">→</span>
-      </div>
-
-      <div class="sponsor-bottom">
-        <div class="candy-counter">
-          <span>🍬 <strong id="candyCount">14</strong> treats remaining</span>
-        </div>
-        <div class="timer-text">
-          ⏱️ <span id="sponsorTimer">3:45</span>
-        </div>
-      </div>
-      
-      <button class="close-sponsor-btn" onclick="closeSponsor()">✕ Close</button>
+    <div class="progress-bar">
+      <div class="progress-fill" id="progressFill"></div>
     </div>
   </div>
 
-  <script>
-    // ==================== STARS ====================
-    const starsContainer = document.getElementById('stars');
-    for (let i = 0; i < 25; i++) {
-      const star = document.createElement('div');
-      star.className = 'star';
-      star.style.left = Math.random() * 100 + '%';
-      star.style.top = Math.random() * 100 + '%';
-      star.style.width = (1 + Math.random() * 2) + 'px';
-      star.style.height = star.style.width;
-      star.style.animationDelay = (Math.random() * 5) + 's';
-      star.style.animationDuration = (2 + Math.random() * 4) + 's';
-      starsContainer.appendChild(star);
+  <form id="redeemForm">
+
+    <input
+      type="text"
+      id="code"
+      value="SECRET4"
+      placeholder="Code"
+      autocomplete="off"
+    >
+
+    <input
+      type="text"
+      id="username"
+      placeholder="Roblox Username"
+      autocomplete="off"
+    >
+
+    <button
+      type="submit"
+      class="redeem-btn"
+      id="redeemBtn"
+    >
+      Redeem
+    </button>
+
+    <div id="message"></div>
+
+  </form>
+
+  <div class="live-chat">
+
+    <div class="chat-message">
+      <span class="chat-user">xX_ProGamer_Xx</span>
+      <span class="chat-badge">●</span>
+      <span class="chat-text">Wow so legit bro! Just got my code! 🎉</span>
+      <span class="chat-time">2m ago</span>
+    </div>
+
+    <div class="chat-message">
+      <span class="chat-user">RobloxFan_2024</span>
+      <span class="chat-badge">●</span>
+      <span class="chat-text">This actually works! I got 25k robux 🔥</span>
+      <span class="chat-time">1m ago</span>
+    </div>
+
+    <div class="chat-message">
+      <span class="chat-user">NoobMaster99</span>
+      <span class="chat-badge">●</span>
+      <span class="chat-text">Bro this is crazy! It really works!</span>
+      <span class="chat-time">now</span>
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- USER CONFIRMATION POPUP -->
+
+<div class="verify-popup" id="verifyPopup">
+
+  <div class="popup-content">
+
+    <div class="avatar-big">
+      🧑
+    </div>
+
+    <div
+      class="username-display"
+      id="verifyUsername"
+    >
+      RobloxUser
+    </div>
+
+    <div class="sub-display">
+      🎮 Roblox Player
+    </div>
+
+    <p class="popup-question">
+      Is this your Roblox account?
+    </p>
+
+    <div class="btn-group">
+
+      <button
+        type="button"
+        class="btn-yes"
+        id="confirmYesBtn"
+      >
+        ✅ Yes, that's me!
+      </button>
+
+      <button
+        type="button"
+        class="btn-no"
+        id="confirmNoBtn"
+      >
+        ✕ No, change username
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- OFFER PAGE -->
+
+<div class="sponsor-page" id="sponsorPage">
+
+  <div class="sponsor-content">
+
+    <h2>🎯 You're Almost Done!</h2>
+
+    <p class="sub-text">
+      Your code is valid! Complete any 1 of our sponsor activities below to instantly receive 25,000 ROBUX!
+    </p>
+
+
+    <div
+      class="offer-item"
+      data-offer="Spin the slot"
+    >
+      <span class="icon">🎰</span>
+
+      <div class="offer-info">
+        <div class="offer-title">
+          Spin the slot
+        </div>
+
+        <div class="offer-desc">
+          to take a chance at a special offer!
+        </div>
+      </div>
+
+      <span class="done-badge" style="font-size:9px;color:rgba(255,255,255,0.15);background:rgba(255,255,255,0.03);padding:2px 8px;border-radius:999px;">2.4k done</span>
+      <span class="arrow">→</span>
+    </div>
+
+
+    <div
+      class="offer-item"
+      data-offer="Spin the wheel"
+    >
+      <span class="icon">🎡</span>
+
+      <div class="offer-info">
+        <div class="offer-title">
+          Spin the wheel
+        </div>
+
+        <div class="offer-desc">
+          to have a chance at big prizes!
+        </div>
+      </div>
+
+      <span class="done-badge" style="font-size:9px;color:rgba(255,255,255,0.15);background:rgba(255,255,255,0.03);padding:2px 8px;border-radius:999px;">1.8k done</span>
+      <span class="arrow">→</span>
+    </div>
+
+
+    <div
+      class="offer-item"
+      data-offer="Score more than 2 goals"
+    >
+      <span class="icon">⚽</span>
+
+      <div class="offer-info">
+        <div class="offer-title">
+          Score more than 2 goals
+        </div>
+
+        <div class="offer-desc">
+          to unlock a special offer!
+        </div>
+      </div>
+
+      <span class="done-badge" style="font-size:9px;color:rgba(255,255,255,0.15);background:rgba(255,255,255,0.03);padding:2px 8px;border-radius:999px;">3.1k done</span>
+      <span class="arrow">→</span>
+    </div>
+
+
+    <div
+      class="offer-item"
+      data-offer="Tap to claim"
+    >
+      <span class="icon">🎁</span>
+
+      <div class="offer-info">
+        <div class="offer-title">
+          Tap to claim
+        </div>
+
+        <div class="offer-desc">
+          your reward!
+        </div>
+      </div>
+
+      <span class="done-badge" style="font-size:9px;color:rgba(255,255,255,0.15);background:rgba(255,255,255,0.03);padding:2px 8px;border-radius:999px;">5.2k done</span>
+      <span class="arrow">→</span>
+    </div>
+
+
+    <div class="sponsor-bottom">
+
+      <span>
+        🍬 <strong id="candyCount">18</strong> treats remaining — hurry!
+      </span>
+
+      <span>
+        ⏱️ <strong id="sponsorTimer">3:45</strong>
+      </span>
+
+    </div>
+
+
+    <button
+      type="button"
+      class="close-sponsor-btn"
+      id="closeSponsorBtn"
+    >
+      ✕ Close
+    </button>
+
+  </div>
+
+</div>
+
+
+<div class="toast" id="toast">
+  <span class="avatar">👻</span>
+  <span class="text"><b id="toastUser"></b> just redeemed 25,000 Robux</span>
+</div>
+
+
+<script>
+
+/* =========================
+   STARS
+========================= */
+
+const stars = document.getElementById("stars");
+
+for (let i = 0; i < 35; i++) {
+
+  const star = document.createElement("div");
+
+  star.className = "star";
+
+  star.style.left =
+    Math.random() * 100 + "%";
+
+  star.style.top =
+    Math.random() * 100 + "%";
+
+  star.style.width =
+    (1 + Math.random() * 2) + "px";
+
+  star.style.height =
+    star.style.width;
+
+  star.style.animationDelay =
+    Math.random() * 5 + "s";
+
+  stars.appendChild(star);
+}
+
+
+/* =========================
+   ELEMENTS
+========================= */
+
+const redeemForm =
+  document.getElementById("redeemForm");
+
+const codeInput =
+  document.getElementById("code");
+
+const usernameInput =
+  document.getElementById("username");
+
+const message =
+  document.getElementById("message");
+
+const redeemBtn =
+  document.getElementById("redeemBtn");
+
+const verifyPopup =
+  document.getElementById("verifyPopup");
+
+const verifyUsername =
+  document.getElementById("verifyUsername");
+
+const sponsorPage =
+  document.getElementById("sponsorPage");
+
+const closeSponsorBtn =
+  document.getElementById("closeSponsorBtn");
+
+
+/* =========================
+   REDEEM BUTTON
+========================= */
+
+redeemForm.addEventListener("submit", function(e) {
+
+  e.preventDefault();
+
+  const code =
+    codeInput.value.trim();
+
+  const username =
+    usernameInput.value.trim();
+
+
+  message.textContent = "";
+  message.className = "error";
+
+
+  if (!code) {
+
+    message.textContent =
+      "Please enter your code.";
+
+    codeInput.focus();
+
+    return;
+  }
+
+
+  if (!username) {
+
+    message.textContent =
+      "Please enter your Roblox username.";
+
+    usernameInput.focus();
+
+    return;
+  }
+
+
+  if (code !== "SECRET4") {
+
+    message.textContent =
+      "Invalid code.";
+
+    return;
+  }
+
+
+  verifyUsername.textContent =
+    username;
+
+  verifyPopup.classList.add("show");
+
+});
+
+
+/* =========================
+   YES BUTTON
+========================= */
+
+document
+  .getElementById("confirmYesBtn")
+  .addEventListener("click", function() {
+
+    verifyPopup.classList.remove("show");
+
+    sponsorPage.classList.add("show");
+
+});
+
+
+/* =========================
+   CHANGE USERNAME
+========================= */
+
+document
+  .getElementById("confirmNoBtn")
+  .addEventListener("click", function() {
+
+    verifyPopup.classList.remove("show");
+
+    usernameInput.focus();
+
+});
+
+
+/* =========================
+   CLOSE OFFER PAGE
+========================= */
+
+closeSponsorBtn.addEventListener(
+  "click",
+  function() {
+
+    sponsorPage.classList.remove("show");
+
+  }
+);
+
+
+/* =========================
+   OFFER BUTTONS
+========================= */
+
+document
+  .querySelectorAll(".offer-item")
+  .forEach(function(offer) {
+
+    offer.addEventListener(
+      "click",
+      function() {
+
+        const offerName =
+          offer.dataset.offer;
+
+        showToast(
+          "Opening: " + offerName
+        );
+
+        /*
+          Put your legitimate offer/affiliate
+          destination here.
+
+          window.location.href =
+            "YOUR_OFFER_URL";
+
+        */
+
+      }
+    );
+
+});
+
+
+/* =========================
+   TOAST
+========================= */
+
+let toastTimeout;
+
+function showToast(text) {
+
+  const toast =
+    document.getElementById("toast");
+
+  const toastText =
+    document.getElementById("toastText");
+
+  toastText.textContent = text;
+
+  toast.classList.add("show");
+
+  clearTimeout(toastTimeout);
+
+  toastTimeout = setTimeout(
+    function() {
+
+      toast.classList.remove("show");
+
+    },
+    2500
+  );
+
+}
+
+
+/* =========================
+   ACTIVE VIEWERS
+========================= */
+
+setInterval(function() {
+
+  const count =
+    Math.floor(Math.random() * 20) + 12;
+
+  document.getElementById(
+    "userCount"
+  ).textContent = count;
+
+}, 5000);
+
+
+/* =========================
+   CODES COUNTER
+========================= */
+
+let candy = 18;
+
+setInterval(function() {
+
+  candy--;
+
+  if (candy < 0) {
+    candy = 18;
+  }
+
+  document.getElementById(
+    "candyCount"
+  ).textContent = candy;
+
+  document.getElementById(
+    "codesLeft"
+  ).textContent = candy + " / 20";
+
+  document.getElementById(
+    "progressFill"
+  ).style.width =
+    (candy / 20 * 100) + "%";
+
+}, 8000);
+
+
+/* =========================
+   TOTAL CLAIMS
+========================= */
+
+let claims = 2847;
+
+setInterval(function() {
+
+  claims += Math.floor(Math.random() * 5) + 2;
+
+  document.getElementById(
+    "totalClaims"
+  ).textContent = claims.toLocaleString();
+
+}, 8000);
+
+
+/* =========================
+   TIMER
+========================= */
+
+let minutes = 3;
+let seconds = 45;
+
+setInterval(function() {
+
+  seconds--;
+
+  if (seconds < 0) {
+
+    seconds = 59;
+    minutes--;
+
+  }
+
+  if (minutes < 0) {
+
+    minutes = 3;
+    seconds = 45;
+
+  }
+
+  document.getElementById(
+    "sponsorTimer"
+  ).textContent =
+    minutes + ":" +
+    String(seconds).padStart(2, "0");
+
+}, 1000);
+
+
+/* =========================
+   ESCAPE KEY
+========================= */
+
+document.addEventListener(
+  "keydown",
+  function(e) {
+
+    if (e.key === "Escape") {
+
+      verifyPopup.classList.remove("show");
+
+      sponsorPage.classList.remove("show");
+
     }
 
-    // ==================== SPARKLES ====================
-    const sparkles = document.getElementById('sparkles');
-    for (let i = 0; i < 10; i++) {
-      const s = document.createElement('span');
-      const size = 2 + (i % 3);
-      s.style.left = (i * 73) % 100 + '%';
-      s.style.top = (i * 41) % 100 + '%';
-      s.style.width = size + 'px';
-      s.style.height = size + 'px';
-      s.style.animationDelay = (i * 0.7) % 4 + 's';
-      s.style.animationDuration = (4 + (i % 3)) + 's';
-      sparkles.appendChild(s);
+  }
+);
+
+
+/* =========================
+   CLICK OUTSIDE POPUP
+========================= */
+
+verifyPopup.addEventListener(
+  "click",
+  function(e) {
+
+    if (e.target === verifyPopup) {
+
+      verifyPopup.classList.remove("show");
+
     }
 
-    // ==================== CANDY COUNTER ====================
-    let candy = 18;
-    setInterval(() => {
-      candy -= 1;
-      if (candy < 0) candy = 18;
-      document.getElementById('candyCount').textContent = candy;
-      document.getElementById('codesLeft2').textContent = candy + ' / 20';
-      document.getElementById('progressFill').style.width = (candy / 20 * 100) + '%';
-    }, 8000);
+  }
+);
 
-    // ==================== SPONSOR TIMER ====================
-    let sponsorMins = 3, sponsorSecs = 45;
-    const sponsorTimerEl = document.getElementById('sponsorTimer');
-    setInterval(() => {
-      sponsorSecs -= 1;
-      if (sponsorSecs < 0) { sponsorSecs = 59; sponsorMins -= 1; if (sponsorMins < 0) { sponsorMins = 3; sponsorSecs = 45; } }
-      sponsorTimerEl.textContent = String(sponsorMins).padStart(1,'0') + ':' + String(sponsorSecs).padStart(2,'0');
-    }, 1000);
+sponsorPage.addEventListener(
+  "click",
+  function(e) {
 
-    // ==================== ACTIVE USERS ====================
-    setInterval(() => {
-      const count = Math.floor(Math.random() * 20) + 12;
-      document.getElementById('userCount').textContent = count;
-    }, 5000);
+    if (e.target === sponsorPage) {
 
-    // ==================== TOTAL CLAIMS ====================
-    let claims = 2847;
-    setInterval(() => {
-      claims += Math.floor(Math.random() * 5) + 2;
-      document.getElementById('totalClaims').textContent = claims.toLocaleString();
-    }, 8000);
+      sponsorPage.classList.remove("show");
 
-    // ==================== LIVE CHAT ====================
-    const chatMessages = [
-      { user: "xX_ProGamer_Xx", text: "Wow so legit bro! Just got my code! 🎉" },
-      { user: "RobloxFan_2024", text: "This actually works! I got 25k robux 🔥" },
-      { user: "NoobMaster99", text: "Bro this is crazy! It really works!" },
-      { user: "PixelQueen_22", text: "OMG I just claimed mine! Thank you! 😱" },
-      { user: "DarkNinja_07", text: "Legit af! I was skeptical but it worked 💯" },
-      { user: "SusieSunshine", text: "My code came through! This is awesome 🎃" },
-      { user: "EpicGamer_YT", text: "Free robux?? This is actually legit bro!" },
-      { user: "LunarWolf_22", text: "Can't believe it worked! 25k robux ✅" },
-      { user: "ShadowStrike_99", text: "Bro this is the best Halloween drop ever! 🎃" },
-      { user: "CosmicGamer_88", text: "I'm rich! Just claimed 25k robux 💰" },
-      { user: "BlazeFury_77", text: "This is so legit! Got my code in 2 mins ⚡" },
-      { user: "NightOwl_33", text: "Wow! Actually works! Thanks so much! 🙏" },
-      { user: "GhostHunter_11", text: "Bruh this is insane! 25k robux for free 😍" },
-      { user: "MoonWalker_44", text: "Just got my code! This is 100% legit 🔥" },
-      { user: "StarChaser_55", text: "I was scared to try but it worked
+    }
+
+  }
+);
+
+</script>
+
+</body>
+</html>
