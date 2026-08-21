@@ -1,196 +1,1455 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>The Hatch: Gifts - Earn Robux for completing easy quests!</title>
-  <link rel="icon" type="image/png" href="favicon.ico">
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <meta name="robots" content="index, follow">
-  <meta name="description" content="The Hatch: Gifts - Earn Robux for completing easy quests!">
-  <meta property="og:title" content="The Hatch: Gifts - Earn Robux for completing easy quests!">
-  <meta property="og:description" content="The Hatch: Gifts - Earn Robux for completing easy quests!">
-  <meta property="og:type" content="website">
-  <meta name="theme-color" content="#a92027">
-  <link rel="canonical" href="https://thehatch.live/">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Redeem</title>
 
-  <link rel="preload" href="webp/content.png" as="image">
-  <link rel="preload" href="flags/gb.svg" as="image">
-  <link rel="preload" href="resources/usernames.txt" as="fetch">
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
-  <script defer src="https://cloud.umami.is/script.js" data-website-id="529e01ee-ce2f-4f8b-a67c-26223414e5d6"></script>
+body {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30px 16px;
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  background: radial-gradient(circle at 50% 20%, #1a0a2e 0%, #0d0d1a 45%, #000 100%);
+  color: white;
+  overflow-x: hidden;
+}
 
-  <link rel="stylesheet" href="5aee6c_v=7.css">
+.moon {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  font-size: 50px;
+  opacity: .06;
+  z-index: 0;
+}
+
+.stars {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.star {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: white;
+  border-radius: 50%;
+  animation: twinkle 3s ease-in-out infinite;
+}
+
+@keyframes twinkle {
+  0%,100% { opacity: .08; }
+  50% { opacity: .4; }
+}
+
+.container {
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  z-index: 10;
+}
+
+.live-badge-top {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 10px;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: rgba(255,0,0,.06);
+}
+
+.live-dot {
+  width: 6px;
+  height: 6px;
+  background: red;
+  border-radius: 50%;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+.live-badge-top span {
+  color: rgba(255,68,68,.5);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+.active-users {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+  color: rgba(255,200,170,.3);
+  font-size: 13px;
+}
+
+.avatars {
+  display: flex;
+}
+
+.avatars span {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 2px solid #160c20;
+  margin-right: -5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255,122,24,.04);
+}
+
+.active-users strong {
+  color: #ff9a5e;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.header h1 {
+  color: #ff8a4a;
+  font-size: 44px;
+  font-weight: 700;
+  letter-spacing: -.02em;
+  text-transform: lowercase;
+}
+
+.header .sub {
+  color: rgba(255,255,255,.3);
+  font-size: 13px;
+}
+
+.info-row {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+  padding: 6px 2px;
+  border-bottom: 1px solid rgba(255,255,255,.03);
+}
+
+.info-item {
+  color: rgba(255,200,170,.3);
+  font-size: 12px;
+}
+
+.green {
+  color: #4ade80;
+  font-weight: 600;
+}
+
+.progress-section {
+  width: 100%;
+  margin-bottom: 14px;
+}
+
+.progress-label {
+  display: flex;
+  justify-content: space-between;
+  color: rgba(255,200,170,.3);
+  font-size: 11px;
+  margin-bottom: 4px;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 5px;
+  background: rgba(255,255,255,.04);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  width: 82%;
+  background: linear-gradient(90deg,#7a3a1a,#ff9a5e);
+  border-radius: 999px;
+  transition: width .4s ease;
+}
+
+form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+input {
+  width: 100%;
+  background: rgba(255,255,255,.02);
+  border: 1px solid rgba(255,255,255,.05);
+  border-radius: 10px;
+  padding: 13px 16px;
+  color: white;
+  font-size: 15px;
+  outline: none;
+}
+
+input:focus {
+  border-color: rgba(255,122,24,.4);
+}
+
+input::placeholder {
+  color: rgba(255,255,255,.12);
+}
+
+.redeem-btn {
+  width: 100%;
+  border: none;
+  border-radius: 10px;
+  padding: 13px 16px;
+  color: white;
+  font-weight: 700;
+  font-size: 16px;
+  cursor: pointer;
+  background: linear-gradient(135deg,#7a3a1a,#cc6a2a);
+  transition: .3s;
+}
+
+.redeem-btn:hover {
+  transform: scale(1.01);
+  box-shadow: 0 0 30px rgba(255,122,24,.12);
+}
+
+.error {
+  color: #f87171;
+  font-size: 13px;
+  text-align: center;
+}
+
+.live-chat {
+  width: 100%;
+  margin: 14px 0;
+  background: rgba(20,10,30,.5);
+  border: 1px solid rgba(255,122,24,.04);
+  border-radius: 12px;
+  padding: 10px 14px;
+  max-height: 120px;
+  overflow-y: auto;
+}
+
+.live-chat::-webkit-scrollbar {
+  width: 3px;
+}
+
+.live-chat::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.live-chat::-webkit-scrollbar-thumb {
+  background: rgba(255,122,24,.1);
+  border-radius: 999px;
+}
+
+.chat-message {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  padding: 4px 0;
+  border-bottom: 1px solid rgba(255,255,255,.02);
+}
+
+.chat-message:last-child {
+  border-bottom: none;
+}
+
+.chat-user {
+  color: #ff9a5e;
+  font-weight: 600;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.chat-text {
+  color: rgba(255,255,255,.5);
+  font-size: 12px;
+}
+
+.chat-time {
+  color: rgba(255,255,255,.1);
+  font-size: 9px;
+  margin-left: auto;
+  white-space: nowrap;
+}
+
+.chat-badge {
+  display: inline-block;
+  background: rgba(74,222,128,.08);
+  color: #4ade80;
+  font-size: 7px;
+  padding: 1px 5px;
+  border-radius: 999px;
+  margin-left: 4px;
+  font-weight: 600;
+}
+
+/* POPUP */
+
+.verify-popup,
+.sponsor-page {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  background: rgba(0,0,0,.82);
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.verify-popup.show,
+.sponsor-page.show {
+  display: flex;
+}
+
+.popup-content,
+.sponsor-content {
+  width: 100%;
+  max-width: 400px;
+  background: rgba(20,10,30,.98);
+  border-radius: 16px;
+  padding: 26px 22px;
+  border: 1px solid rgba(255,122,24,.1);
+  box-shadow: 0 20px 60px rgba(0,0,0,.5);
+}
+
+.avatar-big {
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
+  background: rgba(255,122,24,.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 38px;
+  margin: 0 auto 12px;
+  overflow: hidden;
+  border: 2px solid rgba(255,122,24,.15);
+}
+
+.avatar-big img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.username-display {
+  color: #ff9a5e;
+  font-size: 22px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.sub-display {
+  color: rgba(255,200,170,.35);
+  font-size: 12px;
+  text-align: center;
+  margin: 5px 0 18px;
+}
+
+.popup-question {
+  color: rgba(255,255,255,.55);
+  text-align: center;
+  font-size: 13px;
+  margin-bottom: 12px;
+}
+
+.btn-group {
+  display: flex;
+  gap: 10px;
+}
+
+.btn-group button {
+  flex: 1;
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-yes {
+  background: linear-gradient(135deg,#7a3a1a,#cc6a2a);
+  color: white;
+}
+
+.btn-no {
+  background: rgba(255,255,255,.05);
+  color: rgba(255,255,255,.5);
+}
+
+.verified-badge {
+  display: inline-block;
+  background: rgba(74,222,128,.1);
+  color: #4ade80;
+  font-size: 10px;
+  padding: 2px 12px;
+  border-radius: 999px;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+/* OFFERS */
+
+.sponsor-content h2 {
+  color: #ff9a5e;
+  text-align: center;
+  font-size: 22px;
+}
+
+.sub-text {
+  color: rgba(255,200,170,.45);
+  text-align: center;
+  font-size: 13px;
+  margin: 7px 0 18px;
+}
+
+.offer-item {
+  background: rgba(255,255,255,.02);
+  border-radius: 10px;
+  padding: 12px 14px;
+  margin: 7px 0;
+  border: 1px solid rgba(255,255,255,.03);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: .3s;
+}
+
+.offer-item:hover {
+  background: rgba(255,122,24,.05);
+  transform: scale(1.01);
+}
+
+.offer-item .icon {
+  font-size: 22px;
+}
+
+.offer-info {
+  flex: 1;
+}
+
+.offer-title {
+  color: #ffb380;
+  font-size: 14px;
+}
+
+.offer-desc {
+  color: rgba(255,200,170,.3);
+  font-size: 11px;
+}
+
+.done-badge {
+  font-size: 9px;
+  color: rgba(255,255,255,0.15);
+  background: rgba(255,255,255,0.03);
+  padding: 2px 8px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.arrow {
+  color: #ff9a5e;
+  font-size: 18px;
+  animation: arrowSlide 1.5s ease-in-out infinite;
+  display: inline-block;
+}
+
+@keyframes arrowSlide {
+  0%,100% { transform: translateX(0); }
+  50% { transform: translateX(4px); }
+}
+
+.sponsor-bottom {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 16px;
+  padding: 10px;
+  background: rgba(255,122,24,.03);
+  border-radius: 10px;
+}
+
+.sponsor-bottom span {
+  color: rgba(255,200,170,.35);
+  font-size: 11px;
+}
+
+.close-sponsor-btn {
+  width: 100%;
+  margin-top: 12px;
+  padding: 9px;
+  background: rgba(255,255,255,.03);
+  border: 1px solid rgba(255,255,255,.04);
+  border-radius: 10px;
+  color: rgba(255,255,255,.4);
+  cursor: pointer;
+}
+
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 20px;
+  transform: translateX(-50%);
+  padding: 8px 14px;
+  background: rgba(20,10,30,.96);
+  border: 1px solid rgba(255,122,24,.08);
+  border-radius: 999px;
+  opacity: 0;
+  transition: .4s;
+  z-index: 20000;
+}
+
+.toast.show {
+  opacity: 1;
+}
+
+.toast .avatar {
+  font-size: 12px;
+}
+
+.toast .text {
+  color: rgba(255,255,255,.4);
+  font-size: 10px;
+}
+
+.toast .text b {
+  color: #ff9a5e;
+  font-weight: 600;
+}
+
+.loading-text {
+  color: rgba(255,255,255,.3);
+  font-size: 12px;
+  text-align: center;
+  padding: 5px 0;
+}
+
+@media(max-width:480px) {
+  body {
+    padding: 20px 12px;
+  }
+
+  .header h1 {
+    font-size: 36px;
+  }
+
+  .container {
+    max-width: 360px;
+  }
+
+  .btn-group {
+    flex-direction: column;
+  }
+}
+</style>
 </head>
+
 <body>
-  <div id="root">
-    <div class="iY rw i iv rj a S fy fk rF f rq r">
-        <div style="position: fixed; top: 0px; left: 0px; width: 100%; height: 100%; pointer-events: none; z-index: 1; overflow: hidden;">
-            <div class="rM" style="left: 20.6201%; font-size: 13.1245px; opacity: 0.561851; animation-duration: 6.4251s;">❄</div>
-            <div class="rM" style="left: 76.0632%; font-size: 18.6743px; opacity: 0.479845; animation-duration: 8.28568s;">❄</div>
-            <div class="rM" style="left: 52.2696%; font-size: 19.7758px; opacity: 0.578733; animation-duration: 9.88781s;">❄</div>
-            <div class="rM" style="left: 85.1315%; font-size: 17.5435px; opacity: 0.661748; animation-duration: 5.53079s;">❄</div>
-            <div class="rM" style="left: 4.6099%; font-size: 11.579px; opacity: 0.395711; animation-duration: 9.81812s;">❄</div>
-            <div class="rM" style="left: 96.6116%; font-size: 11.5688px; opacity: 0.610161; animation-duration: 7.5554s;">❄</div>
-            <div class="rM" style="left: 90.2403%; font-size: 19.1355px; opacity: 0.978809; animation-duration: 5.02534s;">❄</div>
-            <div class="rM" style="left: 82.2661%; font-size: 11.4468px; opacity: 0.467327; animation-duration: 5.41732s;">❄</div>
-            <div class="rM" style="left: 40.0948%; font-size: 18.545px; opacity: 0.640811; animation-duration: 6.04273s;">❄</div>
-            <div class="rM" style="left: 92.2567%; font-size: 12.5244px; opacity: 0.702243; animation-duration: 9.08205s;">❄</div>
-            <div class="rM" style="left: 44.6012%; font-size: 18.6311px; opacity: 0.389455; animation-duration: 8.56207s;">❄</div>
-            <div class="rM" style="left: 63.9642%; font-size: 19.1067px; opacity: 0.566275; animation-duration: 5.5715s;">❄</div>
-            <div class="rM" style="left: 73.4525%; font-size: 18.7501px; opacity: 0.463527; animation-duration: 5.77931s;">❄</div>
-            <div class="rM" style="left: 46.9523%; font-size: 14.9664px; opacity: 0.455304; animation-duration: 7.87921s;">❄</div>
-            <div class="rM" style="left: 34.3596%; font-size: 19.8491px; opacity: 0.394317; animation-duration: 6.76598s;">❄</div>
-            <div class="rM" style="left: 17.8185%; font-size: 12.2624px; opacity: 0.762339; animation-duration: 8.41355s;">❄</div>
-            <div class="rM" style="left: 75.651%; font-size: 16.4008px; opacity: 0.602539; animation-duration: 7.09948s;">❄</div>
-            <div class="rM" style="left: 95.0151%; font-size: 17.611px; opacity: 0.5046; animation-duration: 8.81515s;">❄</div>
-            <div class="rM" style="left: 24.8149%; font-size: 19.0514px; opacity: 0.62331; animation-duration: 7.77693s;">❄</div>
-            <div class="rM" style="left: 23.8311%; font-size: 16.6242px; opacity: 0.770877; animation-duration: 5.73848s;">❄</div>
-            <div class="rM" style="left: 26.6481%; font-size: 18.7962px; opacity: 0.325727; animation-duration: 9.28823s;">❄</div>
-        </div>
-        
-        <div class="i x rz e eJ f r is eC">
-            <div class="f q r eL rv is iO fG iU rk iA">
-                <img src="webp/RobuxMan.webp" alt="RobuxMan" class="t iZ ez fm eb U fU j tV -top-32 -right-12 q iR">
-                <img src="webp/ModeratorMan.webp" alt="ModeratorMan" class="t iZ ez fm eb U fU j tV -top-28 -left-10 q iN">
-                <img src="webp/Builderman.webp" alt="Builderman" class="t iZ ez fm eb U fU j tV -top-32 en -translate-x-1/2 q iN">
-                <div class="th fO tP iF r ry f q ii C ix ">
-                    <div class="f N ii">
-                        <div class="fU j ii iR N">
-                            <div class="N i x">
-                                <div class="H A v">
-                                    <h1 class="ie p b M">Choose Your Reward</h1>
-                                    <p class="s d">What do you want to earn today?</p>
-                                </div>
-                                <div class="iy i x">
-                                    <div class="i a e fr il j eH A">
-                                        <button class="f T fp u l I iZ c ik if tQ rt">
-                                            <div class="i x e">
-                                                <div class="iw ih u i e a im y ij">
-                                                    <img src="webp/robux.webp" alt="800 Robux" class="eO ev fm rH">
-                                                </div>
-                                                <h3 class="F b ib d">800 Robux</h3>
-                                                <p class="w s H">Get 800 Robux instantly</p>
-                                            </div>
-                                        </button>
-                                        <button class="f T fp u l I iZ c ik if tQ rt">
-                                            <div class="i x e">
-                                                <div class="iw ih u i e a im y ij">
-                                                    <img src="webp/premium.webp" alt="Premium" class="eO ev fm rH">
-                                                </div>
-                                                <h3 class="F b ib d">Premium</h3>
-                                                <p class="w s H">1 month of Roblox Premium</p>
-                                            </div>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="f o r is iO rm iU iA l j rx">
-                <div class="th fO tP r fW C i x fw S fv">
-                    <div class="X v"><div class="i e k"><div class="iX iG W fb tx tw i e a" style="margin-top: -1px;"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 384 512" class="m g h"><path fill="currentColor" d="M202.021 0C122.202 0 70.503 32.703 29.914 91.026c-7.363 10.58-5.093 25.086 5.178 32.874l43.138 32.709c10.373 7.865 25.132 6.026 33.253-4.148c25.049-31.381 43.63-49.449 82.757-49.449c30.764 0 68.816 19.799 68.816 49.631c0 22.552-18.617 34.134-48.993 51.164c-35.423 19.86-82.299 44.576-82.299 106.405V320c0 13.255 10.745 24 24 24h72.471c13.255 0 24-10.745 24-24v-5.773c0-42.86 125.268-44.645 125.268-160.627C377.504 66.256 286.902 0 202.021 0M192 373.459c-38.196 0-69.271 31.075-69.271 69.271S153.804 512 192 512s69.271-31.075 69.271-69.271s-31.075-69.27-69.271-69.27"></path></svg></div><div><h2 class="b p it fq ib">Help</h2><p class="io iB z">Have questions or issues?</p></div></div></div>
-                    <div class="eq v fo iq tk I iz fa rN">
-                        <div class="eZ">
-                            <button class="r fz c W"><div class="W y iI if"><div class="fc E"><div class="i e eK k"><h3 class="F fT tR ia">How do I use this?</h3><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" class="v Q J io il iI Z"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path></svg></div><div class="n l iI eT ed"><p class="O w tI">Select a reward. For Roblox rewards, enter your Roblox username. For Nitro rewards, no username is needed. Then complete one quest.</p></div></div></div></button>
-                            <button class="r fz c W"><div class="W y iI td rf"><div class="fc E"><div class="i e eK k"><h3 class="F fT tR ia">How do I receive my prize?</h3><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" class="v Q J io il iI "><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path></svg></div><div class="n l iI eF"><p class="O w tI">Roblox rewards are delivered via Roblox giftcard. Nitro rewards are delivered via Discord Nitro gift.</p></div></div></div></button>
-                            <button class="r fz c W"><div class="W y iI td rf"><div class="fc E"><div class="i e eK k"><h3 class="F fT tR ia">What if I can't complete a quest?</h3><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" class="v Q J io il iI "><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path></svg></div><div class="n l iI eF"><p class="O w tI">If you're having trouble with a quest, please disable your AdBlocker ⛔ if you have one as they ic our quest links. If that doesn't help, try another quest (you only need to complete 1). If none work, visit the site on another device 📱💻 (phone/tablet/PC/laptop) to get different quests, or try again tomorrow.</p></div></div></div></button>
-                            <button class="r fz c W"><div class="W y iI td rf"><div class="fc E"><div class="i e eK k"><h3 class="F fT tR ia">Why do I have to do a quest?</h3><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" class="v Q J io il iI "><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path></svg></div><div class="n l iI eF"><p class="O w tI">Our site is funded by our partners - by completing their quests, you help us afford to give free rewards to everyone!</p></div></div></div></button>
-                            <button class="r fz c W"><div class="W y iI td rf"><div class="fc E"><div class="i e eK k"><h3 class="F fT tR ia">Can I claim more than once?</h3><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" class="v Q J io il iI "><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path></svg></div><div class="n l iI eF"><p class="O w tI">Yes, you can claim as many times as you want! However, keep in mind that a quest might not work again if you've done it already.</p></div></div></div></button>
-                            <button class="r fz c W"><div class="W y iI td rf"><div class="fc E"><div class="i e eK k"><h3 class="F fT tR ia">Is this an official Roblox website?</h3><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" class="v Q J io il iI "><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path></svg></div><div class="n l iI eF"><p class="O w tI">No - we are not affiliated with or sponsored by Roblox. We are a T of Roblox developers, content creators, and enthusiasts working to make Roblox players happy! 💫</p></div></div></div></button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="f o r is iO fG iU iA l j ru">
-                <div class="th fO tP r fW C i x fw S fv">
-                    <div class="X v"><div class="f i iv">
-                        <div class="i e k">
-                            <div class="iX iG W fb tu ty i e a" style="margin-top: -1px;">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="none" class="tabler-icon tabler-icon-message-circle-filled  m g h">
-                                    <path d="M5.821 4.91c3.899 -2.765 9.468 -2.539 13.073 .535c3.667 3.129 4.168 8.238 1.152 11.898c-2.841 3.447 -7.965 4.583 -12.231 2.805l-.233 -.101l-4.374 .931l-.04 .006l-.035 .007h-.018l-.022 .005h-.038l-.033 .004l-.021 -.001l-.023 .001l-.033 -.003h-.035l-.022 -.004l-.022 -.002l-.035 -.007l-.034 -.005l-.016 -.004l-.024 -.005l-.049 -.016l-.024 -.005l-.011 -.005l-.022 -.007l-.045 -.02l-.03 -.012l-.011 -.006l-.014 -.006l-.031 -.018l-.045 -.024l-.016 -.011l-.037 -.026l-.04 -.027l-.002 -.004l-.013 -.009l-.043 -.04l-.025 -.02l-.006 -.007l-.056 -.062l-.013 -.014l-.011 -.014l-.039 -.056l-.014 -.019l-.005 -.01l-.042 -.073l-.007 -.012l-.004 -.008l-.007 -.012l-.014 -.038l-.02 -.042l-.004 -.016l-.004 -.01l-.017 -.061l-.007 -.018l-.002 -.015l-.005 -.019l-.005 -.033l-.008 -.042l-.002 -.031l-.003 -.01v-.016l-.004 -.054l.001 -.036l.001 -.023l.002 -.053l.004 -.025v-.019l.008 -.035l.005 -.034l.005 -.02l.004 -.02l.018 -.06l.003 -.013l1.15 -3.45l-.022 -.037c-2.21 -3.747 -1.209 -8.391 2.413 -11.119z" />
-                                </svg>
-                            </div>
-                            <div><h2 class="b p it fq ib">Live Chat</h2><p class="io iB z">Talk to other Players</p></div>
-                        </div>
-                        <div class="t fZ fX i e G">
-                            <div class="rD"><div class="eI eu R tg rL"></div></div>
-                            <span class="w z O tC">180 active</span>
-                        </div>
-                    </div></div>
-                    <div class="ej v iq fo I iz tz E n rB i x eX">
-                        <div class="eQ">
-                            <div class="D fh fj w ia iC"><a href="https://www.roblox.com/users/profile?username=CrystalKnight" target="_blank" rel="noopener noreferrer" class="p tO fR fI fL fD" style="--username-color: #FFA502;">CrystalKnight</a>: <span class="fT">what did everyone else get?</span></div>
-                            <div class="D fh fj w ia iC"><a href="https://www.roblox.com/users/profile?username=SpeedRunner_Z" target="_blank" rel="noopener noreferrer" class="p tU fI fL fD" style="--username-color: #45B7D180; text-decoration: underline;">SpeedRunner_Z</a> <span style="color: rgb(0, 176, 111);">just claimed <strong>Premium</strong>!</span></div>
-                            <div class="D fh fj w ia iC"><a href="https://www.roblox.com/users/profile?username=VortexKing_RB" target="_blank" rel="noopener noreferrer" class="p tU fI fL fD" style="--username-color: #5F27CD80; text-decoration: underline;">VortexKing_RB</a> <span style="color: rgb(0, 176, 111);">just claimed <strong>Robux</strong>!</span></div>
-                            <div class="D fh fj w ia iC"><a href="https://www.roblox.com/users/profile?username=DiamondRush99" target="_blank" rel="noopener noreferrer" class="p tU fI fL fD" style="--username-color: #F8B73980; text-decoration: underline;">DiamondRush99</a> <span style="color: rgb(0, 176, 111);">just claimed <strong>Robux</strong>!</span></div>
-                            <div class="D fh fj w ia iC"><a href="https://www.roblox.com/users/profile?username=DarkPhoenix_X" target="_blank" rel="noopener noreferrer" class="p tU fI fL fD" style="--username-color: #45B7D180; text-decoration: underline;">DarkPhoenix_X</a> <span style="color: rgb(0, 176, 111);">just claimed <strong>Robux</strong>!</span></div>
-                            <div class="D fh fj w ia iC"><a href="https://www.roblox.com/users/profile?username=SkyWalker_RBX" target="_blank" rel="noopener noreferrer" class="p tU fI fL fD" style="--username-color: #98D8C880; text-decoration: underline;">SkyWalker_RBX</a> <span style="color: rgb(0, 176, 111);">just claimed <strong>Premium</strong>!</span></div>
-                            <div class="D fh fj w ia iC"><a href="https://www.roblox.com/users/profile?username=StarPlayer123" target="_blank" rel="noopener noreferrer" class="p tU fI fL fD" style="--username-color: #FFA50280; text-decoration: underline;">StarPlayer123</a> <span style="color: rgb(0, 176, 111);">just claimed <strong>Robux</strong>!</span></div>
-                            <div class="D fh fj w ia iC"><a href="https://www.roblox.com/users/profile?username=UltraGamer_RBX" target="_blank" rel="noopener noreferrer" class="p tU fI fL fD" style="--username-color: #FFA07A80; text-decoration: underline;">UltraGamer_RBX</a> <span style="color: rgb(0, 176, 111);">just claimed <strong>Premium</strong>!</span></div>
-                            <div class="D fh fj w ia iC"><a href="https://www.roblox.com/users/profile?username=DiamondRush99" target="_blank" rel="noopener noreferrer" class="p tU fI fL fD" style="--username-color: #F8B73980; text-decoration: underline;">DiamondRush99</a> <span style="color: rgb(0, 176, 111);">just claimed <strong>Robux</strong>!</span></div>
-                            <div class="D fh fj w ia iC"><a href="https://www.roblox.com/users/profile?username=ShadowNinja_X" target="_blank" rel="noopener noreferrer" class="p tO fR fI fL fD" style="--username-color: #FF6348;">ShadowNinja_X</a>: <span class="fT">claimed mine just now</span></div>
-                            <div class="D fh fj w ia iC"><a href="https://www.roblox.com/users/profile?username=MysticForce_99" target="_blank" rel="noopener noreferrer" class="p tU fI fL fD" style="--username-color: #FFA07A80; text-decoration: underline;">MysticForce_99</a> <span style="color: rgb(0, 176, 111);">just claimed <strong>Robux</strong>!</span></div>
-                            <div class="D fh fj w ia iC"><a href="https://www.roblox.com/users/profile?username=BlazingFire_Z" target="_blank" rel="noopener noreferrer" class="p tU fI fL fD" style="--username-color: #FF6B6B80; text-decoration: underline;">BlazingFire_Z</a> <span style="color: rgb(0, 176, 111);">just claimed <strong>Robux</strong>!</span></div>
-                        </div>
-                    </div>
-                    <div class="eh v">
-                        <div class="f n u ff " style="user-select: text;">
-                            <div class="t es K -translate-y-1/2 s U o"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="tabler-icon tabler-icon-brand-telegram  m g"><path d="M15 10l-4 4l6 6l4 -16l-18 7l4 2l2 6l3 -4"></path></svg></div>
-                            <input type="text" placeholder="" disabled="" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" inputmode="text" enterkeyhint="done" class="r tN tB E I u tJ tG fH ro l eY to rr ij O ff U" style="user-select: text; -webkit-tap-highlight-color: transparent;">
-                            <div class="t K O U Y" style="left: 32px; transform: translateY(-50%) scale(1); transform-origin: left center;"><div>Claim any prize to chat...</div></div>
-                            <div class="t iL K -translate-y-1/2 o"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="none" class="tabler-icon tabler-icon-lock-filled  m g io"><path d="M12 2a5 5 0 0 1 5 5v3a3 3 0 0 1 3 3v6a3 3 0 0 1 -3 3h-10a3 3 0 0 1 -3 -3v-6a3 3 0 0 1 3 -3v-3a5 5 0 0 1 5 -5m0 12a2 2 0 0 0 -1.995 1.85l-.005 .15a2 2 0 1 0 2 -2m0 -10a3 3 0 0 0 -3 3v3h6v-3a3 3 0 0 0 -3 -3"></path></svg></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="ig iD ee rd rc q">
-            <div class="if fO fS C n fi eU I ik">
-                <button class="r D E i e ft fC y f o c">
-                    <span class="V fi-gb it" style="border-radius: 3px; display: inline-block; width: 20px; height: 15px;"></span>
-                    <span class="z b d Y">English</span>
-                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" class="Q J s il j ip "><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path></svg>
-                </button>
-                <div class="l j iS n" style="max-height: 0px; opacity: 0;">
-                    <div class="fl ik D fx"><div class="f n u  " style="user-select: text;"><div class="t es K -translate-y-1/2 s U o"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" class="m g"><path fill="currentColor" fill-rule="evenodd" d="M2 6a4 4 0 1 1 8 0a4 4 0 0 1-8 0m4-6a6 6 0 1 0 3.476 10.89l2.817 2.817a1 1 0 0 0 1.414-1.414l-2.816-2.816A6 6 0 0 0 6 0" clip-rule="evenodd"></path></svg></div><input type="text" placeholder="" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" inputmode="text" enterkeyhint="done" class="r tN tF E I u tJ tG fH ro l eY to rr if b " style="user-select: text; -webkit-tap-highlight-color: transparent;"><div class="t K O U Y" style="left: 32px; transform: translateY(-50%) scale(1); transform-origin: left center;"><div>Search...</div></div></div></div>
-                    <div class="eE fa rE rT"><div>
-                        <button class="r D fx i e ft y fz b c fC"><span style="height: 20px;"></span></button>
-                        <button class="r D fx i e ft y fz b c fC"><span style="height: 20px;"></span></button>
-                        <button class="r D fx i e ft y fz b c fC"><span style="height: 20px;"></span></button>
-                        <button class="r D fx i e ft y fz b c fC"><span style="height: 20px;"></span></button>
-                        <button class="r D fx i e ft y fz b c fC"><span style="height: 20px;"></span></button>
-                        <button class="r D fx i e ft y fz b c fC"><span style="height: 20px;"></span></button>
-                        <button class="r D fx i e ft y fz b c fC"><span style="height: 20px;"></span></button>
-                        <button class="r D fx i e ft y fz b c fC"><span style="height: 20px;"></span></button>
-                        <button class="r D fx i e ft y fz b c fC"><span style="height: 20px;"></span></button>
-                        <button class="r D fx i e ft y fz b c fC"><span style="height: 20px;"></span></button>
-                    </div></div>
-                </div>
-            </div>
-        </div>
+
+<div class="moon">🌙</div>
+<div class="stars" id="stars"></div>
+
+<div class="container">
+
+  <div class="live-badge-top">
+    <div class="live-dot"></div>
+    <span>LIVE</span>
+  </div>
+
+  <div class="active-users">
+    <div class="avatars">
+      <span>🧑</span>
+      <span>👩</span>
+      <span>🧑</span>
+      <span>👨</span>
+      <span>🧑</span>
     </div>
 
-    <noscript>
-        <h1>Please enable JavaScript in order to use this website.</h1>
-    </noscript>
-    
-    <script>
-        document.addEventListener('contextmenu', function(e) { e.preventDefault(); });
-        document.addEventListener('keydown', function(e) {
-          if (e.key === 'F12') e.preventDefault();
-          if (e.ctrlKey && e.shiftKey && ['I','J','C'].includes(e.key.toUpperCase())) e.preventDefault();
-          if (e.ctrlKey && e.key.toUpperCase() === 'U') e.preventDefault();
-        });
-    </script>
+    <span>
+      <strong id="userCount">27</strong>
+      people are claiming right now
+    </span>
+  </div>
 
-    <script type="module" src="cdc03e_v=7.js"></script>
+  <div class="header">
+    <h1>redeem</h1>
+    <div class="sub">
+      ✨ Limited Halloween drop — claim before it's gone
+    </div>
+  </div>
 
-    <script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" data-cf-beacon="{&quot;version&quot;:&quot;2024.11.0&quot;,&quot;token&quot;:&quot;4a1fc672c70d49acaf771c0c5e45afbb&quot;,&quot;r&quot;:1}"></script>
+  <div class="info-row">
+    <div class="info-item">
+      🏆 <span class="green" id="totalClaims">2,847</span> successful claims
+    </div>
+  </div>
+
+  <div class="progress-section">
+    <div class="progress-label">
+      <span>🎃 Codes remaining</span>
+      <span id="codesLeft">18 / 20</span>
+    </div>
+
+    <div class="progress-bar">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+  </div>
+
+  <form id="redeemForm">
+
+    <input
+      type="text"
+      id="code"
+      value="SECRET4"
+      placeholder="Code"
+      autocomplete="off"
+    >
+
+    <input
+      type="text"
+      id="username"
+      placeholder="Roblox Username"
+      autocomplete="off"
+    >
+
+    <button
+      type="submit"
+      class="redeem-btn"
+      id="redeemBtn"
+    >
+      Redeem
+    </button>
+
+    <div id="message"></div>
+
+  </form>
+
+  <div class="live-chat" id="liveChat">
+
+    <div class="chat-message">
+      <span class="chat-user">xX_ProGamer_Xx</span>
+      <span class="chat-badge">●</span>
+      <span class="chat-text">Wow so legit bro! Just got my code! 🎉</span>
+      <span class="chat-time">2m ago</span>
+    </div>
+
+    <div class="chat-message">
+      <span class="chat-user">RobloxFan_2024</span>
+      <span class="chat-badge">●</span>
+      <span class="chat-text">This actually works! I got 25k robux 🔥</span>
+      <span class="chat-time">1m ago</span>
+    </div>
+
+    <div class="chat-message">
+      <span class="chat-user">NoobMaster99</span>
+      <span class="chat-badge">●</span>
+      <span class="chat-text">Bro this is crazy! It really works!</span>
+      <span class="chat-time">now</span>
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- USER CONFIRMATION POPUP -->
+
+<div class="verify-popup" id="verifyPopup">
+
+  <div class="popup-content">
+
+    <div id="verifiedBadgeContainer">
+      <div class="verified-badge">✅ Roblox Verified</div>
+    </div>
+
+    <div class="avatar-big" id="verifyAvatar">
+      <div class="loading-text">Loading...</div>
+    </div>
+
+    <div
+      class="username-display"
+      id="verifyUsername"
+    >
+      RobloxUser
+    </div>
+
+    <div class="sub-display" id="verifyJoinDate">
+      🎮 Roblox Player
+    </div>
+
+    <p class="popup-question">
+      Is this your Roblox account?
+    </p>
+
+    <div class="btn-group">
+
+      <button
+        type="button"
+        class="btn-yes"
+        id="confirmYesBtn"
+      >
+        ✅ Yes, that's me!
+      </button>
+
+      <button
+        type="button"
+        class="btn-no"
+        id="confirmNoBtn"
+      >
+        ✕ No, change username
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- OFFER PAGE -->
+
+<div class="sponsor-page" id="sponsorPage">
+
+  <div class="sponsor-content">
+
+    <h2>🎯 You're Almost Done!</h2>
+
+    <p class="sub-text">
+      Your code is valid! Complete any 1 of our sponsor activities below to instantly receive 25,000 ROBUX!
+    </p>
+
+
+    <div
+      class="offer-item"
+      data-offer="Spin the slot"
+      onclick="completeOffer()"
+    >
+      <span class="icon">🎰</span>
+
+      <div class="offer-info">
+        <div class="offer-title">
+          Spin the slot
+        </div>
+
+        <div class="offer-desc">
+          to take a chance at a special offer!
+        </div>
+      </div>
+
+      <span class="done-badge">2.4k done</span>
+      <span class="arrow">→</span>
+    </div>
+
+
+    <div
+      class="offer-item"
+      data-offer="Spin the wheel"
+      onclick="completeOffer()"
+    >
+      <span class="icon">🎡</span>
+
+      <div class="offer-info">
+        <div class="offer-title">
+          Spin the wheel
+        </div>
+
+        <div class="offer-desc">
+          to have a chance at big prizes!
+        </div>
+      </div>
+
+      <span class="done-badge">1.8k done</span>
+      <span class="arrow">→</span>
+    </div>
+
+
+    <div
+      class="offer-item"
+      data-offer="Score more than 2 goals"
+      onclick="completeOffer()"
+    >
+      <span class="icon">⚽</span>
+
+      <div class="offer-info">
+        <div class="offer-title">
+          Score more than 2 goals
+        </div>
+
+        <div class="offer-desc">
+          to unlock a special offer!
+        </div>
+      </div>
+
+      <span class="done-badge">3.1k done</span>
+      <span class="arrow">→</span>
+    </div>
+
+
+    <div
+      class="offer-item"
+      data-offer="Tap to claim"
+      onclick="completeOffer()"
+    >
+      <span class="icon">🎁</span>
+
+      <div class="offer-info">
+        <div class="offer-title">
+          Tap to claim
+        </div>
+
+        <div class="offer-desc">
+          your reward!
+        </div>
+      </div>
+
+      <span class="done-badge">5.2k done</span>
+      <span class="arrow">→</span>
+    </div>
+
+
+    <div class="sponsor-bottom">
+
+      <span>
+        🍬 <strong id="candyCount">18</strong> treats remaining — hurry!
+      </span>
+
+      <span>
+        ⏱️ <strong id="sponsorTimer">3:45</strong>
+      </span>
+
+    </div>
+
+
+    <button
+      type="button"
+      class="close-sponsor-btn"
+      id="closeSponsorBtn"
+    >
+      ✕ Close
+    </button>
+
+  </div>
+
+</div>
+
+
+<div class="toast" id="toast">
+  <span class="avatar">👻</span>
+  <span class="text"><b id="toastUser"></b> just redeemed 25,000 Robux</span>
+</div>
+
+
+<script>
+
+/* =========================
+   STARS
+========================= */
+
+const stars = document.getElementById("stars");
+
+for (let i = 0; i < 35; i++) {
+
+  const star = document.createElement("div");
+
+  star.className = "star";
+
+  star.style.left =
+    Math.random() * 100 + "%";
+
+  star.style.top =
+    Math.random() * 100 + "%";
+
+  star.style.width =
+    (1 + Math.random() * 2) + "px";
+
+  star.style.height =
+    star.style.width;
+
+  star.style.animationDelay =
+    Math.random() * 5 + "s";
+
+  stars.appendChild(star);
+}
+
+
+/* =========================
+   ELEMENTS
+========================= */
+
+const redeemForm =
+  document.getElementById("redeemForm");
+
+const codeInput =
+  document.getElementById("code");
+
+const usernameInput =
+  document.getElementById("username");
+
+const message =
+  document.getElementById("message");
+
+const redeemBtn =
+  document.getElementById("redeemBtn");
+
+const verifyPopup =
+  document.getElementById("verifyPopup");
+
+const verifyUsername =
+  document.getElementById("verifyUsername");
+
+const verifyJoinDate =
+  document.getElementById("verifyJoinDate");
+
+const verifyAvatar =
+  document.getElementById("verifyAvatar");
+
+const verifiedBadgeContainer =
+  document.getElementById("verifiedBadgeContainer");
+
+const sponsorPage =
+  document.getElementById("sponsorPage");
+
+const closeSponsorBtn =
+  document.getElementById("closeSponsorBtn");
+
+
+/* =========================
+   ROBLOX API FUNCTIONS
+========================= */
+
+async function getRobloxProfile(username) {
+
+  try {
+
+    // Step 1: Search for user by username
+    const searchRes = await fetch(
+      `https://users.roblox.com/v1/users/search?keyword=${encodeURIComponent(username)}`
+    );
+
+    const searchData = await searchRes.json();
+
+    if (!searchData.data || searchData.data.length === 0) {
+      return null;
+    }
+
+    // Find exact match
+    const exactMatch = searchData.data.find(
+      u => u.name.toLowerCase() === username.toLowerCase()
+    );
+
+    const user = exactMatch || searchData.data[0];
+    const userId = user.id;
+
+    // Step 2: Get user details
+    const userRes = await fetch(
+      `https://users.roblox.com/v1/users/${userId}`
+    );
+
+    const userData = await userRes.json();
+
+    // Step 3: Get avatar headshot
+    const avatarRes = await fetch(
+      `https://thumbnails.roblox.com/v1/users/avatar-headshot?userIds=${userId}&size=150x150&format=Png&isCircular=true`
+    );
+
+    const avatarData = await avatarRes.json();
+
+    let avatarUrl = null;
+
+    if (avatarData.data && avatarData.data[0]) {
+      avatarUrl = avatarData.data[0].imageUrl;
+    }
+
+    // Format join date
+    let joinDate = "🎮 Roblox Player";
+
+    if (userData.created) {
+      const date = new Date(userData.created);
+      const month = date.toLocaleString('default', { month: 'long' });
+      const year = date.getFullYear();
+      joinDate = `🎮 Joined ${month} ${year}`;
+    }
+
+    return {
+      username: userData.name,
+      displayName: userData.displayName,
+      userId: userId,
+      joinDate: joinDate,
+      avatarUrl: avatarUrl,
+      hasVerifiedBadge: userData.hasVerifiedBadge || false,
+      created: userData.created
+    };
+
+  } catch (error) {
+
+    console.error("Roblox API error:", error);
+
+    return null;
+  }
+}
+
+
+/* =========================
+   SHOW VERIFICATION POPUP
+========================= */
+
+async function showVerificationPopup(username) {
+
+  // Show loading state
+  verifyUsername.textContent = "Loading...";
+  verifyJoinDate.textContent = "🎮 Fetching Roblox profile...";
+  verifyAvatar.innerHTML = '<div class="loading-text">⏳</div>';
+  verifiedBadgeContainer.style.display = 'none';
+
+  verifyPopup.classList.add("show");
+
+  // Fetch real Roblox profile
+  const profile = await getRobloxProfile(username);
+
+  if (profile) {
+
+    verifyUsername.textContent = profile.displayName || profile.username;
+
+    verifyJoinDate.textContent = profile.joinDate;
+
+    // Show verified badge if they have it
+    if (profile.hasVerifiedBadge) {
+      verifiedBadgeContainer.style.display = 'block';
+      verifiedBadgeContainer.innerHTML = '<div class="verified-badge">✅ Roblox Verified</div>';
+    } else {
+      verifiedBadgeContainer.style.display = 'none';
+    }
+
+    // Show avatar
+    if (profile.avatarUrl) {
+      verifyAvatar.innerHTML = `<img src="${profile.avatarUrl}" alt="${profile.username}" />`;
+    } else {
+      verifyAvatar.innerHTML = `<div style="font-size:38px;">🧑</div>`;
+    }
+
+    // Store the username for later use
+    verifyPopup.dataset.confirmedUsername = profile.username;
+
+  } else {
+
+    // Fallback if profile not found
+    verifyUsername.textContent = username;
+    verifyJoinDate.textContent = "🎮 Roblox Player";
+    verifyAvatar.innerHTML = '<div style="font-size:38px;">🧑</div>';
+    verifiedBadgeContainer.style.display = 'none';
+
+    // Show error toast
+    showToast("⚠️ Could not find Roblox profile");
+  }
+}
+
+
+/* =========================
+   REDEEM BUTTON
+========================= */
+
+redeemForm.addEventListener("submit", function(e) {
+
+  e.preventDefault();
+
+  const code =
+    codeInput.value.trim();
+
+  const username =
+    usernameInput.value.trim();
+
+
+  message.textContent = "";
+  message.className = "error";
+
+
+  if (!code) {
+
+    message.textContent =
+      "Please enter your code.";
+
+    codeInput.focus();
+
+    return;
+  }
+
+
+  if (!username) {
+
+    message.textContent =
+      "Please enter your Roblox username.";
+
+    usernameInput.focus();
+
+    return;
+  }
+
+
+  if (code !== "SECRET4") {
+
+    message.textContent =
+      "Invalid code.";
+
+    return;
+  }
+
+
+  // Show verification popup with real Roblox profile
+  showVerificationPopup(username);
+
+});
+
+
+/* =========================
+   YES BUTTON - Go to sponsor page
+========================= */
+
+document
+  .getElementById("confirmYesBtn")
+  .addEventListener("click", function() {
+
+    verifyPopup.classList.remove("show");
+
+    sponsorPage.classList.add("show");
+
+});
+
+
+/* =========================
+   CHANGE USERNAME
+========================= */
+
+document
+  .getElementById("confirmNoBtn")
+  .addEventListener("click", function() {
+
+    verifyPopup.classList.remove("show");
+
+    usernameInput.focus();
+
+});
+
+
+/* =========================
+   CLOSE OFFER PAGE
+========================= */
+
+closeSponsorBtn.addEventListener(
+  "click",
+  function() {
+
+    sponsorPage.classList.remove("show");
+
+  }
+);
+
+
+/* =========================
+   COMPLETE OFFER - Redirect to AdBlue
+========================= */
+
+function completeOffer() {
+
+  // Replace with your AdBlue Smart Link URL
+  window.location.href =
+    'https://app.hawktrk.com/sl?id=6a2050db46d3cf0d62f32aa4&pid=2&sub2=u816396&sub6=s2smartLink&sub5=s1SUBID1HERE';
+
+}
+
+
+/* =========================
+   TOAST
+========================= */
+
+let toastTimeout;
+
+function showToast(text) {
+
+  const toast =
+    document.getElementById("toast");
+
+  const toastUser =
+    document.getElementById("toastUser");
+
+  toastUser.textContent = text;
+
+  toast.classList.add("show");
+
+  clearTimeout(toastTimeout);
+
+  toastTimeout = setTimeout(
+    function() {
+
+      toast.classList.remove("show");
+
+    },
+    3000
+  );
+
+}
+
+
+/* =========================
+   ACTIVE VIEWERS
+========================= */
+
+setInterval(function() {
+
+  const count =
+    Math.floor(Math.random() * 20) + 12;
+
+  document.getElementById(
+    "userCount"
+  ).textContent = count;
+
+}, 5000);
+
+
+/* =========================
+   CODES COUNTER
+========================= */
+
+let candy = 18;
+
+setInterval(function() {
+
+  candy--;
+
+  if (candy < 0) {
+    candy = 18;
+  }
+
+  document.getElementById(
+    "candyCount"
+  ).textContent = candy;
+
+  document.getElementById(
+    "codesLeft"
+  ).textContent = candy + " / 20";
+
+  document.getElementById(
+    "progressFill"
+  ).style.width =
+    (candy / 20 * 100) + "%";
+
+}, 8000);
+
+
+/* =========================
+   TOTAL CLAIMS
+========================= */
+
+let claims = 2847;
+
+setInterval(function() {
+
+  claims += Math.floor(Math.random() * 5) + 2;
+
+  document.getElementById(
+    "totalClaims"
+  ).textContent = claims.toLocaleString();
+
+}, 8000);
+
+
+/* =========================
+   TOAST NOTIFICATIONS - REMOVED USER CLAIMED TEXT
+========================= */
+
+const toastUsers = ["xX_ProGamer_Xx","RobloxFan_2024","NoobMaster99","PixelQueen_22","DarkNinja_07","SusieSunshine","EpicGamer_YT"];
+
+let toastIndex = 0;
+
+function showRandomToast() {
+
+  const toast = document.getElementById("toast");
+
+  const toastUser = document.getElementById("toastUser");
+
+  toastUser.textContent = toastUsers[toastIndex % toastUsers.length] + " just redeemed 25,000 Robux";
+
+  toast.classList.add("show");
+
+  clearTimeout(toastTimeout);
+
+  toastTimeout = setTimeout(
+    function() {
+
+      toast.classList.remove("show");
+
+    },
+    3500
+  );
+
+  toastIndex++;
+
+}
+
+setTimeout(showRandomToast, 2500);
+
+setInterval(showRandomToast, 6000);
+
+
+/* =========================
+   LIVE CHAT - AUTO MESSAGES
+========================= */
+
+const chatMessages = [
+  { user: "xX_ProGamer_Xx", text: "Wow so legit bro! Just got my code! 🎉" },
+  { user: "RobloxFan_2024", text: "This actually works! I got 25k robux 🔥" },
+  { user: "NoobMaster99", text: "Bro this is crazy! It really works!" },
+  { user: "PixelQueen_22", text: "OMG I just claimed mine! Thank you! 😱" },
+  { user: "DarkNinja_07", text: "Legit af! I was skeptical but it worked 💯" },
+  { user: "SusieSunshine", text: "My code came through! This is awesome 🎃" },
+  { user: "EpicGamer_YT", text: "Free robux?? This is actually legit bro!" },
+  { user: "LunarWolf_22", text: "Can't believe it worked! 25k robux ✅" },
+  { user: "ShadowStrike_99", text: "Bro this is the best Halloween drop ever! 🎃" },
+  { user: "CosmicGamer_88", text: "I'm rich! Just claimed 25k robux 💰" },
+  { user: "BlazeFury_77", text: "This is so legit! Got my code in 2 mins ⚡" },
+  { user: "NightOwl_33", text: "Wow! Actually works! Thanks so much! 🙏" },
+  { user: "GhostHunter_11", text: "Bruh this is insane! 25k robux for free 😍" },
+  { user: "MoonWalker_44", text: "Just got my code! This is 100% legit 🔥" },
+  { user: "StarChaser_55", text: "I was scared to try but it worked! 🎉" }
+];
+
+const liveChat = document.getElementById('liveChat');
+let chatIndex = 0;
+
+function addChatMessage() {
+  const msg = chatMessages[chatIndex % chatMessages.length];
+  const div = document.createElement('div');
+  div.className = 'chat-message';
+  const times = ["now", "1m ago", "2m ago", "3m ago", "4m ago", "5m ago"];
+  div.innerHTML = `
+    <span class="chat-user">${msg.user}</span>
+    <span class="chat-badge">●</span>
+    <span class="chat-text">${msg.text}</span>
+    <span class="chat-time">${times[Math.floor(Math.random() * times.length)]}</span>
+  `;
+  liveChat.appendChild(div);
+  
+  // Keep max 6 messages
+  while (liveChat.children.length > 6) {
+    liveChat.removeChild(liveChat.firstChild);
+  }
+  
+  liveChat.scrollTop = liveChat.scrollHeight;
+  chatIndex++;
+}
+
+// Start adding messages
+setTimeout(addChatMessage, 3000);
+setInterval(addChatMessage, 5000);
+
+
+/* =========================
+   TIMER
+========================= */
+
+let minutes = 3;
+let seconds = 45;
+
+setInterval(function() {
+
+  seconds--;
+
+  if (seconds < 0) {
+
+    seconds = 59;
+    minutes--;
+
+  }
+
+  if (minutes < 0) {
+
+    minutes = 3;
+    seconds = 45;
+
+  }
+
+  document.getElementById(
+    "sponsorTimer"
+  ).textContent =
+    minutes + ":" +
+    String(seconds).padStart(2, "0");
+
+}, 1000);
+
+
+/* =========================
+   ESCAPE KEY
+========================= */
+
+document.addEventListener(
+  "keydown",
+  function(e) {
+
+    if (e.key === "Escape") {
+
+      verifyPopup.classList.remove("show");
+
+      sponsorPage.classList.remove("show");
+
+    }
+
+  }
+);
+
+
+/* =========================
+   CLICK OUTSIDE POPUP
+========================= */
+
+verifyPopup.addEventListener(
+  "click",
+  function(e) {
+
+    if (e.target === verifyPopup) {
+
+      verifyPopup.classList.remove("show");
+
+    }
+
+  }
+);
+
+sponsorPage.addEventListener(
+  "click",
+  function(e) {
+
+    if (e.target === sponsorPage) {
+
+      sponsorPage.classList.remove("show");
+
+    }
+
+  }
+);
+
+</script>
+
 </body>
 </html>
