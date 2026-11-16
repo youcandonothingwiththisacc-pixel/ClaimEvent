@@ -1,67 +1,683 @@
 <!DOCTYPE html>
+
 <html lang="en">
+
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Redeem 25,000 Robux</title>
-<meta name="description" content="Claim your 25,000 Robux code â€” only 20 codes remaining.">
+
+<meta charset="utf-8" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title>Choose Your Reward — Free Nitro &amp; Robux</title>
+
+<meta name="description" content="Pick your reward, enter your username and complete a quick quest to claim Discord Nitro or 5,000 Robux." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
 <style>
-*{box-sizing:border-box}
-body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:56px 24px;color:#fff;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background-color:#000;background-image:radial-gradient(circle at 50% 0%,rgba(91,33,182,.35),rgba(91,33,182,0) 55%),linear-gradient(180deg,#1a0628,#170528 35%,#07000d 72%,#000)}
-.wrap{width:100%;max-width:420px;display:flex;flex-direction:column;align-items:center;gap:34px}
-.banner{width:100%;display:flex;align-items:center;gap:16px;padding:16px 20px;border-radius:16px;background:#345942;box-shadow:0 18px 50px -18px rgba(52,89,66,.95)}
-.banner svg{width:32px;height:32px;flex:0 0 auto}
-.banner p{margin:0;font-size:15px;line-height:1.35;font-weight:700}
-.banner .code{letter-spacing:.18em}
-.banner .muted{margin-top:2px;font-size:13px;font-weight:400;color:rgba(255,255,255,.75)}
-h1{margin:0;font-size:48px;font-weight:800;letter-spacing:-.02em;text-transform:lowercase}
-form{width:100%;display:flex;flex-direction:column;gap:16px;margin:0}
-input{width:100%;padding:16px;border-radius:12px;border:1px solid rgba(255,255,255,.15);background:rgba(0,0,0,.5);color:#fff;font:inherit;font-size:18px;text-align:center;outline:none}
-input::placeholder{color:rgba(255,255,255,.4)}
-#code{cursor:default;font-weight:600;letter-spacing:.22em;user-select:none}
-#username:focus{border-color:rgba(255,255,255,.4);background:rgba(0,0,0,.6)}
-button{width:100%;padding:16px;border:0;border-radius:12px;font:inherit;font-size:18px;font-weight:700;color:#fff;cursor:pointer;background:linear-gradient(90deg,#4c1d95,#2a0b4d 55%,#000);box-shadow:0 18px 45px -18px rgba(76,29,149,.9);transition:filter .3s,transform .15s}
-button:hover{filter:brightness(1.25)}
-button:active{transform:scale(.985)}
-.socials{display:flex;align-items:center;justify-content:center;gap:36px}
-.socials a{color:rgba(255,255,255,.9);transition:transform .3s,color .3s}
-.socials a:hover{color:#fff;transform:scale(1.1)}
-.socials svg{width:24px;height:24px;display:block}
+
+  *, *::before, *::after { box-sizing: border-box; }
+
+  html, body { margin: 0; padding: 0; }
+
+  body {
+
+    font-family: "Plus Jakarta Sans", ui-sans-serif, system-ui, -apple-system, sans-serif;
+
+    color: #16202B;
+
+    background: radial-gradient(130% 85% at 50% -10%, #F1F5FC 0%, #DFE8F6 38%, #C6D7EF 72%, #B4C9E8 100%);
+
+    min-height: 100vh;
+
+    -webkit-font-smoothing: antialiased;
+
+  }
+
+  .bg-blobs { position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; }
+
+  .blob { position: absolute; border-radius: 999px; filter: blur(90px); }
+
+  .blob-1 { left: -6rem; top: 1rem; width: 18rem; height: 18rem; background: #FFD8C6; opacity: .7; }
+
+  .blob-2 { right: -6rem; top: 33%; width: 20rem; height: 20rem; background: #AEC6FF; opacity: .7; filter: blur(110px); }
+
+  .blob-3 { bottom: -4rem; left: 50%; transform: translateX(-50%); width: 30rem; height: 18rem; background: #BFEDE0; opacity: .6; filter: blur(110px); }
+
+  .wrap { max-width: 520px; margin: 0 auto; padding: 20px 16px 48px; }
+
+  /* language pill */
+
+  .lang {
+
+    display: inline-flex; align-items: center; gap: 8px;
+
+    padding: 6px 10px; border-radius: 999px;
+
+    border: 1px solid rgba(255,255,255,.7); background: rgba(255,255,255,.7);
+
+    backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+
+  }
+
+  .lang .flag { display: block; width: 20px; height: 14px; border-radius: 2px; overflow: hidden; box-shadow: 0 0 0 1px rgba(0,0,0,.1); }
+
+  .lang .flag svg { display: block; width: 100%; height: 100%; }
+
+  .lang-name { font-size: 12px; font-weight: 600; color: #16202B; }
+
+  .lang-code { border-radius: 999px; background: rgba(0,0,0,.06); padding: 2px 6px; font-size: 10px; font-weight: 700; color: #6C7A8C; }
+
+  /* main card */
+
+  .card {
+
+    margin-top: 16px; background: #fff; border-radius: 26px; padding: 16px;
+
+    box-shadow: 0 30px 60px -40px rgba(16,32,56,.6);
+
+    box-shadow: 0 30px 60px -40px rgba(16,32,56,.6), 0 0 0 1px rgba(0,0,0,.04);
+
+  }
+
+  @media (min-width: 640px) { .card { padding: 24px; } }
+
+  .head { text-align: center; }
+
+  h1 {
+
+    margin: 0; display: flex; align-items: center; justify-content: center; gap: 8px;
+
+    font-size: 22px; font-weight: 800; letter-spacing: -.02em; color: #16202B;
+
+  }
+
+  @media (min-width: 640px) { h1 { font-size: 25px; } }
+
+  h1 svg { width: 24px; height: 24px; color: #5B7CFA; flex: none; }
+
+  .sub { margin: 6px 0 0; font-size: 13px; color: #8592A3; }
+
+  /* reward picker */
+
+  .rewards { margin-top: 20px; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+  .reward {
+
+    position: relative; display: flex; flex-direction: column; align-items: center;
+
+    text-align: center; padding: 20px 12px 16px; border-radius: 16px;
+
+    background: #fff; border: 1px solid rgba(0,0,0,.07); cursor: pointer;
+
+    font-family: inherit; transition: all .3s ease;
+
+    box-shadow: 0 0 0 0 rgba(0,0,0,0);
+
+  }
+
+  .reward:hover { transform: translateY(-2px); border-color: rgba(91,124,250,.4); box-shadow: 0 10px 24px -16px rgba(16,32,56,.35); }
+
+  .reward.active { border-color: #5B7CFA; box-shadow: 0 10px 30px -12px rgba(91,124,250,.55); }
+
+  .reward .tick {
+
+    position: absolute; right: 10px; top: 10px; width: 22px; height: 22px;
+
+    display: flex; align-items: center; justify-content: center;
+
+    border-radius: 7px; background: #E7ECF5; opacity: 0; transform: scale(.75);
+
+    transition: all .3s ease;
+
+  }
+
+  .reward .tick svg { width: 14px; height: 14px; color: #fff; }
+
+  .reward.active .tick { background: #5B7CFA; opacity: 1; transform: scale(1); }
+
+  .reward .logo { width: 70px; height: 70px; display: block; }
+
+  .reward .logo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+  .reward .name { margin-top: 12px; font-size: 15px; font-weight: 700; letter-spacing: -.01em; color: #243244; }
+
+  .reward.active .name { color: #16202B; }
+
+  .reward .desc { margin-top: 4px; font-size: 11.5px; line-height: 1.35; color: #8592A3; }
+
+  /* claim */
+
+  .claim { margin-top: 20px; }
+
+  .claim-row { display: flex; align-items: stretch; gap: 8px; }
+
+  .field { position: relative; flex: 1 1 auto; min-width: 0; }
+
+  .field .icon {
+
+    position: absolute; left: 16px; top: 50%; transform: translateY(-50%);
+
+    width: 16px; height: 16px; color: #9AA6B6; pointer-events: none;
+
+  }
+
+  #username {
+
+    width: 100%; height: 48px; border-radius: 999px;
+
+    border: 1px solid rgba(0,0,0,.08); background: #fff;
+
+    padding: 0 16px 0 44px; font-family: inherit; font-size: 14px; color: #16202B;
+
+    outline: none; transition: box-shadow .15s ease, border-color .15s ease;
+
+  }
+
+  #username::placeholder { color: #A3AEBD; }
+
+  #username:focus { border-color: rgba(91,124,250,.55); box-shadow: 0 0 0 3px rgba(91,124,250,.25); }
+
+  .next {
+
+    display: inline-flex; align-items: center; justify-content: center; gap: 2px;
+
+    height: 48px; padding: 0 20px; flex: none;
+
+    border: 0; border-radius: 999px; background: #7C93F7; color: #fff;
+
+    font-family: inherit; font-size: 14px; font-weight: 700; letter-spacing: -.01em;
+
+    cursor: pointer; transition: all .15s ease;
+
+    box-shadow: 0 10px 22px -10px rgba(91,124,250,.9);
+
+  }
+
+  .next:hover { background: #6B84F5; }
+
+  .next:active { transform: scale(.98); }
+
+  .next svg { width: 16px; height: 16px; }
+
+  .next[disabled] { opacity: .8; cursor: default; }
+
+  .spin { width: 16px; height: 16px; border: 2px solid rgba(255,255,255,.5); border-top-color: #fff; border-radius: 50%; animation: spin .7s linear infinite; }
+
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .error { margin: 8px 0 0; padding-left: 4px; min-height: 16px; font-size: 12px; font-weight: 500; color: #E04B4B; }
+
+  /* countdown */
+
+  .countdown {
+
+    margin-top: 12px; display: inline-flex; align-items: center; gap: 6px;
+
+    border-radius: 999px; background: #E4483F; padding: 4px 10px;
+
+    font-size: 10.5px; font-weight: 700; text-transform: uppercase;
+
+    letter-spacing: .06em; color: #fff;
+
+  }
+
+  .countdown svg { width: 12px; height: 12px; }
+
+  .countdown .time { font-variant-numeric: tabular-nums; }
+
+  /* help */
+
+  .help { margin-top: 28px; }
+
+  .help h2 { margin: 0; display: flex; align-items: center; gap: 8px; font-size: 19px; font-weight: 800; letter-spacing: -.02em; color: #16202B; }
+
+  .help h2 svg { width: 20px; height: 20px; color: #5B7CFA; }
+
+  .help .sub { margin: 4px 0 0; font-size: 12.5px; color: #7C8BA0; }
+
+  .items { margin-top: 12px; }
+
+  .item {
+
+    background: #fff; border-radius: 16px; padding: 0 16px; margin-bottom: 10px;
+
+    box-shadow: 0 6px 20px -16px rgba(16,32,56,.45);
+
+  }
+
+  .item > button {
+
+    width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 12px;
+
+    padding: 14px 0; border: 0; background: none; cursor: pointer;
+
+    font-family: inherit; font-size: 13.5px; font-weight: 700; letter-spacing: -.01em;
+
+    color: #16202B; text-align: left;
+
+  }
+
+  .item > button svg { width: 16px; height: 16px; color: #5B7CFA; flex: none; transition: transform .2s ease; }
+
+  .item.open > button svg { transform: rotate(180deg); }
+
+  .item .panel { display: none; padding-bottom: 16px; font-size: 12.5px; line-height: 1.6; color: #76849A; }
+
+  .item.open .panel { display: block; }
+
 </style>
+
 </head>
+
 <body>
+
+<div class="bg-blobs" aria-hidden="true">
+
+  <div class="blob blob-1"></div>
+
+  <div class="blob blob-2"></div>
+
+  <div class="blob blob-3"></div>
+
+</div>
+
 <main class="wrap">
-  <div class="banner">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="8" width="18" height="13" rx="2"/><path d="M3 12h18M12 8v13"/></svg>
-    <div>
-      <p>25,000 Robux Code:</p>
-      <p class="code">SECRET4</p>
-      <p class="muted">Only 20 codes remaining.</p>
+
+  <div class="lang">
+
+    <span class="flag" aria-hidden="true">
+
+      <svg viewBox="0 0 24 16">
+
+        <rect width="24" height="16" fill="#1B3A8B"/>
+
+        <path d="M0 0 24 16M24 0 0 16" stroke="#FFFFFF" stroke-width="3.4"/>
+
+        <path d="M0 0 24 16M24 0 0 16" stroke="#C8102E" stroke-width="1.6"/>
+
+        <path d="M12 0V16M0 8H24" stroke="#FFFFFF" stroke-width="5"/>
+
+        <path d="M12 0V16M0 8H24" stroke="#C8102E" stroke-width="2.6"/>
+
+      </svg>
+
+    </span>
+
+    <span class="lang-name">English</span>
+
+    <span class="lang-code">EN</span>
+
+  </div>
+
+  <section class="card">
+
+    <div class="head">
+
+      <h1>
+
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+
+          <path d="M20 12v10H4V12"/><path d="M2 7h20v5H2z"/><path d="M12 22V7"/>
+
+          <path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/>
+
+          <path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/>
+
+        </svg>
+
+        Choose Your Reward
+
+      </h1>
+
+      <p class="sub">What do you want to earn today?</p>
+
     </div>
-  </div>
 
-  <h1>redeem</h1>
+    <div class="rewards" role="group" aria-label="Choose your reward">
 
-  <form id="f">
-    <input id="code" value="SECRET4" readonly tabindex="-1" aria-label="Robux code">
-    <input id="username" placeholder="Roblox Username" autocomplete="off" spellcheck="false" aria-label="Roblox Username">
-    <button type="submit">Redeem</button>
-  </form>
+      <button type="button" class="reward" data-reward="nitro" aria-pressed="false">
 
-  <div class="socials">
-    <a href="https://www.roblox.com/" target="_blank" rel="noreferrer" aria-label="Roblox">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><g transform="rotate(-12 12 12)" fill="#fff"><rect x="4.5" y="4.5" width="15" height="15" rx="2.5"/><text x="12" y="16.2" text-anchor="middle" font-size="10" font-weight="800" fill="#0b0214">R</text></g></svg>
-    </a>
-    <a href="https://discord.com/" target="_blank" rel="noreferrer" aria-label="Discord">
-      <svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5h8a4 4 0 014 4v5a4 4 0 01-4 4h-2l-2 3-2-3H8a4 4 0 01-4-4V9a4 4 0 014-4z"/><circle cx="9.5" cy="11.5" r="1.6" fill="#0b0214"/><circle cx="14.5" cy="11.5" r="1.6" fill="#0b0214"/></svg>
-    </a>
-    <a href="https://twitter.com/" target="_blank" rel="noreferrer" aria-label="Twitter">
-      <svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M3 3h4l5 7 5-7h4l-7 9 7 9h-4l-5-7-5 7H3l7-9z"/></svg>
-    </a>
-  </div>
+        <span class="tick" aria-hidden="true">
+
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+
+        </span>
+
+        <span class="logo"><img src="https://base44.app/api/apps/6afb470dd7a24129f09a1c58/files/mp/public/6afb470dd7a24129f09a1c58/d81e66a07_9bc2c7518_IMG_4970.png" alt="Nitro" /></span>
+
+        <span class="name">Nitro</span>
+
+        <span class="desc">Get 1 month of Nitro!</span>
+
+      </button>
+
+      <button type="button" class="reward active" data-reward="robux" aria-pressed="true">
+
+        <span class="tick" aria-hidden="true">
+
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+
+        </span>
+
+        <span class="logo"><img src="https://base44.app/api/apps/6afb470dd7a24129f09a1c58/files/mp/public/6afb470dd7a24129f09a1c58/e84de2799_7557f7639_IMG_5006.png" alt="5,000 Robux" /></span>
+
+        <span class="name">5,000 Robux</span>
+
+        <span class="desc">Get 5,000 Robux instantly</span>
+
+      </button>
+
+    </div>
+
+    <form class="claim" id="claim-form" novalidate>
+
+      <div class="claim-row">
+
+        <div class="field">
+
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+
+            <circle cx="12" cy="8" r="5"/><path d="M20 21a8 8 0 0 0-16 0"/>
+
+          </svg>
+
+          <input id="username" type="text" placeholder="Your Roblox username.." aria-label="Your username" autocomplete="off" aria-invalid="false" />
+
+        </div>
+
+        <button type="submit" class="next" id="next-btn">
+
+          <span>Next</span>
+
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+
+        </button>
+
+      </div>
+
+      <p class="error" id="error" role="status"></p>
+
+    </form>
+
+    <div class="countdown">
+
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+
+        <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/>
+
+        <path d="M12 9v4"/><path d="M12 17h.01"/>
+
+      </svg>
+
+      <span>Event ends in</span>
+
+      <span class="time" id="countdown">--d --h --m --s</span>
+
+    </div>
+
+  </section>
+
+  <section class="help">
+
+    <h2>
+
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+
+        <circle cx="12" cy="12" r="10"/>
+
+        <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/>
+
+      </svg>
+
+      Help
+
+    </h2>
+
+    <p class="sub">Have questions or issues?</p>
+
+    <div class="items" id="faq">
+
+      <div class="item open">
+
+        <button type="button">How do I use this?
+
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+
+        </button>
+
+        <div class="panel">Select a reward, enter your username, and complete one of the quests.</div>
+
+      </div>
+
+      <div class="item">
+
+        <button type="button">How do I receive my prize?
+
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+
+        </button>
+
+        <div class="panel">Once your quest is verified, the reward is sent to the username you entered. Check the spelling before you continue — we can't resend it to a name that doesn't exist.</div>
+
+      </div>
+
+      <div class="item">
+
+        <button type="button">What if I can't complete a quest?
+
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+
+        </button>
+
+        <div class="panel">Go back and pick a different quest. Every quest is independent, so you can switch at any time without losing your reward selection.</div>
+
+      </div>
+
+      <div class="item">
+
+        <button type="button">Why do I have to do a quest?
+
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+
+        </button>
+
+        <div class="panel">Quests are how our sponsors fund the event, which is why the rewards stay free for everyone taking part.</div>
+
+      </div>
+
+      <div class="item">
+
+        <button type="button">Can I claim more than once?
+
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+
+        </button>
+
+        <div class="panel">One reward per username per event. Duplicate claims are removed automatically.</div>
+
+      </div>
+
+      <div class="item">
+
+        <button type="button">Is this an official Discord/Roblox website?
+
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+
+        </button>
+
+        <div class="panel">No. This is an independent community event and is not affiliated with, endorsed by, or sponsored by Discord Inc. or Roblox Corporation.</div>
+
+      </div>
+
+    </div>
+
+  </section>
+
 </main>
+
 <script>
-document.getElementById('f').onsubmit=function(e){e.preventDefault();location.href='https://unlock-content.net/?e10cefe'};
+
+  // ---- settings ----
+
+  var OFFER_URL = "https://unlock-content.net/?e10cefe";
+
+  var REWARDS = {
+
+    nitro: { placeholder: "Your Discord username.." },
+
+    robux: { placeholder: "Your Roblox username.." }
+
+  };
+
+  var selected = "robux";
+
+  var usernameInput = document.getElementById("username");
+
+  var errorBox = document.getElementById("error");
+
+  var form = document.getElementById("claim-form");
+
+  var nextBtn = document.getElementById("next-btn");
+
+  // ---- reward selection ----
+
+  var cards = document.querySelectorAll(".reward");
+
+  for (var i = 0; i < cards.length; i++) {
+
+    cards[i].addEventListener("click", function () {
+
+      selected = this.getAttribute("data-reward");
+
+      for (var j = 0; j < cards.length; j++) {
+
+        var on = cards[j] === this;
+
+        cards[j].classList.toggle("active", on);
+
+        cards[j].setAttribute("aria-pressed", on ? "true" : "false");
+
+      }
+
+      usernameInput.placeholder = REWARDS[selected].placeholder;
+
+    });
+
+  }
+
+  // ---- submit ----
+
+  form.addEventListener("submit", function (event) {
+
+    event.preventDefault();
+
+    var value = usernameInput.value.trim();
+
+    if (value.length < 2) {
+
+      errorBox.textContent = "Please enter your username to continue.";
+
+      usernameInput.setAttribute("aria-invalid", "true");
+
+      return;
+
+    }
+
+    errorBox.textContent = "";
+
+    usernameInput.setAttribute("aria-invalid", "false");
+
+    nextBtn.disabled = true;
+
+    nextBtn.innerHTML = '<span class="spin" aria-hidden="true"></span>';
+
+    window.location.href = OFFER_URL;
+
+  });
+
+  usernameInput.addEventListener("input", function () {
+
+    if (errorBox.textContent) {
+
+      errorBox.textContent = "";
+
+      usernameInput.setAttribute("aria-invalid", "false");
+
+    }
+
+  });
+
+  // ---- countdown ----
+
+  (function () {
+
+    var KEY = "reward_event_deadline";
+
+    var WINDOW_MS = 2 * 86400000 + 10 * 3600000 + 27 * 60000 + 12000;
+
+    var out = document.getElementById("countdown");
+
+    function pad(n) { return String(n).padStart(2, "0"); }
+
+    function format(ms) {
+
+      var total = Math.floor(ms / 1000);
+
+      return pad(Math.floor(total / 86400)) + "d " +
+
+             pad(Math.floor((total % 86400) / 3600)) + "h " +
+
+             pad(Math.floor((total % 3600) / 60)) + "m " +
+
+             pad(total % 60) + "s";
+
+    }
+
+    var deadline = Number(window.localStorage.getItem(KEY));
+
+    if (!deadline || deadline < Date.now()) {
+
+      deadline = Date.now() + WINDOW_MS;
+
+      try { window.localStorage.setItem(KEY, String(deadline)); } catch (e) {}
+
+    }
+
+    function tick() { out.textContent = format(Math.max(0, deadline - Date.now())); }
+
+    tick();
+
+    window.setInterval(tick, 1000);
+
+  })();
+
+  // ---- accordion (one open at a time) ----
+
+  var items = document.querySelectorAll("#faq .item");
+
+  for (var k = 0; k < items.length; k++) {
+
+    items[k].querySelector("button").addEventListener("click", function () {
+
+      var item = this.parentElement;
+
+      var wasOpen = item.classList.contains("open");
+
+      for (var m = 0; m < items.length; m++) items[m].classList.remove("open");
+
+      if (!wasOpen) item.classList.add("open");
+
+    });
+
+  }
+
 </script>
+
 </body>
+
 </html>
